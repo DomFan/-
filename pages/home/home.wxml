@@ -1,0 +1,5 @@
+<!--pages/home/home.wxml-->
+<text>pages/home/home.wxml</text>
+<view class='wrap'>
+  <view class='box' wx:if='{{list}}' wx:for='{{list}}'>{{item}}</view>
+</view>

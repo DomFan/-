@@ -1,0 +1,88 @@
+<!-- info.wxml -->
+
+  <form bindsubmit='formSubmit'>
+    <!--基本信息  basic-->
+    <view class='basic'>
+      <view class='title basictitle'>基本信息</view>
+      <view class='row-container'>
+        <text class='msgleft'>商户名称</text>
+        <input name='sellerInput' type='text' bindinput='nameinput' placeholder='请输入商户名称' placeholder-class='phcolor'></input>
+      </view>
+      <view class='row-container'>
+        <text class='msgleft'>商户地址</text>
+        <input name='addressInput' type='text' bindinput='addressinput' placeholder='请输入商户地址' placeholder-class='phcolor'></input>
+      </view>
+      <view class='row-container'>
+        <text class='msgleft'>联系人名称</text>
+         <input name='personInput' type='text' bindinput='personinput' placeholder='请输入商户联系人名称' placeholder-class='phcolor'></input> 
+      </view>
+      <view class='row-container nounderline'>
+      <!-- 登录之后能不能跳转到后台接口 测试 避开 -->
+        <text class='msgleft'>电话</text>
+        <input name='phoneInput' type='number' bindinput='phoneinput' placeholder='请输入联系方式' placeholder-class='phcolor'></input>
+      </view>
+    </view>
+    
+    <!--证件信息  proof-->
+    <view class='proop'>
+      <view class='title prooftitle'>证件信息</view>
+        <view class='row-container'>
+        <text>营业执照</text>
+        <button bindtap='lookpic0'>预览</button>
+        <button bindtap='uploadpic0' class='btnright'>上传</button>
+      </view>
+      <view class='row-container'>
+        <text>组织代码证</text>
+        <button bindtap='lookpic1'>预览</button>
+        <button  bindtap='uploadpic1' class='btnright'>上传</button>
+      </view>
+      <view class='row-container'>
+        <text>法人持证件照</text>
+        <button bindtap='lookpic2'>预览</button>
+        <button bindtap='uploadpic2' class='btnright'>上传</button>
+      </view>
+      <view class='row-container'>
+        <text>身份证正面</text>
+        <button bindtap='lookpic3'>预览</button>
+        <button bindtap='uploadpic3' class='btnright'>上传</button>
+      </view>
+      <view class='row-container nounderline'>
+        <text>身份证反面</text>
+        <button bindtap='lookpic4'>预览</button>
+        <button bindtap='uploadpic4' class='btnright'>上传</button>
+      </view>
+    </view>
+
+    <!--特殊资质信息  special-->
+    <view class='special'>
+      <view class='title specialtitle'>特殊资质信息</view>
+        <view class='row-container'>
+        <text>特殊资质一</text>
+        <button bindtap='lookpic5'>预览</button>
+        <button bindtap='uploadpic5' class='btnright'>上传</button>
+      </view>
+      <view class='row-container'>
+        <text>特殊资质二</text>
+        <button bindtap='lookpic6'>预览</button>
+        <button bindtap='uploadpic6' class='btnright'>上传</button>
+      </view>
+      <view class='row-container'>
+        <text>特殊资质三</text>
+        <button bindtap='lookpic7'>预览</button>
+        <button bindtap='uploadpic7' class='btnright'>上传</button>
+      </view>
+      <view class='row-container'>
+        <text>特殊资质四</text>
+        <button bindtap='lookpic8'>预览</button>
+        <button bindtap='uploadpic8' class='btnright'>上传</button>
+      </view>
+      <view class='row-container nounderline'>
+        <text>特殊资质五</text>
+        <button bindtap='lookpic9'>预览</button>
+        <button bindtap='uploadpic9' class='btnright'>上传</button>
+      </view>
+    </view>
+    <view class='space'></view>
+
+    <button class='confirmAdd' bindtap='submitcfm'>确认新增</button>
+  </form>
