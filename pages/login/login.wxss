@@ -43,10 +43,10 @@ page {
 }
 .userIcon, .pswdIcon{
   position: absolute;
-  top: 30rpx;
-  left: 30rpx;
-  width: 50rpx;
-  height: 50rpx;
+  top: 38rpx;
+  left: 38rpx;
+  width: 35rpx;
+  height: 35rpx;
 }
 
 .items {
