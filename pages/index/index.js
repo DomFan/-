@@ -16,7 +16,8 @@ Page({
     sellerPhone: '', //电话
     imageurl: '',
     url: '',
-    urls: new Array(10),
+    // urls: new Array(10),
+    urls: ['1','1','1','1','1','1','1','1','1','1'],
     nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"]
   },
 
@@ -91,7 +92,7 @@ Page({
   /**预览图片 */
   lookpic: function (index, urls) {
     // console.log(urls[index])
-    if (urls[index]) {
+    if (urls[index] != '1') {
       wx.previewImage({
         current: urls[index],
         urls: urls,
@@ -126,70 +127,6 @@ Page({
   /**上传图片 0 */
   uploadpic0: function(){
    this.uploadpic(0, this.data.urls, this.data.nameArr[0], this.data.userId)
-    
-    /** 
-    wx.chooseImage({
-      success: function(res){
-      
-        var tempFilePaths = res.tempFilePaths
-        wx.uploadFile({
-          url: 'http://localhost:3000/uploadfile', //ceshi
-          filePath: tempFilePaths[0],
-          name: 'file',
-          header: {
-            'content-type': 'application/json' // 默认值
-          },
-          formData: {
-            'user': 'test'
-          },
-          success: function (res) {
-            var data = res.data
-            //do something
-            console.log(res, this, this.formData, this.data)
-            console.log(data)
-            that.setData({
-              imageurl: filePath
-            })
-          }
-        })
-
-      }
-    })
-    */
-    
-    /** 
-    var urls = this.data.urls,
-        index = 0
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success(res) {
-        const src = res.tempFilePaths[0]
-        // console.log(src, res, urls)
-
-        // urls 清除第一个元素 添加元素
-        if(urls[index]){
-          urls.splice(index, 1, src)
-        }else {
-          urls.push(src)
-        }
-        
-        wx.redirectTo({
-          url: `../pic/pic?src=${src}`,
-          success: function(){
-            urls.push(src)
-            that.setData({
-              urls: urls
-            })
-            console.log(that.data.urls)
-          }
-        })
-        
-      }
-    })
-    */
-    
   },
 
   /*
@@ -202,7 +139,18 @@ Page({
    * 上传图片 1
    */
   uploadpic1: function () {
-    this.uploadpic(1, this.data.urls, this.data.nameArr[1], this.data.userId)
+    let urls = this.data.urls,
+        nameArr = this.data.nameArr,
+        userId = this.data.userId
+    if(urls[0] == '1'){
+      wx.showModal({
+        title: '提示',
+        content: `请先上传` + nameArr[0],
+      })
+      
+    }else {
+      this.uploadpic(1, urls, nameArr[1], userId)
+    }
   },
 
   /**点击预览 1 */
@@ -211,25 +159,69 @@ Page({
     // console.log('预览 1111')
   },
   uploadpic2: function () {
-    this.uploadpic(2, this.data.urls, this.data.nameArr[2], this.data.userId)
+    let urls = this.data.urls,
+      nameArr = this.data.nameArr,
+      userId = this.data.userId
+    if (!urls[1]) {
+      wx.showModal({
+        title: '提示',
+        content: '请先上传' + nameArr[1],
+      })
+
+    } else {
+      this.uploadpic(2, urls, nameArr[2], userId)
+    }
   },
   lookpic2: function () {
     this.lookpic(2, this.data.urls)
   },
   uploadpic3: function () {
-    this.uploadpic(3, this.data.urls, this.data.nameArr[3], this.data.userId)
+    let urls = this.data.urls,
+      nameArr = this.data.nameArr,
+      userId = this.data.userId
+    if (!urls[2]) {
+      wx.showModal({
+        title: '提示',
+        content: '请先上传' + nameArr[2],
+      })
+
+    } else {
+      this.uploadpic(3, urls, nameArr[3], userId)
+    }
   },
   lookpic3: function () {
     this.lookpic(3, this.data.urls)
   },
   uploadpic4: function () {
-    this.uploadpic(4, this.data.urls, this.data.nameArr[4], this.data.userId)
+    let urls = this.data.urls,
+      nameArr = this.data.nameArr,
+      userId = this.data.userId
+    if (!urls[3]) {
+      wx.showModal({
+        title: '提示',
+        content: '请先上传' + nameArr[3],
+      })
+
+    } else {
+      this.uploadpic(4, urls, nameArr[4], userId)
+    }
   },
   lookpic4: function () {
     this.lookpic(4, this.data.urls)
   },
   uploadpic5: function () {
-    this.uploadpic(5, this.data.urls, this.data.nameArr[5], this.data.userId)
+    let urls = this.data.urls,
+      nameArr = this.data.nameArr,
+      userId = this.data.userId
+    if (!urls[4]) {
+      wx.showModal({
+        title: '提示',
+        content: '请先上传' + nameArr[4],
+      })
+
+    } else {
+      this.uploadpic(5, urls, nameArr[5], userId)
+    }
   },
   lookpic5: function () {
     this.lookpic(5, this.data.urls)

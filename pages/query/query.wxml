@@ -1,0 +1,26 @@
+<!--pages/query/query.wxml-->
+
+<view class='wrap'>
+  <form>
+    <view class='startwrap'>
+      <picker mode="date" value="{{date}}" end='{{enddate}}' bindchange="starttime">
+        <view class="picker">
+          开始日期：{{startdate}}
+        </view>
+      </picker>
+    </view>
+    <view class='endwrap'>
+      <picker mode="date" value="{{date}}" start='{{startdate}}' bindchange="endtime">
+        <view class="picker">
+          结束日期：{{enddate}}
+        </view>
+      </picker>
+    </view>
+    <button class='confirm' bindtap='confirm'>确定</button>
+  </form>
+
+
+  <view class='table'>
+    表格
+  </view>
+</view>

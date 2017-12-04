@@ -14,7 +14,7 @@
       </view>
       <view class='row-container'>
         <text class='msgleft'>联系人名称</text>
-         <input name='personInput' type='text' bindinput='personinput' placeholder='请输入商户联系人名称' placeholder-class='phcolor'></input> 
+         <input name='personInput' type='text' bindinput='personinput' placeholder='请输入联系人名称' placeholder-class='phcolor'></input> 
       </view>
       <view class='row-container nounderline'>
       <!-- 登录之后能不能跳转到后台接口 测试 避开 -->
@@ -85,4 +85,5 @@
     <view class='space'></view>
 
     <button class='confirmAdd' bindtap='submitcfm'>确认新增</button>
+    <view class='bottom'></view>
   </form>

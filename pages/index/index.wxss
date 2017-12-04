@@ -4,6 +4,8 @@ page {
   height: 100%;
   background-color: #fff;
   font-size: 30rpx;
+  /* 字体使用 苹方-简 常规体  */
+  font-family: PingFangSC-Regular, sans-serif;
 }
 form{
   overflow: hidden;  
@@ -46,8 +48,11 @@ form{
 .confirmAdd{
   background-color: #f55d54;
   color: #fff;
+  border-radius: 0;
 }
 .title{
+  font-size: 28rpx;
+  background-color: #f8f8f8;
   padding-left: 28rpx;
   color: #9e9e9e;
   width: 100%;
@@ -79,13 +84,16 @@ form{
   height: 100rpx;
 }
 .row-container button{
-  font-size: 30rpx;
+  font-size: 28rpx;
+  color: #9a9a9a;
   float: right;
   width: 140rpx;
   height: 56rpx;
   line-height: 56rpx;
   margin-top: 22rpx;
   margin-right: 35rpx;
+  border-radius: 4rpx;
+  background-color: #fff;
 }
 .row-container .btnright{
   margin-right: 50rpx;
@@ -93,4 +101,7 @@ form{
 .space{
   height: 100rpx;
   border-top: 1rpx #f5f5f5 solid;
+}
+.bottom{
+  height: 200rpx;
 }

@@ -1,11 +1,13 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/home/home",
-    "pages/login/login",
+    
 
-    "pages/pic/pic",
-    "pages/submitSuccess/submitSuccess",
+    "pages/home/home",    
+    "pages/login/login",  
+    "pages/index/index",  
+    "pages/query/query",
+    "pages/pic/pic",      
+    "pages/submitSuccess/submitSuccess", 
     "pages/logs/logs"    
   ],
   "window": {
@@ -16,18 +18,7 @@
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": false
   },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "主页"
-      },
-      {
-        "pagePath": "pages/login/login",
-        "text": "用户中心"
-      }
-    ]
-  },
+
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000

@@ -5,9 +5,132 @@ Page({
    * 页面的初始数据
    */ 
   data: {
-    list: ["上传","查询","3","4","5","6","7","8","9"],
-
+    list: ["上传", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
+    username: 'hello',
   },
+
+  login: function(){
+    wx.navigateTo({
+      url: '../login/login',
+      success: function(res) {
+        console.log('去登录')
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+  home: function(){
+    wx.redirectTo({
+      url: '../home/home',
+      success: function(res) {
+        console.log('去首页')
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+
+  // 点击跳转
+  // 上传页
+  click0: function(){
+    console.log(0)
+    wx.navigateTo({
+      url: '../index/index',
+      success: function(res) {
+        console.log('go to index')
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+  // 查账页
+  click1: function(){
+    wx.navigateTo({
+      url: '../query/query',
+      success: function(res) {
+        console.log(1)
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+  click2: function () {
+    wx.redirectTo({
+      url: './home',
+      success: function (res) {
+        console.log(2)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+
+  click3: function () {
+    wx.redirectTo({
+      url: './home',
+      success: function (res) {
+        console.log(3)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  click4: function () {
+    wx.redirectTo({
+      url: './home',
+      success: function (res) {
+        console.log(4)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  click5: function () {
+    wx.redirectTo({
+      url: './home',
+      success: function (res) {
+        console.log(5)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  click6: function () {
+    wx.redirectTo({
+      url: './home',
+      success: function (res) {
+        console.log(6)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  click7: function () {
+    wx.redirectTo({
+      url: './home',
+      success: function (res) {
+        console.log(7)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  click8: function () {
+    wx.navigateTo({
+      url: '../home/home',
+      success: function (res) {
+        console.log(8)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+
+
+
+
+
+
 
   /**
    * 生命周期函数--监听页面加载

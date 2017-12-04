@@ -39,19 +39,6 @@ Page({
     })
   },
 
-  /**记住密码 */
-  rmpwd: function (e) {
-    this.setData({
-      remenberPassword: e.detail.value
-    })
-  },
-
-  /**保持登录 */
-  holdon: function (e) {
-    this.setData({
-      holdOn: e.detail.value
-    })
-  },
 
   /**
    * 登录按钮
@@ -106,17 +93,13 @@ Page({
             }
           })
 
-          wx.navigateTo({
-            url: '../index/index',
-            success: function (res) {
-              // console.log(that.data, value)
+          wx.redirectTo({
+            url: '../home/home?userName={{userName}}&userPassword=userPassword&token=1',
+            success: function(res) {
+              console.log(this.url, that.data)
             },
-            fail: function (res) {
-              // console.log('fail navigateTo index', res)
-            },
-            complete: function (res) {
-
-            },
+            fail: function(res) {},
+            complete: function(res) {},
           })
         }
       })
@@ -132,9 +115,9 @@ Page({
       })
     }
   },
+
+
   /** */
-
-
   usertap: function() {
     console.log('user had clicked')
   },

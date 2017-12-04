@@ -1,5 +1,18 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
-<view class='wrap'>
-  <view class='box' wx:if='{{list}}' wx:for='{{list}}'>{{item}}</view>
+
+<view>
+  <view class='head'>
+    <image bindtap='login' class='avatar' src='../../pic/user.png'></image>
+    <text wx:if='token=0' class='username'>{{username}}</text>
+    <block wx:else='token=1'>{{userName}}</block>
+  </view>
+
+  <view class='wrap'>
+    <view class='box' wx:if='{{list}}' wx:for='{{list}}' wx:key='index' bindtap='click{{index}}'>{{index}}___{{item}}</view>
+  </view>
+
+  <view class='footer'>
+    <view class='home' bindtap='home'>首页</view>
+    <view class='user' bindtap='login'>登录</view>
+  </view>
 </view>

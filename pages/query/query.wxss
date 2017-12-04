@@ -1,0 +1,22 @@
+/* pages/query/query.wxss */
+.wrap{
+  font-size: 45rpx;
+}
+
+.startwrap, .endwrap{
+  margin-bottom: 50rpx;
+  display: flex;
+  padding-left: 50rpx; 
+  /* position: relative;
+  left: 50rpx; */
+}
+.confirm{
+  width: 90%;
+  background-color: #f55d54;
+  color: #fff;
+  font-size: 50rpx;
+}
+
+.table{
+  margin-top: 50rpx;
+}
