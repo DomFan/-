@@ -58,8 +58,8 @@ form{
   width: 100%;
   height: 100rpx;
   line-height: 100rpx;
-  border-top: 1rpx #f5f5f5 solid;
-  border-bottom: 1rpx #f5f5f5 solid;
+  border-top: 1rpx #f1f1f1 solid;
+  border-bottom: 1rpx #f1f1f1 solid;
   /* border-bottom: 1rpx #f5f5f5 solid; */
 }
 .phcolor{
@@ -69,7 +69,7 @@ form{
   overflow: hidden; 
   height: 100rpx;
   line-height: 100rpx;
-  border-bottom: 1rpx #f5f5f5 solid;
+  border-bottom: 1rpx #f1f1f1 solid;
   margin-left: 45rpx;
 }
 .nounderline{
@@ -100,7 +100,7 @@ form{
 }
 .space{
   height: 100rpx;
-  border-top: 1rpx #f5f5f5 solid;
+  border-top: 1rpx #f1f1f1 solid;
 }
 .bottom{
   height: 200rpx;

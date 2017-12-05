@@ -16,7 +16,11 @@
         </view>
       </picker>
     </view>
-    <button class='confirm' bindtap='confirm'>确定</button>
+    <view class='btn'>
+      <button class='confirm' bindtap='confirm'>查询</button>
+      <button type='reset'>重置</button>
+    </view>
+      
   </form>
 
 

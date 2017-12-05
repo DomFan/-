@@ -7,8 +7,6 @@
   margin-bottom: 50rpx;
   display: flex;
   padding-left: 50rpx; 
-  /* position: relative;
-  left: 50rpx; */
 }
 .confirm{
   width: 90%;

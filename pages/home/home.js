@@ -6,7 +6,7 @@ Page({
    */ 
   data: {
     list: ["上传", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
-    username: 'hello',
+    username: 'administrator',
   },
 
   login: function(){

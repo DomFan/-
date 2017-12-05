@@ -2,17 +2,59 @@
 
 <view>
   <view class='head'>
-    <image bindtap='login' class='avatar' src='../../pic/user.png'></image>
-    <text wx:if='token=0' class='username'>{{username}}</text>
-    <block wx:else='token=1'>{{userName}}</block>
+    <view class='avataritem'>
+      <image bindtap='login' class='avatar' src='../../pic/avatar.png'></image>
+      <text wx:if='!token' class='username'>{{username}}</text>
+      <block class='username' wx:else>{{userName}}</block>
+    </view>
   </view>
 
   <view class='wrap'>
-    <view class='box' wx:if='{{list}}' wx:for='{{list}}' wx:key='index' bindtap='click{{index}}'>{{index}}___{{item}}</view>
+    <!-- <view class='box' wx:if='{{list}}' wx:for='{{list}}' wx:key='index' bindtap='click{{index}}'>{{index}}___{{item}}</view> -->
+    <view class='box' bindtap='click0'>
+      <image src='../../pic/upload.png'></image>
+      <view>上传</view>
+    </view>
+    <view class='box' bindtap='click1'>
+      <image src='../../pic/search.png'></image>
+      <view>查账</view>
+    </view>
+    <view class='box norightborder' bindtap='click2'>
+      <image src='../../pic/home.png'></image>
+      <view>zhuye</view>
+    </view>
+    <view class='box' bindtap='click3'>
+      <image src='../../pic/home.png'></image>
+      <view>000</view>
+    </view>
+    <view class='box' bindtap='click4'>
+      <image src='../../pic/home.png'></image>
+      <view>000</view>
+    </view>
+    <view class='box norightborder' bindtap='click5'>
+      <image src='../../pic/home.png'></image>
+      <view>000</view>
+    </view>
+    <view class='box' bindtap='click6'>
+      <image src='../../pic/home.png'></image>
+      <view>000</view>
+    </view>
+    <view class='box' bindtap='click7'>
+      <image src='../../pic/home.png'></image>
+      <view>000</view>
+    </view>
+    <view class='box norightborder' bindtap='click8'>
+      <image src='../../pic/home.png'></image>
+      <view>000</view>
+    </view>
   </view>
 
   <view class='footer'>
-    <view class='home' bindtap='home'>首页</view>
-    <view class='user' bindtap='login'>登录</view>
+    <view class='home' bindtap='home'>
+      <image class='icon' src='../../pic/home_act.png'></image>
+    </view>
+    <view class='login' bindtap='login'>
+      <image class='icon' src='../../pic/login.png'></image>
+    </view>
   </view>
 </view>

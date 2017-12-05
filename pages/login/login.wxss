@@ -6,6 +6,7 @@ page {
 .container {}
 
 .titletxt {
+
   font-size: 50rpx;
   color: #000;
 }
@@ -27,8 +28,8 @@ page {
   margin-bottom: 88rpx;
 }
 .inputWrap input {
-  height: 110rpx;
-  line-height: 110rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   width: 100%;
 }
 .accountWrap, .passwordWrap{
