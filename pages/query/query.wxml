@@ -1,7 +1,16 @@
 <!--pages/query/query.wxml-->
 
 <view class='wrap'>
-  <form>
+  <form class='form'>
+    <radio-group class='radiowrap' bindchange='radioChange'>
+      <view>交易状态：</view>
+      <label class='radiolabel'>
+        <radio name='all' checked='true' class='radio all'>所有</radio>
+        <radio name='success' class='radio success'>成功</radio>
+        <radio name='backoff' class='radio backoff'>退款</radio>        
+      </label>
+    </radio-group>
+
     <view class='startwrap'>
       <picker mode="date" value="{{date}}" end='{{enddate}}' bindchange="starttime">
         <view class="picker">
@@ -16,15 +25,23 @@
         </view>
       </picker>
     </view>
-    <view class='btn'>
-      <button class='confirm' bindtap='confirm'>查询</button>
-      <button type='reset'>重置</button>
+    <view class='btnwrap'>
+      <button class='btn confirm' bindtap='confirm'>查询</button>
+      <button class='btn' type='reset'>重置</button>
     </view>
       
   </form>
 
 
   <view class='table'>
-    表格
+    <!--表头  -->
+    <view class="tr bg-w">
+      <view class="th">交易确认时间</view>
+      <view class="th">商户名称</view>
+      <view class="th">通道</view>
+      <view class="th">订单号</view>
+      <view class="th">交易金额</view>
+      <view class="th">交易状态</view>
+    </view>
   </view>
 </view>

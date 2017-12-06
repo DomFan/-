@@ -1,20 +1,76 @@
 /* pages/query/query.wxss */
-.wrap{
-  font-size: 45rpx;
+.form{
+  font-size: 35rpx;
+  /* line-height: 100rpx; */
+}
+
+.radiowrap{
+  padding-left: 50rpx;
+  margin-bottom: 25rpx;
+  border-bottom: 1rpx solid #f1f1f1; 
+  display: flex;
+}
+.radiolabel{
+  width: 70%;
+  display: flex;
+  justify-content: space-around; 
 }
 
 .startwrap, .endwrap{
-  margin-bottom: 50rpx;
+  margin-top: 25rpx; 
+  margin-bottom: 25rpx;
   display: flex;
   padding-left: 50rpx; 
+  border-bottom: 1rpx solid #f1f1f1;
 }
 .confirm{
-  width: 90%;
   background-color: #f55d54;
   color: #fff;
-  font-size: 50rpx;
+}
+.btnwrap{
+  margin-top: 50rpx;
+  display: flex;
+}
+.btn{
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4rpx;
 }
 
 .table{
   margin-top: 50rpx;
+  font-size: 21rpx;
+}
+/* 表格css  */
+.table {
+  border: 0px solid darkgray;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+    width:40%;
+    justify-content: center;
+    text-align: center;
+}
+.bg-w{
+  background: snow;
+}
+.bg-g{
+  background: #E6F3F9;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #ccc;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
 }
