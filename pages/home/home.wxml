@@ -21,7 +21,7 @@
     </view>
     <view class='box norightborder' bindtap='click2'>
       <image src='../../pic/home.png'></image>
-      <view>zhuye</view>
+      <view>000</view>
     </view>
     <view class='box' bindtap='click3'>
       <image src='../../pic/home.png'></image>
