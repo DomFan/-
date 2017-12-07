@@ -1,11 +1,11 @@
 {
   "pages":[
-    
+    "pages/query/query",
 
     "pages/home/home",    
     "pages/login/login",  
     "pages/index/index",  
-    "pages/query/query",
+    
     "pages/pic/pic",      
     "pages/submitSuccess/submitSuccess", 
     "pages/logs/logs"    
