@@ -8,11 +8,11 @@
     <view class='inputWrap'>
       <view class='accountWrap'>
         <input name='nameInput' class='items account' bindinput='nameInput' placeholder='用户名' placeholder-class="phcolor" />
-        <image class='userIcon' bindtap='usertap' src='../../pic/user.png'>1</image>
+        <image class='userIcon' bindtap='usertap' src='../../images/user.png'>1</image>
       </view>
       <view class='passwordWrap'>
         <input name='pswdInput' class='items password' password bindinput='pswdInput' placeholder='密码' placeholder-class="phcolor" />
-        <image class='pswdIcon' src='../../pic/pswd.png'></image>
+        <image class='pswdIcon' src='../../images/pswd.png'></image>
       </view>
     </view>
     <!--提交按钮  -->

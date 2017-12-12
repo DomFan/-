@@ -128,8 +128,10 @@ Page({
 
 
 
-
-
+  // 禁止下拉刷新
+  onPullDownRefresh: function(){
+    wx.stopPullDownRefresh()
+  },
 
 
   /**

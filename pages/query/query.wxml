@@ -3,18 +3,23 @@
 <view class='wrap'>
   <form class='form'>
     <radio-group class='radiowrap' bindchange='radioChange'>
-      <view>交易状态：</view>
-      <label class='radiolabel'>
+      <view class='typeleft'>交易状态：</view>
+      <!-- <label class='radiolabel'>
         <radio value='all' checked='true' class='radio all'>所有</radio>
         <radio value='success' class='radio success'>成功</radio>
         <radio value='backoff' class='radio backoff'>退款</radio>        
-      </label>
+      </label> -->
+      <view class='typeright'>
+        <view class='text'>所有交易</view>
+        <image class='arrow' src='../../images/arrow.png'></image>
+      </view>
     </radio-group>
 
     <view class='startwrap'>
       <picker mode="date" value="{{date}}" end='{{enddate}}' bindchange="starttime">
         <view class="picker">
           开始日期：{{startdate}}
+
         </view>
       </picker>
     </view>
