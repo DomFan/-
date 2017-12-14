@@ -14,8 +14,7 @@ Page({
     sellerAddress: '', //商户地址
     sellerPerson: '', //联系人
     sellerPhone: '', //电话
-    imageurl: '',
-    url: '',
+    
     // urls: new Array(10),
     urls: ['1','1','1','1','1','1','1','1','1','1'],
     nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"]
@@ -27,6 +26,7 @@ Page({
     this.setData({
       sellerName: e.detail.value
     })
+    console.log(e.detail.value, '---' ,this.data.sellerName)
   },
   /* 地址 */
   addressinput: function (e) {
@@ -60,7 +60,7 @@ Page({
         const src = res.tempFilePaths[0]
         // urls 清除元素 添加元素
         urls.splice(index, 1, src)
-
+        console.log(that.data.urls)
         console.log(res.tempFilePaths)
         console.log(src)
         // 上传文件
@@ -72,17 +72,18 @@ Page({
           header: {},
           formData: {
             id: userId,
-            indexName,
-
+            indexName: indexName,
           },
           success: function (res) {
-            console.log(name, this.formData)
+            console.log(res.data)
           },
           fail: function (res) {
             console.log(res, 'fail', name, indexName, this.formData, this.filePath, that)
             //{errMsg: "uploadFile:fail Error: connect ECONNREFUSED 192.157.208.178:443"}errMsg: "uploadFile:fail Error: connect ECONNREFUSED 192.157.208.178:443"__proto__: Object "fail" "" undefined undefined
           },
-          complete: function (res) { },
+          complete: function (res) {
+            console.log(name, that.formData)
+          },
         })
 
       }
@@ -261,13 +262,15 @@ Page({
       url: 'http://localhost:3000/submitfile',
       method: 'POST',
       data: data,
-      success: function () {
+      success: function (res) {
+        // console.log(that.data.sellerName)
         console.log(data)
+        console.log(res.data)
         wx.navigateTo({
           url: '../submitSuccess/submitSuccess',
           success: function (res) { },
           fail: function (res) { },
-          complete: function (res) { },
+          complete: function (res) {  },
         })
       }
 

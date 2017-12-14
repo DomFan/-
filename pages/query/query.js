@@ -65,7 +65,7 @@ Page({
         enddate: that.data.enddate
       },
       header: {},
-      method: "POST",
+      method: "GET",
       dataType: "json",
       success: function(res) {},
       fail: function(res) {},
