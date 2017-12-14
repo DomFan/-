@@ -20,8 +20,28 @@ Page({
       { "time": "2012-01-02", "name": "name2", "road": "alipay", "num": "0123456789", "money": "123.12", "status": "success" },
       { "time": "2012-01-03", "name": "name3", "road": "wechat", "num": "0123456789", "money": "789.01", "status": "backoff" },
       { "time": "2012-01-04", "name": "name4", "road": "alipay", "num": "0123456789", "money": "0.12", "status": "success" },
-    ]
+    ],
+    open: false,
+    text: "所有交易",
+    list: ["所有交易","交易成功","退款"],
+    
+    
   },
+
+
+  // openlist 点击交易状态
+  openlist: function(){
+    (!this.data.open) ? this.setData({open: true}): this.setData({open: false})
+    console.log(this.data.open)
+  },
+  // 交易状态选择
+  chooseone: function(e){
+    // console.log(e)
+    this.setData(e.target.dataset)
+    console.log(this.data.text)
+    this.setData({open: false})
+  },
+
 
   // 交易状态选择
   radioChange: function(e){

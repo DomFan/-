@@ -10,10 +10,18 @@
         <radio value='backoff' class='radio backoff'>退款</radio>        
       </label> -->
       <view class='typeright'>
-        <view class='text'>所有交易</view>
+        <view class='text' bindtap='openlist'>{{text}}</view>
+        <image class='arrow {{open ? "arrow-up" : "arrow-down"}}' src='../../images/arrow.png'></image>
+      </view>
+      
+    </radio-group>
+    <!--交易状态列表  -->
+    <view class='listwrap' wx:if='{{open}}'>  
+      <view class='list' wx:for='{{list}}' wx:key='{{index}}'>
+        <view data-text='{{item}}' bindtap='chooseone'>{{item}}</view>
         <image class='arrow' src='../../images/arrow.png'></image>
       </view>
-    </radio-group>
+    </view>
 
     <view class='startwrap'>
       <picker mode="date" value="{{date}}" end='{{enddate}}' bindchange="starttime">

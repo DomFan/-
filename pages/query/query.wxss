@@ -1,3 +1,4 @@
+
 /* pages/query/query.wxss */
 .form{
   font-size: 35rpx;
@@ -34,6 +35,28 @@
   top: 12rpx;
   width: 24rpx;
   height: 24rpx;
+}
+.arrow-down{
+  transition: transform .4s;
+  transform: rotate(90deg)
+}
+.arrow-up{
+  transition: transform .4s;
+  transform: rotate(-90deg)
+}
+
+
+
+
+.listwrap{
+  background-color: #fff;
+  width: 100%;
+}
+.list{
+  padding-left: 215rpx;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
 }
 
 
