@@ -9,20 +9,9 @@ Page({
     date: '{{new Date()}}',
     startdate: '开始时间',
     enddate: '结束时间',
-    listData: [
-      {"time": "2012-01-01", "name": "name1", "road": "alipay", "num": "0123456789", "money": "456.00", "status": "success"},
-      {"time": "2012-01-02", "name": "name2", "road": "alipay", "num": "0123456789", "money": "123.12", "status": "success"},
-      {"time": "2012-01-03", "name": "name3", "road": "wechat", "num": "0123456789", "money": "789.01", "status": "backoff"},
-      {"time": "2012-01-04", "name": "name4", "road": "alipay", "num": "0123456789", "money": "0.12", "status": "success"},
-      {"time": "2012-01-05", "name": "name5", "road": "alipay", "num": "0123456789", "money": "45678.21", "status": "backoff"},
-      {"time": "2012-01-06", "name": "name6", "road": "wechat", "num": "0123456789", "money": "6.00", "status": "success"},
-      { "time": "2012-01-01", "name": "name1", "road": "alipay", "num": "0123456789", "money": "456.00", "status": "success" },
-      { "time": "2012-01-02", "name": "name2", "road": "alipay", "num": "0123456789", "money": "123.12", "status": "success" },
-      { "time": "2012-01-03", "name": "name3", "road": "wechat", "num": "0123456789", "money": "789.01", "status": "backoff" },
-      { "time": "2012-01-04", "name": "name4", "road": "alipay", "num": "0123456789", "money": "0.12", "status": "success" },
-    ],
-    open: false,
-    text: "所有交易",
+    listData: [], // 查询列表
+    open: false, // 是否开启交易类别列表
+    text: "所有交易", // 交易类别
     list: ["所有交易","交易成功","退款"],
     
     
@@ -65,7 +54,28 @@ Page({
 
   // 确定搜索条件
   confirm: function(){
-    
+
+    let that = this
+
+    wx.request({
+      url: 'http://localhost:3000/search',
+      data: {
+        text: that.data.text,
+        startdate: that.data.startdate,
+        enddate: that.data.enddate
+      },
+      header: {},
+      method: "POST",
+      dataType: "json",
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {
+        console.log(res.data)
+        that.setData({
+          listData: res.data.listData
+        })
+      },
+    })
   },
 
 

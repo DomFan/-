@@ -46,3 +46,14 @@
 		交易确认时间、商户名称、通道、订单号、交易金额、交易状态
 	退款订单查询：
 		交易确认时间、商户名称、通道、退款订单号、退款金额、交易状态。
+
+##注意事项
+###页面加载时 接受数据的方法
+	onLoad: function(options) {
+	  　　var jsonString = options.trainInfos;
+	  　　//将字串类型转为JSON类型
+	  　　var json = JSON.parse(jsonString);
+	  　　this.setData({
+	      　　trainList: json.data.trainList,
+	  　　});
+	}

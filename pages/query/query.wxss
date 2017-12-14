@@ -120,3 +120,12 @@
   height: 3rem;
   align-items: center;
 }
+
+.nocontent{
+  padding-top: 50rpx;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  font-size: 25rpx;
+  color: #ccc
+}
