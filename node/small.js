@@ -22,18 +22,18 @@ app.post('/file', function (req, res) {
 })
 
 app.post('/uploadfile', function (req, res) {
-  console.log('upload')
+  console.log('upload---')
   console.log(req.file, req.body)
   res.send('upload')
 })
 
 app.post('/submitfile', function (req, res) {
-  console.log('submitform', req.file, req.body);
+  console.log('submitform---', req.file, req.body, req.params);
   res.send('提交成功')
 })
 
 app.get('/search', function (req, res) {
-  console.log(req.query, req.body, req.params)
+  console.log('search---', req.query, req.body, req.params)
   res.send({
     listData: [
       { "time": "2012-01-01", "name": "name1", "road": "alipay", "num": "0123456789", "money": "456.00", "status": "success" },

@@ -43,6 +43,9 @@ Page({
       startdate: e.detail.value
     })
     console.log(this.data.startdate)
+    if(this.data.enddate){
+
+    }
   },
   // 结束时间
   endtime: function (e) {
