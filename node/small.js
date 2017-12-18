@@ -7,7 +7,7 @@
 var express = require('express')
 var app = express()
 app.get('/api', function (req, res) {
-  console.log(req.query);
+  console.log('login'+ req.query);
   if (true) {
     res.send('true')
   } else {
@@ -16,14 +16,14 @@ app.get('/api', function (req, res) {
 
 })
 app.post('/file', function (req, res) {
-  req.file //wenjian
+  req.files //wenjian
   req.body //biaodan
 
 })
 
 app.post('/uploadfile', function (req, res) {
   console.log('upload---')
-  console.log(req.file, req.body)
+  console.log(req.files, req.body, req.formData, req.filePath)
   res.send('upload')
 })
 

@@ -57,3 +57,8 @@
 	      　　trainList: json.data.trainList,
 	  　　});
 	}
+
+###页面跳转携带参数
+	登录后跳转回首页 首页进入上传页及查询页
+	URL+datas
+	datas = '?userName=' + userName + '&userPassword=' + userPassword + 'token=1'

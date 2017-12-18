@@ -80,7 +80,7 @@ Page({
             console.log(res, 'fail', name, indexName, this.formData, this.filePath, that)
           },
           complete: function (res) {
-            console.log(name, that.formData)
+            console.log('uploadfiles---', index, urls, that.data)
           },
         })
 
