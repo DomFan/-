@@ -33,9 +33,11 @@ Page({
   // 点击跳转
   // 上传页
   click0: function(){
+    let userName = this.data.userName,
+        userPassword = this.data.userPassword
     console.log(0)
     wx.navigateTo({
-      url: '../index/index',
+      url: '../index/index?userName=' + userName + '&userPassword=' + userPassword + '&token=1',
       success: function(res) {
         console.log('go to index')
       },
@@ -45,8 +47,10 @@ Page({
   },
   // 查账页
   click1: function(){
+    let userName = this.data.userName,
+        userPassword = this.data.userPassword
     wx.navigateTo({
-      url: '../query/query',
+      url: '../query/query?userName=' + userName + '&userPassword=' + userPassword + '&token=1',
       success: function(res) {
         console.log(1)
       },
@@ -138,7 +142,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      userName: options.userName,
+      userPassword: options.userPassword
+    })
+    console.log(options, this.data.userName, this.data.userPassword)
   },
 
   /**

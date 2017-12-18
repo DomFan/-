@@ -8,8 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userId: 'admin',
-    userPassword: null,
+    userId: '',
     sellerName: '', //商户名称
     sellerAddress: '', //商户地址
     sellerPerson: '', //联系人
@@ -79,7 +78,6 @@ Page({
           },
           fail: function (res) {
             console.log(res, 'fail', name, indexName, this.formData, this.filePath, that)
-            //{errMsg: "uploadFile:fail Error: connect ECONNREFUSED 192.157.208.178:443"}errMsg: "uploadFile:fail Error: connect ECONNREFUSED 192.157.208.178:443"__proto__: Object "fail" "" undefined undefined
           },
           complete: function (res) {
             console.log(name, that.formData)
@@ -288,7 +286,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      userName: options.userName,
+      userPassword: options.userPassword
+    })
+    console.log(options, this.data.userName, this.data.userPassword)
   },
 
   /**

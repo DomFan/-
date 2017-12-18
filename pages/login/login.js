@@ -53,7 +53,9 @@ Page({
     let that = this
     console.log(e)
     let nameInput = this.data.inputName,
-        passwordInput = this.data.inputPassword
+        passwordInput = this.data.inputPassword,
+        userName = this.data.userName,
+        userPassword = this.data.userPassword
     
     if (nameInput === '') {
       wx.showModal({
@@ -81,7 +83,7 @@ Page({
         success: function () {
 
           wx.request({
-            url: 'http://localhost:3000/api',
+            url: 'http://localhost:3000/api?userName='+nameInput+'&userPassword='+passwordInput,
             method: 'GET',
             data: that.data,
             header: {
@@ -94,7 +96,7 @@ Page({
           })
 
           wx.redirectTo({
-            url: '../home/home?userName={{userName}}&userPassword=userPassword&token=1',
+            url: '../home/home?userName='+userName+'&userPassword='+userPassword+'&token=1',
             success: function(res) {
               console.log(this.url, that.data)
             },
