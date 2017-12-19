@@ -256,6 +256,36 @@ Page({
   submitcfm: function (e) {
     let data = this.data,
         that = this
+
+    if(!this.data.sellerName){
+      wx.showToast({
+        title: '请填写商户名称',
+        icon: 'loading',
+      })
+      return
+    }
+    if (!this.data.sellerAddress) {
+      wx.showToast({
+        title: '请填写商户地址',
+        icon: 'loading',
+      })
+      return
+    }
+    if (!this.data.sellerPerson) {
+      wx.showToast({
+        title: '请填写联系人名称',
+        icon: 'loading',
+      })
+      return
+    }
+    if (!this.data.sellerPhone) {
+      wx.showToast({
+        title: '请填写联系人电话',
+        icon: 'loading',
+      })
+      return
+    }
+
     wx.request({
       url: 'http://localhost:3000/submitfile',
       method: 'POST',
@@ -296,50 +326,38 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
-  },
+  onUnload: function () {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
-  },
+  onShareAppMessage: function () {},
 
 })
