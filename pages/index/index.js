@@ -287,7 +287,7 @@ Page({
     }
 
     wx.request({
-      url: 'http://localhost:3000/submitfile',
+      url: 'https://www.shouzan365.com/back/merchantinfoController/save',
       method: 'POST',
       data: data,
       success: function (res) {

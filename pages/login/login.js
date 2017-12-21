@@ -75,7 +75,7 @@ Page({
       })
       return false
     }
-    if (nameInput === 'admin' && passwordInput === 'admin') {
+    if (true) {
       wx.showModal({
         title: '恭喜',
         content: '登录成功',
@@ -83,9 +83,12 @@ Page({
         success: function () {
 
           wx.request({
-            url: 'http://localhost:3000/api?userName='+nameInput+'&userPassword='+passwordInput,
-            method: 'GET',
-            data: that.data,
+            url: 'https://www.shouzan365.com/api/jwt/auth?username='+that.data.inputName+'&password='+that.data.inputPassword,
+            method: 'POST',
+            data: {
+              username: that.data.inputName,
+              password: that.data.inputPassword
+            },
             header: {
               'Content-Type': 'application/json'
             },
@@ -95,14 +98,14 @@ Page({
             }
           })
 
-          wx.redirectTo({
-            url: '../home/home?userName='+userName+'&userPassword='+userPassword+'&token=1',
-            success: function(res) {
-              console.log(this.url, that.data)
-            },
-            fail: function(res) {},
-            complete: function(res) {},
-          })
+          // wx.redirectTo({
+          //   url: '../home/home?userName='+userName+'&userPassword='+userPassword+'&token=1',
+          //   success: function(res) {
+          //     console.log(this.url, that.data)
+          //   },
+          //   fail: function(res) {},
+          //   complete: function(res) {},
+          // })
         }
       })
 

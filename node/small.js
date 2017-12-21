@@ -33,7 +33,7 @@ app.post('/submitfile', function (req, res) {
 })
 
 app.get('/search', function (req, res) {
-  console.log('search---', req.query, req.body, req.params)
+  console.log('search---', req.query)
   res.send({
     listData: [
       { "time": "2012-01-01", "name": "name1", "road": "alipay", "num": "0123456789", "money": "456.00", "status": "success" },
