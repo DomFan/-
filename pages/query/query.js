@@ -81,6 +81,8 @@ Page({
       return 
     }
 
+    console.log(that.data)
+
     wx.request({
       // https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31
       url: 'https://www.shouzan365.com/back/tradeBlotter/page?startDate='+ that.data.startDate +'&endDate='+ that.data.endDate +'&token='+ token,
