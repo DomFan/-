@@ -24,17 +24,22 @@
     </view>
 
     <view class='startwrap'>
-      <picker mode="date" value="{{date}}" end='{{enddate}}' bindchange="starttime">
-        <view class="picker">
-          开始日期：{{startdate}}
-
+      <picker mode="date" value="{{date}}" end='{{endDate}}' bindchange="starttime">
+        <view class='picker' wx:if='{{!startDate}}'>
+          开始日期：开始时间
+        </view>
+        <view class="picker" wx:else>
+          开始日期：{{startDate}}
         </view>
       </picker>
     </view>
     <view class='endwrap'>
-      <picker mode="date" value="{{date}}" start='{{startdate}}' bindchange="endtime">
-        <view class="picker">
-          结束日期：{{enddate}}
+      <picker mode="date" value="{{date}}" start='{{startDate}}' bindchange="endtime">
+        <view class="picker" wx:if='{{!endDate}}'>
+          结束日期：结束时间
+        </view>
+        <view class="picker" wx:else>
+          结束日期：{{endDate}}
         </view>
       </picker>
     </view>

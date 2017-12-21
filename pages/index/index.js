@@ -255,7 +255,16 @@ Page({
   */
   submitcfm: function (e) {
     let data = this.data,
-        that = this
+        that = this,
+        token = this.data.token
+    if (!token || token == 'undefined') {
+      wx.showModal({
+        title: '请先登录',
+        content: '登录后可添加',
+        showCancel: false,
+      })
+      return
+    }
 
     if(!this.data.sellerName){
       wx.showToast({

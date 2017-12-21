@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据
    */ 
   data: {
+    token: '',
+    userName: '',
+    userPassword: '',
     list: ["上传", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
     username: 'administrator',
   },
@@ -48,12 +51,14 @@ Page({
   },
   // 查账页
   click1: function(){
-    let token = this.data.token,
+    let that = this,
+        token = this.data.token,
         userName = this.data.userName,
         userPassword = this.data.userPassword
     wx.navigateTo({
       url: '../query/query?userName=' + userName + '&userPassword=' + userPassword + '&token='+ token,
       success: function(res) {
+        console.log(that.data)
         console.log('go to seatch---', userName, userPassword, token)
       },
       fail: function(res) {},

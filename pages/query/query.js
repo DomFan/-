@@ -5,10 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
     date: '{{new Date()}}',
-    startdate: '开始时间',
-    enddate: '结束时间',
+    startDate: '',
+    endDate: '',
     listData: [], // 查询列表
     open: false, // 是否开启交易类别列表
     text: "所有交易", // 交易类别
@@ -27,7 +26,6 @@ Page({
     //   tradeNo: "4200000027201712207895653733", // 钱包方订单号
     //   typeName: "收款"// 交易类型
     // }]
-    
   },
 
 
@@ -53,19 +51,19 @@ Page({
   // 开始时间
   starttime: function(e){
     this.setData({
-      startdate: e.detail.value
+      startDate: e.detail.value
     })
-    console.log(this.data.startdate)
-    if(this.data.enddate){
+    console.log(this.data.startDate)
+    if(this.data.endDate){
 
     }
   },
   // 结束时间
   endtime: function (e) {
     this.setData({
-      enddate: e.detail.value
+      endDate: e.detail.value
     })
-    console.log(this.data.enddate)    
+    console.log(this.data.endDate)    
   },
 
   // 确定搜索条件
@@ -73,16 +71,25 @@ Page({
 
     let that = this,
         token = this.data.token
+    console.log(token)
+    if(!token || token == 'undefined') {
+      wx.showModal({
+        title: '请先登录',
+        content: '登录后可查询',
+        showCancel: false,
+      })
+      return 
+    }
 
     wx.request({
       // https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31
-      url: 'https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31&token='+ token,
+      url: 'https://www.shouzan365.com/back/tradeBlotter/page?startDate='+ that.data.startDate +'&endDate='+ that.data.endDate +'&token='+ token,
       data: {
         limit: 10,
         offset: 1,
         text: that.data.text,
-        startdate: that.data.startdate,
-        enddate: that.data.enddate
+        startDate: that.data.startDate,
+        endDate: that.data.endDate
       },
       header: {
         'access-token': token
