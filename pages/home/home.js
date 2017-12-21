@@ -43,7 +43,7 @@ Page({
     wx.navigateTo({
       url: '../index/index?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
       success: function(res) {
-        console.log('go to index---', userName, userPassword, token)
+        // console.log('go to index---', userName, userPassword, token)
       },
       fail: function(res) {},
       complete: function(res) {},
@@ -58,8 +58,8 @@ Page({
     wx.navigateTo({
       url: '../query/query?userName=' + userName + '&userPassword=' + userPassword + '&token='+ token,
       success: function(res) {
-        console.log(that.data)
-        console.log('go to seatch---', userName, userPassword, token)
+        // console.log(that.data)
+        // console.log('go to search---', userName, userPassword, token)
       },
       fail: function(res) {},
       complete: function(res) {},

@@ -55,7 +55,7 @@ Page({
     })
     console.log(this.data.startDate)
     if(this.data.endDate){
-
+      console.log(this.data.endDate.substr('-'))
     }
   },
   // 结束时间
@@ -63,7 +63,7 @@ Page({
     this.setData({
       endDate: e.detail.value
     })
-    console.log(this.data.endDate)    
+    // console.log(this.data.endDate)    
   },
 
   // 确定搜索条件
@@ -85,10 +85,10 @@ Page({
 
     wx.request({
       // https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31
-      url: 'https://www.shouzan365.com/back/tradeBlotter/page?startDate='+ that.data.startDate +'&endDate='+ that.data.endDate +'&token='+ token,
+      url: 'https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=2&startDate='+ that.data.startDate +'&endDate='+ that.data.endDate +'&token='+ token,
       data: {
-        limit: 10,
-        offset: 1,
+        // limit: 10,
+        // offset: 1,
         text: that.data.text,
         startDate: that.data.startDate,
         endDate: that.data.endDate
@@ -128,7 +128,7 @@ Page({
       userPassword: options.userPassword,
       token: options.token
     })
-    console.log(options)
+    // console.log(options)
   },
 
   /**
