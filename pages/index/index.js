@@ -318,9 +318,10 @@ Page({
   onLoad: function (options) {
     this.setData({
       userName: options.userName,
-      userPassword: options.userPassword
+      userPassword: options.userPassword,
+      token: options.token
     })
-    console.log(options, this.data.userName, this.data.userPassword)
+    console.log(options)
   },
 
   /**

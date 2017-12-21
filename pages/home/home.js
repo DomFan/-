@@ -33,13 +33,14 @@ Page({
   // 点击跳转
   // 上传页
   click0: function(){
-    let userName = this.data.userName,
+    let token = this.data.token,
+        userName = this.data.userName,
         userPassword = this.data.userPassword
     console.log(0)
     wx.navigateTo({
-      url: '../index/index?userName=' + userName + '&userPassword=' + userPassword + '&token=1',
+      url: '../index/index?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
       success: function(res) {
-        console.log('go to index')
+        console.log('go to index---', userName, userPassword, token)
       },
       fail: function(res) {},
       complete: function(res) {},
@@ -47,12 +48,13 @@ Page({
   },
   // 查账页
   click1: function(){
-    let userName = this.data.userName,
+    let token = this.data.token,
+        userName = this.data.userName,
         userPassword = this.data.userPassword
     wx.navigateTo({
-      url: '../query/query?userName=' + userName + '&userPassword=' + userPassword + '&token=1',
+      url: '../query/query?userName=' + userName + '&userPassword=' + userPassword + '&token='+ token,
       success: function(res) {
-        console.log(1)
+        console.log('go to seatch---', userName, userPassword, token)
       },
       fail: function(res) {},
       complete: function(res) {},
@@ -137,9 +139,10 @@ Page({
   onLoad: function (options) {
     this.setData({
       userName: options.userName,
-      userPassword: options.userPassword
+      userPassword: options.userPassword,
+      token: options.token
     })
-    console.log(options, this.data.userName, this.data.userPassword)
+    console.log(options)
   },
 
   /**

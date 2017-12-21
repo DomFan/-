@@ -15,13 +15,11 @@ Page({
    */
   data: {
     id: "",
-    token: 0,
-    userName: "admin",
-    userPassword: "admin",
+    token: "",
+    userName: "",
+    userPassword: "",
     inputName: "",
     inputPassword: "",
-    nameInput: '',
-    passwordInput: '',
   },
 
   
@@ -30,6 +28,7 @@ Page({
     this.setData({
       inputName: util.trim(e.detail.value)
     })
+    // console.log(this.data.inputName)
   },
 
   /**密码 */
@@ -37,6 +36,7 @@ Page({
     this.setData({
       inputPassword: util.trim(e.detail.value)
     })
+    // console.log(this.data.inputPassword)
   },
 
 
@@ -44,15 +44,10 @@ Page({
    * 登录按钮
    */
   loginbtn: function (e) {
-    // console.log('loginbtn', e.detail)
-    this.setData({
-      nameInput: this.data.inputName,
-      passwordInput: this.data.inputPassword,
-    })
-    console.log(this.data.nameInput, this.data.passwordInput)
     let that = this
     console.log(e)
-    let nameInput = this.data.inputName,
+    let token = this.data.token,
+        nameInput = this.data.inputName,
         passwordInput = this.data.inputPassword,
         userName = this.data.userName,
         userPassword = this.data.userPassword
@@ -75,50 +70,58 @@ Page({
       })
       return false
     }
-    if (true) {
-      wx.showModal({
-        title: '恭喜',
-        content: '登录成功',
-        showCancel: false,
-        success: function () {
-
-          wx.request({
-            url: 'https://www.shouzan365.com/api/jwt/auth?username='+that.data.inputName+'&password='+that.data.inputPassword,
-            method: 'POST',
-            data: {
-              username: that.data.inputName,
-              password: that.data.inputPassword
-            },
-            header: {
-              'Content-Type': 'application/json'
-            },
-            success: function (res) {
-              console.log(res, res.data)
-
+    wx.request({
+      url: 'https://www.shouzan365.com/api/jwt/auth?username=' + that.data.inputName + '&password=' + that.data.inputPassword,
+      method: 'POST',
+      data: {
+        username: that.data.inputName,
+        password: that.data.inputPassword
+      },
+      header: {
+        'Content-Type': 'application/json',
+        'access-token':  token
+      },
+      success: function (res) {
+        console.log(res, res.data)
+        that.setData({
+          token: res.data.token
+        })
+        if(res.statusCode === 200 && res.data.token){
+          that.setData({
+            userName: nameInput,
+            userPassword: passwordInput
+          })
+          wx.showModal({
+            title: '恭喜',
+            content: '登录成功',
+            showCancel: false,
+            success: function () {
+              wx.redirectTo({
+                url: '../home/home?userName='+that.data.userName+'&userPassword='+ that.data.userPassword+'&token='+ that.data.token,
+                success: function(res) {
+                  console.log(that.data)
+                },
+                fail: function(res) {},
+                complete: function(res) {},
+              })
             }
           })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '用户名或密码输入错误',
+            showCancel: false,
+            success: function (e) {
 
-          // wx.redirectTo({
-          //   url: '../home/home?userName='+userName+'&userPassword='+userPassword+'&token=1',
-          //   success: function(res) {
-          //     console.log(this.url, that.data)
-          //   },
-          //   fail: function(res) {},
-          //   complete: function(res) {},
-          // })
+            },
+            complete: function (e) {
+              console.log(e)
+            }
+          })
         }
-      })
-
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '用户名或密码输入错误',
-        showCancel: false,
-        success: function (e) {
-
-        }
-      })
-    }
+      }
+    })
+    
   },
 
 
