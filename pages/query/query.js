@@ -13,7 +13,20 @@ Page({
     open: false, // 是否开启交易类别列表
     text: "所有交易", // 交易类别
     list: ["所有交易","交易成功","退款"],
-    
+    // listData: [{
+    //   tradedt: "2017-12-20 17:21:02", // 交易确认时间
+    //   merchantName: "支付测试", // 商户名称
+    //   passwayId: "微信", // 通道
+    //   orders: "202017122017210159540768", // 订单号
+    //   sum: 0.01, // 交易金额
+    //   stateName: "支付成功",// 交易状态
+
+    //   fee: 0.00006, //手续费
+    //   rate: 0.006, // 费率
+    //   refundsum: 0, // 退款金额
+    //   tradeNo: "4200000027201712207895653733", // 钱包方订单号
+    //   typeName: "收款"// 交易类型
+    // }]
     
   },
 
@@ -58,44 +71,38 @@ Page({
   // 确定搜索条件
   confirm: function(){
 
-    let that = this
+    let that = this,
+        token = this.data.token
 
     wx.request({
-      url: 'http://localhost:3000/search',
+      // https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31
+      url: 'https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31&token='+ token,
       data: {
+        limit: 10,
+        offset: 1,
         text: that.data.text,
         startdate: that.data.startdate,
         enddate: that.data.enddate
       },
-      header: {},
+      header: {
+        'access-token': token
+      },
       method: "GET",
       dataType: "json",
-      success: function(res) {},
+      success: function(res) {
+        console.log(res)
+        console.log(res.data.rows)
+        that.setData({
+          listData: res.data.rows
+        })
+        console.log(that.data.listData)
+      },
       fail: function(res) {},
       complete: function(res) {
-        console.log(res.data)
-        that.setData({
-          listData: res.data.listData
-        })
+        
       },
     })
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -107,7 +114,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      userName: options.userName,
+      userPassword: options.userPassword,
+      token: options.token
+    })
+    console.log(options)
   },
 
   /**

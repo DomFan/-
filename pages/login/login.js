@@ -20,6 +20,7 @@ Page({
     userPassword: "",
     inputName: "",
     inputPassword: "",
+    
   },
 
   
@@ -75,7 +76,8 @@ Page({
       method: 'POST',
       data: {
         username: that.data.inputName,
-        password: that.data.inputPassword
+        password: that.data.inputPassword,
+        token: that.data.token
       },
       header: {
         'Content-Type': 'application/json',
