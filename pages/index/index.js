@@ -8,6 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userName: '',
+    userPassword: '',
+    token: '',
     userId: '',
     sellerName: '', //商户名称
     sellerAddress: '', //商户地址
@@ -69,7 +72,7 @@ Page({
           filePath: src,
           name: indexName,
           header: {
-            'access-token': token
+            'access-token': that.data.token
           },
           formData: {
             id: userId,
@@ -303,10 +306,15 @@ Page({
       header: {
         'access-token': token
       },
-      data: data,
+      data: {
+        merchantName: that.data.sellerName,
+        linkman: that.data.sellerPerson,
+        lkmphone: that.data.sellerPhone,
+        address: that.data.sellerAddress,
+        merchantStname: that.data.sellerName
+      },
       success: function (res) {
         // console.log(that.data.sellerName)
-        console.log(data)
         console.log(res.data)
         wx.navigateTo({
           url: '../submitSuccess/submitSuccess',
