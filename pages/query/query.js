@@ -84,14 +84,15 @@ Page({
     console.log(that.data)
 
     wx.request({
-      // https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31
-      url: 'https://www.shouzan365.com/back/tradeBlotter/page?limit=10&offset=2&startDate='+ that.data.startDate +'&endDate='+ that.data.endDate +'&token='+ token,
+      // https://www.shouzan365.com/back/tradeBlotter/page?limit=10000000&offset=1&startDate=2017-12-01&endDate=2017-12-31
+      url: 'https://www.shouzan365.com/back/tradeBlotter/page',
       data: {
-        // limit: 10,
-        // offset: 1,
+        limit: 1000000,
+        offset: 1,
         text: that.data.text,
         startDate: that.data.startDate,
-        endDate: that.data.endDate
+        endDate: that.data.endDate,
+        token
       },
       header: {
         'access-token': token

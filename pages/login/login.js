@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    * @params
    * id 用户ID
-   * token 是否记住用户登录
+   * token 
    * userName 用户名 userPassword 密码
    * inputName 输入用户名 inputPassword 输入密码
    * 
@@ -77,7 +77,6 @@ Page({
       data: {
         username: that.data.inputName,
         password: that.data.inputPassword,
-        token: that.data.token
       },
       header: {
         'Content-Type': 'application/json',

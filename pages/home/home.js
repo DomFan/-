@@ -51,8 +51,7 @@ Page({
   },
   // 查账页
   click1: function(){
-    let that = this,
-        token = this.data.token,
+    let token = this.data.token,
         userName = this.data.userName,
         userPassword = this.data.userPassword
     wx.navigateTo({
@@ -147,7 +146,7 @@ Page({
       userPassword: options.userPassword,
       token: options.token
     })
-    console.log(options)
+    // console.log(options)
   },
 
   /**

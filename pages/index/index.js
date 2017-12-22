@@ -68,7 +68,9 @@ Page({
           method: 'POST',
           filePath: src,
           name: indexName,
-          header: {},
+          header: {
+            'access-token': token
+          },
           formData: {
             id: userId,
             indexName: indexName,
@@ -298,6 +300,9 @@ Page({
     wx.request({
       url: 'https://www.shouzan365.com/back/merchantinfoController/save',
       method: 'POST',
+      header: {
+        'access-token': token
+      },
       data: data,
       success: function (res) {
         // console.log(that.data.sellerName)
