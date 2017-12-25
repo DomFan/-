@@ -8,51 +8,77 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '',
-    userPassword: '',
+    username: '',
+    password: '',
     token: '',
     userId: '',
-    sellerName: '', //商户名称
-    sellerAddress: '', //商户地址
-    sellerPerson: '', //联系人
-    sellerPhone: '', //电话
-    
+    merchantName: '', //商户名称
+    address: '', //商户地址
+    linkman: '', //联系人
+    lkmphone: '', //电话
+    fileList: new Array(10), // 文件列表
+    userName: '', // 为商户设置名称
+    passWord: '', // 为商户设置密码
     // urls: new Array(10),
     urls: ['1','1','1','1','1','1','1','1','1','1'],
-    nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"]
+    nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"],
+
+    buslicence: '', // 营业执照图片
+    orgcode: '', // 组织代码图片
+    lawholder: '', // 法人持证件照图片
+    frontid: '', // 身份证正面照片
+    backid: '', // 身份证反面照片
+    spequalifione: '', // 特殊资质一图片
+    spequalifitwo: '', // 特殊资质二图片
+    spequalifithree: '', // 特殊资质三图片
+    spequalififour: '', // 特殊资质四图片
+    spequalififive: '', // 特殊资质五图片
   },
 
   /* 获取input输入值 */
   /* 商户 */
   nameinput: function (e) {
     this.setData({
-      sellerName: e.detail.value
+      merchantName: e.detail.value
     })
-    console.log(e.detail.value, '---' ,this.data.sellerName)
+    console.log(e.detail.value, '---' ,this.data.merchantName)
   },
   /* 地址 */
   addressinput: function (e) {
     this.setData({
-      sellerAddress: e.detail.value
+      address: e.detail.value
     })
   },
   /* 联系人 */
   personinput: function (e) {
     this.setData({
-      sellerPerson: e.detail.value
+      linkman: e.detail.value
     })
   },
   /* 电话 */
   phoneinput: function (e) {
     this.setData({
-      sellerPhone: e.detail.value
+      lkmphone: e.detail.value
+    })
+  },
+  /* 商户登录名 */
+  phoneinput: function (e) {
+    this.setData({
+      userName: e.detail.value
+    })
+  },
+  /* 商户登录密码 */
+  phoneinput: function (e) {
+    this.setData({
+      passWord: e.detail.value
     })
   },
   
   /**上传图片  */
   uploadpic: function (index, urls, indexName, userId) { // 索引，本地图片地址， 当前栏， 用户ID
     console.log(indexName)
-    let that = this
+    let that = this,
+        token = that.data.token
     // 选择图片
     wx.chooseImage({
       count: 1, // 默认9
@@ -62,30 +88,92 @@ Page({
         const src = res.tempFilePaths[0]
         // urls 清除元素 添加元素
         urls.splice(index, 1, src)
-        console.log(that.data.urls)
-        console.log(res.tempFilePaths)
+        // console.log(that.data.urls)
+        // console.log(res.tempFilePaths)
         console.log(src)
         // 上传文件
         wx.uploadFile({
-          url: 'http://localhost:3000/uploadfile',
-          method: 'POST',
+          url: 'http://192.168.98.179/back/accepagent/fileUpload',
           filePath: src,
-          name: indexName,
+          name: 'book', // 文件类型 需设置为 book
           header: {
-            'access-token': that.data.token
+            'content-type': 'multipart/form-data',
+            'access-token': token
           },
-          formData: {
-            id: userId,
-            indexName: indexName,
-          },
+          formData: {},
           success: function (res) {
-            console.log(res.data)
+            console.log('upload success', res)
+            // console.log(res.data)
+            let data = JSON.parse(res.data) // 将JSON字符串 转换成对象格式
+            console.log(data)
+            switch (index) {
+              case 0: 
+                that.setData({
+                  buslicence: data.msg
+                })
+                break
+              case 1:
+                that.setData({
+                  orgcode: data.msg
+                })
+                break
+              case 2:
+                that.setData({
+                  lawholder: data.msg
+                })
+                break
+              case 3:
+                that.setData({
+                  frontid: data.msg
+                })
+                break
+              case 4:
+                that.setData({
+                  backid: data.msg
+                })
+                break
+              case 5:
+                that.setData({
+                  spequalifione: data.msg
+                })
+                break
+              case 6:
+                that.setData({
+                  spequalifitwo: data.msg
+                })
+                break
+              case 7:
+                that.setData({
+                  spequalifithree: data.msg
+                })
+                break
+              case 8:
+                that.setData({
+                  spequalififour: data.msg
+                })
+                break
+              case 9:
+                that.setData({
+                  spequalififive: data.msg
+                })
+                break
+            }
+
+            
+            // console.log(data, res.data, res.data.msg, that.data.buslicence)
+
+            let fileList = that.data.fileList,
+                file = data.msg
+            fileList.splice(index, 1, file)
+            console.log(fileList, file, that.data.buslicence)
           },
           fail: function (res) {
-            console.log(res, 'fail', name, indexName, this.formData, this.filePath, that)
+            console.log('upload fail', res)
+            // console.log(res, 'fail', name, indexName, this.formData, this.filePath, that)
           },
           complete: function (res) {
-            console.log('uploadfiles---', index, urls, that.data)
+            console.log('upload complete', res)
+            // console.log('uploadfiles---', index, urls, res)
           },
         })
 
@@ -116,16 +204,6 @@ Page({
         complete: function (res) { },
       })
     }
-
-
-    /** 
-    wx.navigateTo({
-      url: '../pic/pic',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-    */
   },
 
   /**上传图片 0 */
@@ -271,28 +349,28 @@ Page({
       return
     }
 
-    if(!this.data.sellerName){
+    if(!this.data.merchantName){
       wx.showToast({
         title: '请填写商户名称',
         icon: 'loading',
       })
       return
     }
-    if (!this.data.sellerAddress) {
+    if (!this.data.address) {
       wx.showToast({
         title: '请填写商户地址',
         icon: 'loading',
       })
       return
     }
-    if (!this.data.sellerPerson) {
+    if (!this.data.linkman) {
       wx.showToast({
         title: '请填写联系人名称',
         icon: 'loading',
       })
       return
     }
-    if (!this.data.sellerPhone) {
+    if (!this.data.lkmphone) {
       wx.showToast({
         title: '请填写联系人电话',
         icon: 'loading',
@@ -301,21 +379,29 @@ Page({
     }
 
     wx.request({
-      url: 'https://www.shouzan365.com/back/merchantinfoController/save',
+      url: 'http://192.168.98.179/back/merchantinfoController/save',
       method: 'POST',
       header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
         'access-token': token
       },
       data: {
-        merchantName: that.data.sellerName,
-        linkman: that.data.sellerPerson,
-        lkmphone: that.data.sellerPhone,
-        address: that.data.sellerAddress,
-        merchantStname: that.data.sellerName
+        merchantName: that.data.merchantName, // 商户名
+        linkman: that.data.linkman, // 商户联系人
+        lkmphone: that.data.lkmphone, // 商户联系方式
+        address: that.data.address, // 商户地址
+        merchantStname: that.data.merchantName, // 商户名简称
+        userName: that.data.userName, // 为商户设置用户名
+        passWord: that.data.passWord, // 为商户设置密码
+        urls: that.data.urls // 
       },
       success: function (res) {
-        // console.log(that.data.sellerName)
+        // console.log(that.data.merchantName)
         console.log(res.data)
+        console.log(res)
+        // data:{ rel: true }, errMsg: "request:ok", header: { Expires: "0", Cache - Control: "no-cache, no-store, max-age=0, must-revalidate", Set - Cookie: SESSION=13ca18d1-4fe1-4743-848a-3fcc9a28dae8; path=/; HttpOnly", X - XSS - Protection: "1; mode=block", Pragma: "no-cache", … }, statusCode: 200
+
+
         wx.navigateTo({
           url: '../submitSuccess/submitSuccess',
           success: function (res) { },
@@ -339,8 +425,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      userName: options.userName,
-      userPassword: options.userPassword,
+      username: options.userName,
+      password: options.userPassword,
       token: options.token
     })
     console.log(options)

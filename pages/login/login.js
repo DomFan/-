@@ -72,14 +72,14 @@ Page({
       return false
     }
     wx.request({
-      url: 'https://www.shouzan365.com/api/jwt/auth?username=' + that.data.inputName + '&password=' + that.data.inputPassword,
+      url: 'http://192.168.98.179/api/jwt/auth',
       method: 'POST',
       data: {
         username: that.data.inputName,
         password: that.data.inputPassword,
       },
       header: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'access-token':  token
       },
       success: function (res) {
