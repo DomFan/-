@@ -55,7 +55,7 @@ Page({
     })
     console.log(this.data.startDate)
     if(this.data.endDate){
-      console.log(this.data.endDate.substr('-'))
+      // console.log(this.data.endDate.substr('-'))
     }
   },
   // 结束时间
@@ -79,6 +79,22 @@ Page({
         showCancel: false,
       })
       return 
+    }
+    if (!that.data.startDate){
+      wx.showModal({
+        title: '提示',
+        content: '请选择开始日期',
+        showCancel: false,
+      })
+      return
+    }
+    if (!that.data.endDate) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择结束日期',
+        showCancel: false,
+      })
+      return
     }
 
     console.log(that.data)
