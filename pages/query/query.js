@@ -1,6 +1,6 @@
 // pages/query/query.js
 Page({
-
+  
   /**
    * 页面的初始数据
    */
@@ -12,6 +12,7 @@ Page({
     open: false, // 是否开启交易类别列表
     text: "所有交易", // 交易类别
     list: ["所有交易","交易成功","退款"],
+    dateReg: /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/, // 时间格式正则
     // listData: [{
     //   tradedt: "2017-12-20 17:21:02", // 交易确认时间
     //   merchantName: "支付测试", // 商户名称
@@ -54,9 +55,21 @@ Page({
       startDate: e.detail.value
     })
     console.log(this.data.startDate)
-    if(this.data.endDate){
-      // console.log(this.data.endDate.substr('-'))
+    
+    let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
+      endDate = this.data.endDate,
+      startDate = this.data.startDate
+    if (startDate && dateReg.test(startDate)) {
+      endDate = startDate.split('-').map(item => parseInt(item))
+      endDate[2] += 3
+      this.setData({
+        endDate: endDate.join('-')
+      })
     }
+    console.log(this.data.endDate, this.data.startDate)
+
+    
+    
   },
   // 结束时间
   endtime: function (e) {
@@ -64,6 +77,16 @@ Page({
       endDate: e.detail.value
     })
     // console.log(this.data.endDate)    
+    let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
+      endDate = this.data.endDate,
+      startDate = this.data.startDate
+    if (endDate && dateReg.test(endDate)) {
+      startDate = endDate.split('-').map(item => parseInt(item))
+      startDate[2] -= 3
+      this.setData({
+        startDate: startDate.join('-')
+      })
+    }
   },
 
   // 确定搜索条件
@@ -152,14 +175,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**
