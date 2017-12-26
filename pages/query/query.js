@@ -55,19 +55,22 @@ Page({
       startDate: e.detail.value
     })
     console.log(this.data.startDate)
-    
-    let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
-      endDate = this.data.endDate,
-      startDate = this.data.startDate
-    if (startDate && dateReg.test(startDate)) {
-      endDate = startDate.split('-').map(item => parseInt(item))
-      endDate[2] += 3
-      this.setData({
-        endDate: endDate.join('-')
-      })
+    /*{
+      let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
+        endDate = this.data.endDate,
+        startDate = this.data.startDate
+      if (startDate && dateReg.test(startDate)) {
+        end = startDate.split('-').map(item => parseInt(item))
+        start = startDate.split('-').map(item => parseInt(item))
+        if(start[2])
+        end[2] += 3
+        this.setData({
+          endDate: endDate.join('-')
+        })
+      }
+      console.log(this.data.endDate, this.data.startDate)
     }
-    console.log(this.data.endDate, this.data.startDate)
-
+    */
     
     
   },
@@ -76,17 +79,19 @@ Page({
     this.setData({
       endDate: e.detail.value
     })
-    // console.log(this.data.endDate)    
-    let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
-      endDate = this.data.endDate,
-      startDate = this.data.startDate
-    if (endDate && dateReg.test(endDate)) {
-      startDate = endDate.split('-').map(item => parseInt(item))
-      startDate[2] -= 3
-      this.setData({
-        startDate: startDate.join('-')
-      })
-    }
+    // console.log(this.data.endDate) 
+    /*
+      let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
+        endDate = this.data.endDate,
+        startDate = this.data.startDate
+      if (endDate && dateReg.test(endDate)) {
+        startDate = endDate.split('-').map(item => parseInt(item))
+        startDate[2] -= 3
+        this.setData({
+          startDate: startDate.join('-')
+        })
+      }
+    */
   },
 
   // 确定搜索条件
@@ -103,22 +108,24 @@ Page({
       })
       return 
     }
-    if (!that.data.startDate){
-      wx.showModal({
-        title: '提示',
-        content: '请选择开始日期',
-        showCancel: false,
-      })
-      return
-    }
-    if (!that.data.endDate) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择结束日期',
-        showCancel: false,
-      })
-      return
-    }
+    
+      if (!that.data.startDate){
+        wx.showModal({
+          title: '提示',
+          content: '请选择开始日期',
+          showCancel: false,
+        })
+        return
+      }
+      if (!that.data.endDate) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择结束日期',
+          showCancel: false,
+        })
+        return
+      }
+    
 
     console.log(that.data)
 

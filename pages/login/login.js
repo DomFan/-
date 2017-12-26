@@ -45,6 +45,7 @@ Page({
    * 登录按钮
    */
   loginbtn: function (e) {
+    
     let that = this
     console.log(e)
     let token = this.data.token,
@@ -72,7 +73,8 @@ Page({
       return false
     }
     wx.request({
-      url: 'http://192.168.98.179/api/jwt/auth',
+      // url: 'http://192.168.98.179/api/jwt/auth',
+      url: 'https://www.shouzan365.com/api/jwt/auth',
       method: 'POST',
       data: {
         username: that.data.inputName,
@@ -83,30 +85,46 @@ Page({
         'access-token':  token
       },
       success: function (res) {
+        wx.showLoading({
+          title: 'loading...',
+          mask: true,
+        })
+
         console.log(res, res.data)
         that.setData({
           token: res.data.token
         })
         if(res.statusCode === 200 && res.data.token){
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 2000)
           that.setData({
             userName: nameInput,
             userPassword: passwordInput
           })
-          wx.showModal({
-            title: '恭喜',
-            content: '登录成功',
-            showCancel: false,
-            success: function () {
-              wx.redirectTo({
-                url: '../home/home?userName='+that.data.userName+'&userPassword='+ that.data.userPassword+'&token='+ that.data.token,
-                success: function(res) {
-                  console.log(that.data)
-                },
-                fail: function(res) {},
-                complete: function(res) {},
-              })
-            }
+          wx.redirectTo({
+            url: '../home/home?userName=' + that.data.userName + '&userPassword=' + that.data.userPassword + '&token=' + that.data.token,
+            success: function (res) {
+              console.log(that.data)
+            },
+            fail: function (res) { },
+            complete: function (res) { },
           })
+          // wx.showModal({
+          //   title: '恭喜',
+          //   content: '登录成功',
+          //   showCancel: false,
+          //   success: function () {
+          //     wx.redirectTo({
+          //       url: '../home/home?userName='+that.data.userName+'&userPassword='+ that.data.userPassword+'&token='+ that.data.token,
+          //       success: function(res) {
+          //         console.log(that.data)
+          //       },
+          //       fail: function(res) {},
+          //       complete: function(res) {},
+          //     })
+          //   }
+          // })
         } else {
           wx.showModal({
             title: '提示',
@@ -120,6 +138,13 @@ Page({
             }
           })
         }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: 'tip',
+          content: res.data,
+          showCancel: false,
+        })
       }
     })
     
