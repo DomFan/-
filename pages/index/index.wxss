@@ -1,5 +1,6 @@
 
 page {
+  /* overflow: hidden; */
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -8,7 +9,11 @@ page {
   font-family: PingFangSC-Regular, sans-serif;
 }
 form{
+  width: 100%;
   overflow: hidden;  
+}
+page, form, view{
+  box-sizing: border-box;
 }
 
 /* .container {
@@ -18,23 +23,23 @@ form{
   padding-top: 0;
   font-size: 35rpx;
   padding: 20px;
-}
-.row-container {
-  width: 100%;  
-  margin-bottom: 10px;
+  }
+  .row-container {
+    width: 100%;  
+    margin-bottom: 10px;
 
-  display: flex;
-  justify-content: space-around;
-}
-.row-container text {
-  width: 200rpx;
-  font-size: 28rpx;
-  line-height: 50rpx;
-}
-.row-container input {
-  border: 1rpx solid #cfcfcf;
-}
-.row-container button {
+    display: flex;
+    justify-content: space-around;
+  }
+  .row-container text {
+    width: 200rpx;
+    font-size: 28rpx;
+    line-height: 50rpx;
+  }
+  .row-container input {
+    border: 1rpx solid #cfcfcf;
+  }
+  .row-container button {
   width: 140rpx;
   height: 70rpx;
   
