@@ -1,7 +1,3 @@
-// index.js 上传文件页面
-
-// let app = getApp()
-
 Page({
 
   /**

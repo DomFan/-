@@ -18,7 +18,7 @@
     <!--交易状态列表  -->
     <view class='listwrap' wx:if='{{open}}'>  
       <view class='list' wx:for='{{list}}' wx:key='{{index}}'>
-        <view data-text='{{item}}' bindtap='chooseone'>{{item}}</view>
+        <view data-text='{{item}}' data-type='{{index}}' bindtap='chooseone'>{{item}}</view>
         <image class='arrow' src='../../images/arrow.png'></image>
       </view>
     </view>
@@ -50,40 +50,54 @@
       
   </form>
 
-
   <view class='table'>
     <!--表头  -->
-    <view class="tr bg-w">
-      <view class="th">交易确认时间</view>
-      <view class="th">商户名称</view>
-      <view class="th">通道</view>
-      <view class="th">订单号</view>
-      <view class="th">交易金额</view>
-      <view class="th">交易状态</view>
+    <view class="thead bg-w">
+      <view class="thitem tradedt" style='width: 13%;'>交易时间</view>
+      <view class="thitem merchantName" style='width: 14%;'>商户名称</view>
+      <view class="thitem passwayID" style='width: 10%;'>通道</view>
+      <view class="thitem orders" style='width: 38%;'>订单号</view>
+      <view class="thitem sum" style='width: 12%;'>交易金额</view>
+      <view class="thitem stateName" style='width: 13%;'>交易状态</view>
     </view>
 
-    <!--单元格  -->
-    <view wx:if='{{!listData[0]}}' class='nocontent'>
-      <view>尚无数据</view>
-    </view>
-    <view wx:if='{{listData[0]}}' wx:for="{{listData}}" wx:key="{{index}}">
-      <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-        <view class="td">{{item.tradedt}}</view>
-        <view class="td">{{item.merchantName}}</view>
-        <view class="td">{{item.passwayId}}</view>
-        <view class="td">{{item.orders}}</view>
-        <view class="td">{{item.sum}}</view>
-        <view class="td">{{item.stateName}}</view>
+    <!--测试用  -->
+    <!-- 
+      <view class='test'>
+        <view style='width: 13%; background: #eee'>11111111111</view>
+        <view style='width: 14%; background: white'>22</view>
+        <view style='width: 10%; background: red'>33</view>
+        <view style='width: 40%; background: yellow'>44</view>
+        <view style='width: 10%; background: blue'>55</view>
+        <view style='width: 13%; background: green'>66</view>
+      </view> 
+    -->
+    
+    <scroll-view class='scroll' scroll-y bindscrolltolower='lower'>
+      <!--单元格  -->
+      <view wx:if='{{!listData[0]}}' class='nocontent'>
+        <view>尚无数据</view>
       </view>
-      <view class="tr" wx:else>
-        <view class="td">{{item.tradedt}}</view>
-        <view class="td">{{item.merchantName}}</view>
-        <view class="td">{{item.passwayId}}</view>
-        <view class="td">{{item.orders}}</view>
-        <view class="td">{{item.sum}}</view>
-        <view class="td">{{item.stateName}}</view>
+      <view wx:if='{{listData[0]}}' wx:for="{{listData}}" wx:key="{{index}}">
+        <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+          <view class="td">{{item.tradedt}}</view>
+          <view class="td">{{item.merchantName}}</view>
+          <view class="td">{{item.passwayId}}</view>
+          <view class="td">{{item.orders}}</view>
+          <view class="td">{{item.sum}}</view>
+          <view class="td">{{item.stateName}}</view>
+        </view>
+        <view class="tr" wx:else>
+          <view class="td">{{item.tradedt}}</view>
+          <view class="td">{{item.merchantName}}</view>
+          <view class="td">{{item.passwayId}}</view>
+          <view class="td">{{item.orders}}</view>
+          <view class="td">{{item.sum}}</view>
+          <view class="td">{{item.stateName}}</view>
+        </view>
       </view>
-    </view>
+    </scroll-view>
+      
     <!-- <block wx:if='{{!listData[0]}}'>
       <view>尚无数据</view>
     </block> -->

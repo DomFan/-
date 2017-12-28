@@ -3,21 +3,19 @@
 page{
   width: 100%;
   height: 100%;
-  /* overflow: hidden; */
 }
 page, form, view{
   box-sizing: border-box;
 }
 .form{
+  width: 100%;
   font-size: 35rpx;
-  /* line-height: 100rpx; */
 }
 
 .radiowrap{
   box-sizing: border-box;
   width: 100%;
   padding-left: 50rpx;
-  /* padding-bottom: 25rpx; */
   border-bottom: 1rpx solid #f1f1f1; 
   display: flex; 
 }
@@ -33,13 +31,13 @@ page, form, view{
   position: relative;
 }
 .text{
-  float: left;
+  /* float: left; */
   height: 50rpx;
   line-height: 50rpx;
 }
 .arrow{
-  float: right;
-  position: relative;
+  /* float: right; */
+  position: absolute;
   right: 0rpx;
   top: 12rpx;
   width: 24rpx;
@@ -63,9 +61,13 @@ page, form, view{
 }
 .list{
   padding-left: 215rpx;
-  width: 70%;
-  display: flex;
-  justify-content: space-between;
+  width: 95%;
+  position: relative;
+  /* display: flex;
+  justify-content: space-between; */
+}
+.list view{
+  line-height: 50rpx;  
 }
 
 .startwrap, .endwrap, .btnwrap{
@@ -86,10 +88,11 @@ page, form, view{
 .confirm{
   background-color: #f55d54;
   color: #fff;
-  font-size: 25rpx;
+  font-size: 36rpx;
 }
 .btn{
-  width: 50%;
+  width: 100%;
+  height: 100rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,6 +100,7 @@ page, form, view{
 }
 
 .table{
+  width: 100%;
   margin-top: 50rpx;
   font-size: 21rpx;
 }
@@ -122,7 +126,7 @@ page, form, view{
 .bg-g{
   background: #E6F3F9;
 }
-.th {
+/* .th {
   width: 40%;
   justify-content: center;
   background: #ccc;
@@ -130,7 +134,7 @@ page, form, view{
   display: flex;
   height: 3rem;
   align-items: center;
-}
+} */
 
 .nocontent{
   padding-top: 50rpx;
@@ -139,4 +143,63 @@ page, form, view{
   /* align-items: center; */
   font-size: 25rpx;
   color: #ccc
+}
+
+.thead{
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  background-color: blue;
+}
+.thitem{
+  /* width: 16.666%; */
+  text-align: center;
+  line-height: 3rem;
+  /* justify-content: center; */
+  background: #ccc;
+  color: #fff;
+  /* display: flex; */
+  height: 3rem;
+  /* align-items: center; */
+}
+ .tardedt{
+  /* width: 13.125%; */
+  width: 13%;
+}
+.merchantName{
+  /* width: 14.375%; */
+  width: 14%;
+}
+.passwayId{
+  /* width: 10%; */
+  width: 10%;  
+}
+.orders{
+  /* width: 38.75%; */
+  width: 40%;
+}
+.sum{
+  /* width: 10.625%; */
+  width: 10%;  
+}
+.stateName{
+  /* width: 13.125%; */
+  width: 13%;
+} 
+.test{
+  width: 100%;
+  height: 100rpx;
+  background-color: red;
+}
+.test view{
+   /* width: 10%;  */
+   height: 100rpx; 
+   line-height: 100rpx;
+   text-align: center;
+   float: left;
+}
+
+/* scroll 滚动区域 */
+.scroll {
+  height: 18rem;
 }

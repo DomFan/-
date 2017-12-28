@@ -103,8 +103,7 @@ Page({
               console.log(that.data)
             },
           })
-        } 
-        else {
+        } else if (!res.data.token) {
           setTimeout(function(){
             wx.hideLoading()
           }, 0)
