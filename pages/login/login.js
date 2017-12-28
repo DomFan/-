@@ -7,20 +7,17 @@ Page({
   /**
    * 页面的初始数据
    * @params
-   * id 用户ID
    * token 
    * userName 用户名 userPassword 密码
    * inputName 输入用户名 inputPassword 输入密码
    * 
    */
   data: {
-    id: "",
     token: "",
     userName: "",
     userPassword: "",
     inputName: "",
     inputPassword: "",
-    
   },
 
   
@@ -45,7 +42,6 @@ Page({
    * 登录按钮
    */
   loginbtn: function (e) {
-    
     let that = this
     console.log(e)
     let token = this.data.token,
@@ -57,7 +53,7 @@ Page({
     if (nameInput === '') {
       wx.showModal({
         title: '提示',
-        content: '用户名为空，请重新输入',
+        content: '请输入用户名',
         showCancel: false,
         confirmText: '确定',
       })
@@ -66,7 +62,7 @@ Page({
     if (passwordInput === '') {
       wx.showModal({
         title: '提示',
-        content: '密码为空，请重新输入',
+        content: '请输入密码',
         showCancel: false,
         confirmText: '确定',
       })
@@ -91,61 +87,50 @@ Page({
         })
 
         console.log(res, res.data)
-        that.setData({
-          token: res.data.token
-        })
+
         if(res.statusCode === 200 && res.data.token){
           setTimeout(function () {
             wx.hideLoading()
           }, 2000)
           that.setData({
             userName: nameInput,
-            userPassword: passwordInput
+            userPassword: passwordInput,
+            token: res.data.token            
           })
           wx.redirectTo({
             url: '../home/home?userName=' + that.data.userName + '&userPassword=' + that.data.userPassword + '&token=' + that.data.token,
             success: function (res) {
               console.log(that.data)
             },
-            fail: function (res) { },
-            complete: function (res) { },
           })
-          // wx.showModal({
-          //   title: '恭喜',
-          //   content: '登录成功',
-          //   showCancel: false,
-          //   success: function () {
-          //     wx.redirectTo({
-          //       url: '../home/home?userName='+that.data.userName+'&userPassword='+ that.data.userPassword+'&token='+ that.data.token,
-          //       success: function(res) {
-          //         console.log(that.data)
-          //       },
-          //       fail: function(res) {},
-          //       complete: function(res) {},
-          //     })
-          //   }
-          // })
-        } else {
+        } 
+        else {
+          setTimeout(function(){
+            wx.hideLoading()
+          }, 0)
           wx.showModal({
             title: '提示',
-            content: '用户名或密码输入错误',
+            content: '用户名或密码错误',
             showCancel: false,
             success: function (e) {
-
+              // console.log(e)
             },
             complete: function (e) {
-              console.log(e)
+              // console.log(e)
             }
           })
         }
       },
       fail: function (res) {
+        console.log('loading fail')
+        wx.hideLoading()
         wx.showModal({
           title: 'tip',
           content: res.data,
           showCancel: false,
         })
-      }
+      },
+      complete: function () { }
     })
     
   },

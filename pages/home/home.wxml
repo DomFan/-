@@ -21,31 +21,31 @@
       <view>查账</view>
     </view>
     <view class='box norightborder' bindtap='click2'>
-      <image src='../../images/homeq.png'></image>
+      <image src='../../images/white.png'></image>
       <view> </view>
     </view>
     <view class='box' bindtap='click3'>
-      <image src='../../images/homeq.png'></image>
+      <image src='../../images/white.png'></image>
       <view> </view>
     </view>
     <view class='box' bindtap='click4'>
-      <image src='../../images/homeq.png'></image>
+      <image src='../../images/white.png'></image>
       <view> </view>
     </view>
     <view class='box norightborder' bindtap='click5'>
-      <image src='../../images/homeq.png'></image>
+      <image src='../../images/white.png'></image>
       <view> </view>
     </view>
     <view class='box' bindtap='click6'>
-      <image src='../../images/homeq.png'></image>
+      <image src='../../images/white.png'></image>
       <view> </view>
     </view>
     <view class='box' bindtap='click7'>
-      <image src='../../images/homeq.png'></image>
+      <image src='../../images/white.png'></image>
       <view> </view>
     </view>
     <view class='box norightborder' bindtap='click8'>
-      <image src='../../images/homeq.png'></image>
+      <image src='../../images/white.png'></image>
       <view> </view>
     </view>
   </view>
