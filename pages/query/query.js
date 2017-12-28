@@ -11,7 +11,7 @@ Page({
     startDate: '',
     endDate: '',
     listData: [], // 查询列表
-    hasmore: true, // 上拉加载时 判断条件
+    hasmore: false, // 上拉加载时 判断条件
 
     open: false, // 是否开启交易类别列表
     text: "所有交易", // 交易类别
@@ -168,6 +168,9 @@ Page({
           listData: res.data.rows
         })
         console.log(that.data.listData)
+        if(res.data.total > that.data.listData.length){
+          that.setData({hasmore: true})
+        }
       },
       fail: function(res) {},
       complete: function(res) {
@@ -229,7 +232,7 @@ Page({
           })
 
           setTimeout(function () {
-            this.setData({ hasmore: true })
+            that.setData({ hasmore: true })
           }, 1000)
         },
         fail: function (res) { },

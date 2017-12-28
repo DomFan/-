@@ -73,29 +73,40 @@
       </view> 
     -->
     
-    <scroll-view class='scroll' scroll-y bindscrolltolower='lower'>
+    <scroll-view class='scroll' scroll-y bindscrolltolower='lower' lower-threshold='100'>
       <!--单元格  -->
       <view wx:if='{{!listData[0]}}' class='nocontent'>
         <view>尚无数据</view>
       </view>
-      <view wx:if='{{listData[0]}}' wx:for="{{listData}}" wx:key="{{index}}">
-        <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-          <view class="td">{{item.tradedt}}</view>
-          <view class="td">{{item.merchantName}}</view>
-          <view class="td">{{item.passwayId}}</view>
-          <view class="td">{{item.orders}}</view>
-          <view class="td">{{item.sum}}</view>
-          <view class="td">{{item.stateName}}</view>
+      <view wx:if='{{listData[0]}}'>
+        <view wx:for="{{listData}}" wx:key="{{index}}">
+          <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+            <view class="td">{{item.tradedt}}</view>
+            <view class="td">{{item.merchantName}}</view>
+            <view class="td">{{item.passwayId}}</view>
+            <view class="td">{{item.orders}}</view>
+            <view class="td">{{item.sum}}</view>
+            <view class="td">{{item.stateName}}</view>
+          </view>
+          <view class="tr" wx:else>
+            <view class="td">{{item.tradedt}}</view>
+            <view class="td">{{item.merchantName}}</view>
+            <view class="td">{{item.passwayId}}</view>
+            <view class="td">{{item.orders}}</view>
+            <view class="td">{{item.sum}}</view>
+            <view class="td">{{item.stateName}}</view>
+          </view>
+          
         </view>
-        <view class="tr" wx:else>
-          <view class="td">{{item.tradedt}}</view>
-          <view class="td">{{item.merchantName}}</view>
-          <view class="td">{{item.passwayId}}</view>
-          <view class="td">{{item.orders}}</view>
-          <view class="td">{{item.sum}}</view>
-          <view class="td">{{item.stateName}}</view>
+        <view wx:if='{{hasmore}}' class='more'>
+          正在加载。。。
+        </view>
+        <view wx:else class='more'>
+          全部加载完毕
         </view>
       </view>
+      
+      
     </scroll-view>
       
     <!-- <block wx:if='{{!listData[0]}}'>

@@ -71,6 +71,7 @@ page, form, view{
 }
 
 .startwrap, .endwrap, .btnwrap{
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -80,6 +81,9 @@ page, form, view{
   display: flex;
   padding-left: 50rpx; 
   border-bottom: 1rpx solid #f1f1f1;
+}
+picker{
+  width: 100%;
 }
 .btnwrap{
   margin-top: 50rpx;
@@ -202,4 +206,11 @@ page, form, view{
 /* scroll 滚动区域 */
 .scroll {
   height: 18rem;
+}
+
+.more{
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
 }
