@@ -8,8 +8,10 @@ Page({
    * 页面的初始数据
    * @params
    * token 
-   * userName 用户名 userPassword 密码
-   * inputName 输入用户名 inputPassword 输入密码
+   * userName     -   用户名 
+   * userPassword -   密码
+   * inputName    -   输入de用户名 
+   * inputPassword-   输入de密码
    * 
    */
   data: {
@@ -68,6 +70,11 @@ Page({
       })
       return false
     }
+    wx.showLoading({
+      title: 'loading...',
+      mask: true,
+    })
+    
     wx.request({
       // url: 'http://192.168.98.179/api/jwt/auth',
       url: 'https://www.shouzan365.com/api/jwt/auth',
@@ -81,11 +88,6 @@ Page({
         'access-token':  token
       },
       success: function (res) {
-        wx.showLoading({
-          title: 'loading...',
-          mask: true,
-        })
-
         console.log(res, res.data)
 
         if(res.statusCode === 200 && res.data.token){

@@ -3,34 +3,42 @@ Page({
   
   /**
    * 页面的初始数据
+   * @params
+   * limit      -   显示的行数
+   * offset     -   页码
+   * state      -   交易状态
+   * date       -   日期
+   * startDate  -   开始日期
+   * endDate    -   结束日期
+   * listData   -   查询返回数据列表
+   * hasmore    -   是否还有数据
+   * hasmoredata-   还有未显示数据
+   * hasnomore  -   没有数据
+   * open       -   是否开启交易类别列表
+   * text       -   显示的交易类别
+   * list       -   交易状态列表
+   * dateReg    -   时间格式正则
    */
   data: {
-    limit: 10,
-    offset: 1,
-    date: '{{new Date()}}',
-    startDate: '',
-    endDate: '',
-    listData: [], // 查询列表
-    hasmore: false, // 上拉加载时 判断条件
-
-    open: false, // 是否开启交易类别列表
-    text: "所有交易", // 交易类别
-    list: ["所有交易","交易成功","退款"],
-    dateReg: /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/, // 时间格式正则
-    // listData: [{
-    //   tradedt: "2017-12-20 17:21:02", // 交易确认时间
-    //   merchantName: "支付测试", // 商户名称
-    //   passwayId: "微信", // 通道
-    //   orders: "202017122017210159540768", // 订单号
-    //   sum: 0.01, // 交易金额
-    //   stateName: "支付成功",// 交易状态
-
-    //   fee: 0.00006, //手续费
-    //   rate: 0.006, // 费率
-    //   refundsum: 0, // 退款金额
-    //   tradeNo: "4200000027201712207895653733", // 钱包方订单号
-    //   typeName: "收款"// 交易类型
-    // }]
+    limit: 10, 
+    offset: 1, 
+    state: '', 
+    date: '{{new Date()}}', 
+    startDate: '', 
+    endDate: '', 
+    listData: [], 
+    hasmore: false, 
+    hasmoredata: false, 
+    hasnomore: false, 
+    open: false, 
+    text: "所有交易", 
+    list: [
+      { text: "所有交易", type: '' }, 
+      { text: "支付成功", type: 1 }, 
+      { text: "退款成功", type: 3 }, 
+      { text: "部分退款", type: 6}
+    ], 
+    dateReg: /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/, 
   },
 
 
@@ -43,8 +51,9 @@ Page({
   chooseone: function(e){
     // console.log(e)
     this.setData(e.target.dataset)
-    console.log(this.data.text, this.data.type)
+    console.log(this.data.text)
     this.setData({open: false})
+    console.log(this.data.state)
   },
 
 
@@ -100,6 +109,7 @@ Page({
 
   // 确定搜索条件
   confirm: function(){
+    this.setData({listData: []})
 
     let that = this,
         token = this.data.token
@@ -140,14 +150,29 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
+    
+    /** 
+     * @params 返回参数
+     * tradedt - 交易确认时间
+     * merchantName - 商户名称
+     * passwayId - 通道
+     * orders - 订单号
+     * sum - 交易金额
+     * stateName - 交易状态
 
+     * fee - 手续费
+     * rate - 费率
+     * refundsum - 退款金额
+     * tradeNo - 钱包方订单号
+     * typeName - 交易类型
+     */
     wx.request({
       // https://www.shouzan365.com/back/tradeBlotter/page?limit=10000000&offset=1&startDate=2017-12-01&endDate=2017-12-31
       url: 'https://www.shouzan365.com/back/tradeBlotter/page',
       data: {
         limit: 10,
         offset: 1,
-        text: that.data.text,
+        type: that.data.state,
         startDate: that.data.startDate,
         endDate: that.data.endDate,
         token
@@ -170,6 +195,8 @@ Page({
         console.log(that.data.listData)
         if(res.data.total > that.data.listData.length){
           that.setData({hasmore: true})
+        } else {
+          that.setData({hasmore: false})
         }
       },
       fail: function(res) {},
@@ -195,7 +222,9 @@ Page({
     })
 
     if(hasmore){
-      this.setData({hasmore: false})
+      that.setData({hasmore: false, hasmoredata:true, hasnomore: false})
+      console.log(that.data.hasmoredata, that.data.hasnomore)  
+
       ++this.data.offset
 
       wx.request({
@@ -203,7 +232,7 @@ Page({
         data: {
           limit: 10,
           offset: that.data.offset,
-          text: that.data.text,
+          type: that.data.state,
           startDate: that.data.startDate,
           endDate: that.data.endDate,
           token
@@ -231,17 +260,27 @@ Page({
             listData
           })
 
+          /**设置定时器，防止一次上拉多次加载 */
           setTimeout(function () {
-            that.setData({ hasmore: true })
+            that.setData({ hasmore: true, hasmoredata: false})
           }, 1000)
+
+          that.setData({hasnomore: false })
+
+          if (res.data.total <= that.data.listData.length) {
+            that.setData({hasmore: false, hasmoredata: false, hasnomore: true })
+            console.log(that.data.hasmoredata, that.data.hasnomore)
+          }else{
+            that.setData({hasmore: true})
+          }
+          
         },
         fail: function (res) { },
         complete: function (res) {
-
+          
         },
       })
-    }
-      
+    }      
   },
 
 

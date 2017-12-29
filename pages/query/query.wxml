@@ -18,7 +18,7 @@
     <!--交易状态列表  -->
     <view class='listwrap' wx:if='{{open}}'>  
       <view class='list' wx:for='{{list}}' wx:key='{{index}}'>
-        <view data-text='{{item}}' data-type='{{index}}' bindtap='chooseone'>{{item}}</view>
+        <view class='item' data-text='{{item.text}}' data-state='{{item.type}}' bindtap='chooseone'>{{item.text}}</view>
         <image class='arrow' src='../../images/arrow.png'></image>
       </view>
     </view>
@@ -98,10 +98,10 @@
           </view>
           
         </view>
-        <view wx:if='{{hasmore}}' class='more'>
+        <view wx:if='{{hasmoredata}}' class='more'>
           正在加载。。。
         </view>
-        <view wx:else class='more'>
+        <view wx:if='{{hasnomore}}' class='more'>
           全部加载完毕
         </view>
       </view>

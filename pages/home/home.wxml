@@ -5,8 +5,8 @@
   <view class='head'>
     <view class='avataritem'>
       <image bindtap='login' class='avatar' src='../../images/avatar.png'></image>
-      <text wx:if='!token' class='username'>{{username}}</text>
-      <block class='username' wx:else>{{userName}}</block>
+      <text wx:if='{{!token}}' class='username'>{{username}}</text>
+      <text class='username' wx:else>{{userName}}</text>
     </view>
   </view>
 

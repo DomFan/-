@@ -60,6 +60,7 @@ page, form, view{
   width: 100%;
 }
 .list{
+  margin-top: 20rpx;
   padding-left: 215rpx;
   width: 95%;
   position: relative;
@@ -153,7 +154,7 @@ picker{
   width: 100%;
   height: 3rem;
   display: flex;
-  background-color: blue;
+  /* background-color: blue; */
 }
 .thitem{
   /* width: 16.666%; */
@@ -205,12 +206,17 @@ picker{
 
 /* scroll 滚动区域 */
 .scroll {
-  height: 18rem;
+  height: 27rem;
 }
 
 .more{
   width: 100%;
-  height: 3rem;
-  line-height: 3rem;
+  height: 2rem;
+  line-height: 2rem;
   text-align: center;
+}
+
+.typeleft, .text, .item, .picker{
+  height: 40rpx;
+  line-height: 40rpx;
 }

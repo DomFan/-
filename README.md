@@ -195,8 +195,10 @@
 		- url: 'https://www.shouzan365.com/back、tradeBlotter/page?limit=10&offset=1&startDate=2017-12-01&endDate=2017-12-31&token='+ token 
 	- 请求参数
 		- 必填：
-			- limit 
-			- offset
+			- limit  显示的行数
+			- offset 页码
+			- startDate 开始日期
+			- endDate 结束日期
 	- 请求方式：
 		- 'GET'
 	- 返回数据
