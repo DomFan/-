@@ -9,7 +9,7 @@ Page({
     userName: '',
     userPassword: '',
     list: ["上传", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
-    username: 'administrator',
+    username: '请登录', // administrator
   },
 
   login: function(){

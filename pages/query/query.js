@@ -4,6 +4,7 @@ Page({
   /**
    * 页面的初始数据
    * @params
+   * isrefund   -   是否选择退款
    * limit      -   显示的行数
    * offset     -   页码
    * state      -   交易状态
@@ -20,6 +21,7 @@ Page({
    * dateReg    -   时间格式正则
    */
   data: {
+    isrefund: false,
     limit: 10, 
     offset: 1, 
     state: '', 
@@ -54,13 +56,20 @@ Page({
     console.log(this.data.text)
     this.setData({open: false})
     console.log(this.data.state)
+    let state = this.data.state
+    if(state == 3 || state == 6){
+      this.setData({isrefund: true})
+    } else {
+      this.setData({isrefund: false})
+    }
   },
 
 
   // 交易状态选择
-  radioChange: function(e){
-    console.log(e.detail.value)
-  },
+    // radioChange: function(e){
+    //   console.log(e.detail.value)
+    // },
+
 
   // 开始时间
   starttime: function(e){
@@ -159,10 +168,11 @@ Page({
      * orders - 订单号
      * sum - 交易金额
      * stateName - 交易状态
+     * refundsum - 退款金额
+     * refundorders - 退款订单号
 
      * fee - 手续费
      * rate - 费率
-     * refundsum - 退款金额
      * tradeNo - 钱包方订单号
      * typeName - 交易类型
      */
