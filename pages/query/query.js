@@ -51,17 +51,16 @@ Page({
   },
   // 交易状态选择
   chooseone: function(e){
-    // console.log(e)
-    this.setData(e.target.dataset)
-    console.log(this.data.text)
-    this.setData({open: false})
-    console.log(this.data.state)
+    console.log(e)
+    // this.setData(e.target.dataset)
+    this.setData({
+      state: e.target.dataset.state,
+      open: false
+    })
+    // console.log(this.data.state)
+
     let state = this.data.state
-    if(state == 3 || state == 6){
-      this.setData({isrefund: true})
-    } else {
-      this.setData({isrefund: false})
-    }
+    ;(state == 3 || state == 6) ? this.setData({ isrefund: true }) : this.setData({ isrefund: false })
   },
 
 
@@ -202,11 +201,12 @@ Page({
         that.setData({
           listData: res.data.rows
         })
-        console.log(that.data.listData)
-        if(res.data.total > that.data.listData.length){
-          that.setData({hasmore: true})
+
+        if (res.data.total <= that.data.listData.length) {
+          that.setData({ hasmore: false, hasmoredata: false, hasnomore: true })
+          console.log(that.data.hasmoredata, that.data.hasnomore)
         } else {
-          that.setData({hasmore: false})
+          that.setData({ hasmore: true })
         }
       },
       fail: function(res) {},

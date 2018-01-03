@@ -6,15 +6,19 @@ Page({
    */ 
   data: {
     token: '',
-    userName: '',
-    userPassword: '',
+    userName: '1',
+    userPassword: 2,
     list: ["上传", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
     username: '请登录', // administrator
   },
 
   login: function(){
+    console.log(this.data)
+    let token = this.data.token,
+        userName = this.data.userName,
+        userPassword = this.data.userPassword
     wx.navigateTo({
-      url: '../login/login',
+      url: '../login/login?userName='+ userName+ '&userPassword='+ userPassword+ '&token=' +token,
       success: function(res) {
         console.log('去登录')
       },
@@ -39,7 +43,7 @@ Page({
     let token = this.data.token,
         userName = this.data.userName,
         userPassword = this.data.userPassword
-    console.log(0)
+    console.log(0, this.data)
     wx.navigateTo({
       url: '../index/index?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
       success: function(res) {

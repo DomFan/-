@@ -3,7 +3,7 @@
   <!--标题  -->
   <text class='titletxt'>移动支付管理平台</text>
   <!--表单  -->
-  <form bindsubmit='loginsubmit' bindreset='formreset' class='form'>
+  <form wx:if='{{!islogin}}' bindsubmit='loginsubmit' bindreset='formreset' class='form'>
     <!--输入项  -->
     <view class='inputWrap'>
       <view class='accountWrap'>
@@ -18,4 +18,9 @@
     <!--提交按钮  -->
     <button class='loginbtn items'  bindtap='loginbtn'>登录</button>
   </form>
+
+  <view wx:if='{{islogin}}' class='form'>
+    <view class='items yet'>已登录账户 -- <text>{{userName}}</text></view>
+    <button class='exitbtn items' bindtap='exitbtn'>退出登录</button>
+  </view>
 </view>

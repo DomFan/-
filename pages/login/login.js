@@ -15,6 +15,7 @@ Page({
    * 
    */
   data: {
+    islogin: false,
     token: "",
     userName: "",
     userPassword: "",
@@ -143,15 +144,36 @@ Page({
   },
 
   /**
-   * 注册
+   * 退出登录
    */
+  exitbtn: function(){
+    this.setData({
+      islogin: false,
+      token: '',
+      userName: '',
+      userPassword: '',
+    })
+    wx.navigateBack({
+      delta: 5
+    })
+  },
 
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) { 
-    
+    this.setData({
+      userName: options.userName,
+      userPassword: options.userPassword,
+      token: options.token
+    })
+    console.log(options)
+    if(this.data.token != "undefined"){
+      this.setData({islogin: true})
+    } else {
+      this.setData({islogin: false})
+    }
   },
 
   /**

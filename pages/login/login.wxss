@@ -71,3 +71,19 @@ page {
   line-height: 100rpx;
   border-radius: 4rpx;
 }
+
+.yet{
+  padding-left: 50rpx;
+}
+.yet text{
+  color: #f55d54
+}
+.exitbtn{
+  margin-top: 50rpx;
+  background-color: #f55d54;
+  color: #fff;
+  height: 100rpx;
+  width: 98%;
+  line-height: 100rpx;
+  border-radius: 4rpx;
+}

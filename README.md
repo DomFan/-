@@ -232,3 +232,6 @@
 	     	- refundsum: 0, // 退款金额
 	      	- tradeNo: "4200000027201712207895653733", // 钱包方订单号
 	      	- typeName: "收款" // 交易类型
+	      	- 
+	      	- refundsum BigDecimal 退款金额 
+	      	- refundorders String 退款订单号
