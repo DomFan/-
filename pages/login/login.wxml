@@ -19,8 +19,11 @@
     <button class='loginbtn items'  bindtap='loginbtn'>登录</button>
   </form>
 
-  <view wx:if='{{islogin}}' class='form'>
+  <view wx:if='{{islogin}}' class='formwrap'>
     <view class='items yet'>已登录账户 -- <text>{{userName}}</text></view>
-    <button class='exitbtn items' bindtap='exitbtn'>退出登录</button>
+    <view class='btnwrap'>
+      <button class='exitbtn items' bindtap='exitbtn'>退出登录</button>
+      <button class='exitbtn items' bindtap='backoff'>返回</button>
+    </view>
   </view>
 </view>

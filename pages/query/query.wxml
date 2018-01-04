@@ -75,7 +75,7 @@
       </view> 
     -->
     
-    <scroll-view class='scroll' scroll-y bindscrolltolower='lower' lower-threshold='100'>
+    <scroll-view class='scroll' scroll-y bindscrolltolower='lower' lower-threshold='200'>
       <!--单元格  -->
       <view wx:if='{{!listData[0]}}' class='nocontent'>
         <view>尚无数据</view>

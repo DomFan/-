@@ -34,31 +34,75 @@ Page({
   /* 获取input输入值 */
   /* 商户 */
   nameinput: function (e) {
+    /** 禁止输入特殊字符 只能写入英文 数字 汉字 */
+    let val = e.detail.value,
+        reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
+    return val.replace(reg, '')
     this.setData({
-      merchantName: e.detail.value
+      merchantName: val
     })
     console.log(e.detail.value, '---' ,this.data.merchantName)
   },
   /* 地址 */
   addressinput: function (e) {
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
+    return val.replace(reg, '')
     this.setData({
       address: e.detail.value
     })
   },
   /* 联系人 */
   personinput: function (e) {
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
+    return val.replace(reg, '')
     this.setData({
       linkman: e.detail.value
     })
   },
   /* 电话 */
   phoneinput: function (e) {
+    
     this.setData({
       lkmphone: e.detail.value
     })
   },
+  /** 电话格式验证 */
+  validatemobile: function (e) {
+    let val = e.detail.value
+    if (val.length == 0) {
+      wx.showToast({
+        title: '请输入手机号！',
+        icon: 'success',
+        duration: 1500
+      })
+      return false;
+    }
+    if (val.length != 11) {
+      wx.showToast({
+        title: '手机号长度有误！',
+        icon: 'success',
+        duration: 1500
+      })
+      return false;
+    }
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (!myreg.test(val)) {
+      wx.showToast({
+        title: '手机号格式有误！',
+        icon: 'success',
+        duration: 1500
+      })
+      return false;
+    }
+    return true;
+  },
   /* 商户登录名 */
   phoneinput: function (e) {
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
+    return val.replace(reg, '')
     this.setData({
       userName: e.detail.value
     })

@@ -6,12 +6,11 @@ page {
 .container {}
 
 .titletxt {
-
   font-size: 50rpx;
   color: #000;
 }
 .form {
-   box-sizing: border-box; 
+  box-sizing: border-box; 
   padding: 30rpx;
   background-color: #fff;
   width: 90%;
@@ -72,18 +71,36 @@ page {
   border-radius: 4rpx;
 }
 
+.formwrap{
+  box-sizing: border-box; 
+  padding: 30rpx;
+  background-color: #fff;
+  width: 90%;
+  height: 80%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
 .yet{
   padding-left: 50rpx;
 }
 .yet text{
-  color: #f55d54
+  color: #f55d54;
 }
 .exitbtn{
   margin-top: 50rpx;
   background-color: #f55d54;
   color: #fff;
   height: 100rpx;
-  width: 98%;
+  width: 40%; 
   line-height: 100rpx;
   border-radius: 4rpx;
+}
+.btnwrap{
+  width: 100%;  
+  display: flex;
+  flex-direction: row-reverse; 
+  flex-wrap: nowrap;
+  justify-content: space-around
 }

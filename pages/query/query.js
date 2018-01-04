@@ -202,6 +202,8 @@ Page({
           listData: res.data.rows
         })
 
+        console.log('total--'+res.data.total, '--listData.length--'+that.data.listData.length)
+
         if (res.data.total <= that.data.listData.length) {
           that.setData({ hasmore: false, hasmoredata: false, hasnomore: true })
           console.log(that.data.hasmoredata, that.data.hasnomore)
@@ -276,6 +278,8 @@ Page({
           }, 1000)
 
           that.setData({hasnomore: false })
+
+          console.log('total--' + res.data.total, '--listData.length--' + that.data.listData.length)
 
           if (res.data.total <= that.data.listData.length) {
             that.setData({hasmore: false, hasmoredata: false, hasnomore: true })
