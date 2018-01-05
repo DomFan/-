@@ -2,7 +2,7 @@
 /* pages/query/query.wxss */
 page, .wrap{
   width: 100%;
-  height: 100%;
+  height: 100.5%;
 }
 page, form, view{
   box-sizing: border-box;
@@ -11,6 +11,7 @@ page, form, view{
   width: 100%;
   height: 30%;
   font-size: 35rpx;
+  padding-top: 50rpx;
 }
 
 .radiowrap{
@@ -221,4 +222,12 @@ picker{
 .typeleft, .text, .item, .picker{
   height: 40rpx;
   line-height: 40rpx;
+}
+
+.top{
+  position: fixed;
+  top: 0;
+}
+.notop{
+  position: relative;
 }

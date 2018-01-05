@@ -52,7 +52,7 @@
 
   <view class='table'>
     <!--表头  -->
-    <view class="thead bg-w">
+    <view class="thead bg-w ">
       <view class="thitem tradedt" style='width: 13%;'>交易时间</view>
       <view class="thitem merchantName" style='width: 14%;'>商户名称</view>
       <view class="thitem passwayID" style='width: 10%;'>通道</view>

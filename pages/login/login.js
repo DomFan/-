@@ -1,9 +1,5 @@
 // pages/login/login.js
-
-const util = require('../../utils/util');
-
 Page({
-
   /**
    * 页面的初始数据
    * @params
@@ -24,23 +20,29 @@ Page({
     name: "",
   },
 
-  
   /**用户名 */
   nameInput: function(e) {
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
     this.setData({
-      inputName: util.trim(e.detail.value)
+      inputName: value
     })
-    // console.log(this.data.inputName)
+    console.log('用户名'+this.data.inputName)
+    return value
   },
 
   /**密码 */
   pswdInput: function (e) {
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
     this.setData({
-      inputPassword: util.trim(e.detail.value)
+      inputPassword: value
     })
-    // console.log(this.data.inputPassword)
+    console.log('密码'+this.data.inputPassword)
+    return value
   },
-
 
   /**
    * 登录按钮

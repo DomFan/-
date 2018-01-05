@@ -31,9 +31,10 @@ Page({
   home: function(){
     let token = this.data.token,
       userName = this.data.userName,
-      userPassword = this.data.userPassword
+      userPassword = this.data.userPassword,
+      name = this.data.name
     wx.redirectTo({
-      url: '../home/home?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
+      url: '../home/home?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token + '&name=' +name,
       success: function(res) {
         console.log('去首页')
       },
