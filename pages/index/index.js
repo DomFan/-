@@ -36,37 +36,45 @@ Page({
   nameinput: function (e) {
     /** 禁止输入特殊字符 只能写入英文 数字 汉字 */
     let val = e.detail.value,
-        reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
-    return val.replace(reg, '')
+        reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+        value = val.replace(reg, '')
     this.setData({
-      merchantName: val
+      merchantName: value
     })
-    console.log(e.detail.value, '---' ,this.data.merchantName)
+    console.log(e.detail.value, '---', this.data.merchantName)
+    return value
   },
   /* 地址 */
   addressinput: function (e) {
     let val = e.detail.value,
-      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
-    return val.replace(reg, '')
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
     this.setData({
-      address: e.detail.value
+      address: value
     })
+    console.log('11',value, 2, e.detail.value, 3, this.data.address)
+    return value
   },
   /* 联系人 */
   personinput: function (e) {
     let val = e.detail.value,
-      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
-    return val.replace(reg, '')
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
     this.setData({
-      linkman: e.detail.value
+      linkman: value
     })
+    return value
   },
   /* 电话 */
   phoneinput: function (e) {
-    
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
     this.setData({
-      lkmphone: e.detail.value
+      lkmphone: value
     })
+    console.log('phoneinput', this.data.lkmphone)
+    return value
   },
   /** 电话格式验证 */
   validatemobile: function (e) {
@@ -99,19 +107,22 @@ Page({
     return true;
   },
   /* 商户登录名 */
-  phoneinput: function (e) {
+  userNameinput: function (e) {
     let val = e.detail.value,
-      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g;
-    return val.replace(reg, '')
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
     this.setData({
-      userName: e.detail.value
+      userName: value
     })
+    console.log('userNameinput', e.detail.value, 'userName', this.data.userName)
+    return value
   },
   /* 商户登录密码 */
-  phoneinput: function (e) {
+  passWordinput: function (e) {
     this.setData({
       passWord: e.detail.value
     })
+    console.log('passWordinput', e.detail.value,'passWord', this.data.passWord)
   },
   
   /**上传图片  */
@@ -133,7 +144,8 @@ Page({
         console.log(src)
         // 上传文件
         wx.uploadFile({
-          url: 'http://192.168.98.179/back/accepagent/fileUpload',
+          // url: 'http://192.168.98.179/back/accepagent/fileUpload',
+          url: 'https://www.shouzan365.com/back/accepagent/fileUpload',
           filePath: src,
           name: 'book', // 文件类型 需设置为 book
           header: {
@@ -419,7 +431,8 @@ Page({
     }
 
     wx.request({
-      url: 'http://192.168.98.179/back/merchantinfoController/save',
+      // url: 'http://192.168.98.179/back/merchantinfoController/save',
+      url: 'https://www.shouzan365.com/back/merchantinfoController/save',
       method: 'POST',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',

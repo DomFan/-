@@ -6,19 +6,21 @@ Page({
    */ 
   data: {
     token: '',
-    userName: '1',
-    userPassword: 2,
+    userName: '',
+    userPassword: '',
     list: ["上传", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
     username: '请登录', // administrator
+    name: '',
   },
 
   login: function(){
     console.log(this.data)
     let token = this.data.token,
         userName = this.data.userName,
-        userPassword = this.data.userPassword
+        userPassword = this.data.userPassword,
+        name = this.data.name
     wx.navigateTo({
-      url: '../login/login?userName='+ userName+ '&userPassword='+ userPassword+ '&token=' +token,
+      url: '../login/login?userName='+ userName+ '&userPassword='+ userPassword+ '&token=' +token + '&name='+ name,
       success: function(res) {
         console.log('去登录')
       },
@@ -27,8 +29,11 @@ Page({
     })
   },
   home: function(){
+    let token = this.data.token,
+      userName = this.data.userName,
+      userPassword = this.data.userPassword
     wx.redirectTo({
-      url: '../home/home',
+      url: '../home/home?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
       success: function(res) {
         console.log('去首页')
       },
@@ -148,9 +153,13 @@ Page({
     this.setData({
       userName: options.userName,
       userPassword: options.userPassword,
-      token: options.token
+      token: options.token,
+      name: options.name
     })
-    // console.log(options)
+    if(!options.token){
+      this.setData({name: this.data.username})
+    }
+    console.log(options)
   },
 
   /**

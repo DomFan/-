@@ -52,9 +52,8 @@ Page({
   // 交易状态选择
   chooseone: function(e){
     console.log(e)
-    // this.setData(e.target.dataset)
+    this.setData(e.target.dataset)
     this.setData({
-      state: e.target.dataset.state,
       open: false
     })
     // console.log(this.data.state)
@@ -76,23 +75,6 @@ Page({
       startDate: e.detail.value
     })
     console.log(this.data.startDate)
-    /*{
-      let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
-        endDate = this.data.endDate,
-        startDate = this.data.startDate
-      if (startDate && dateReg.test(startDate)) {
-        end = startDate.split('-').map(item => parseInt(item))
-        start = startDate.split('-').map(item => parseInt(item))
-        if(start[2])
-        end[2] += 3
-        this.setData({
-          endDate: endDate.join('-')
-        })
-      }
-      console.log(this.data.endDate, this.data.startDate)
-    }
-    */
-    
     
   },
   // 结束时间
@@ -101,18 +83,7 @@ Page({
       endDate: e.detail.value
     })
     // console.log(this.data.endDate) 
-    /*
-      let dateReg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/,
-        endDate = this.data.endDate,
-        startDate = this.data.startDate
-      if (endDate && dateReg.test(endDate)) {
-        startDate = endDate.split('-').map(item => parseInt(item))
-        startDate[2] -= 3
-        this.setData({
-          startDate: startDate.join('-')
-        })
-      }
-    */
+    
   },
 
   // 确定搜索条件
@@ -219,12 +190,11 @@ Page({
   },
 
   // 上拉加载
+/** 
   lower: function () {
-    
     let that = this,
         token = this.data.token,
         hasmore = this.data.hasmore
-
     wx.showLoading({
       title: 'searching...',
       mask: true,
@@ -232,7 +202,6 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
-
     if(hasmore){
       that.setData({hasmore: false, hasmoredata:true, hasnomore: false})
       console.log(that.data.hasmoredata, that.data.hasnomore)  
@@ -258,50 +227,35 @@ Page({
           setTimeout(function () {
             wx.hideLoading()
           }, 1000)
-
           console.log(res)
-
           let listData = that.data.listData
           // listData.concat(res.data.rows)
           res.data.rows.map(item => {
             listData.push(item)
           })
-
           console.log(that.data.listData)
           that.setData({
             listData
           })
-
-          /**设置定时器，防止一次上拉多次加载 */
+          // **设置定时器，防止一次上拉多次加载 
           setTimeout(function () {
             that.setData({ hasmore: true, hasmoredata: false})
           }, 1000)
-
           that.setData({hasnomore: false })
-
           console.log('total--' + res.data.total, '--listData.length--' + that.data.listData.length)
-
           if (res.data.total <= that.data.listData.length) {
             that.setData({hasmore: false, hasmoredata: false, hasnomore: true })
             console.log(that.data.hasmoredata, that.data.hasnomore)
           }else{
             that.setData({hasmore: true})
           }
-          
         },
         fail: function (res) { },
-        complete: function (res) {
-          
-        },
+        complete: function (res) {  },
       })
     }      
   },
-
-
-
-
-
-
+*/
 
   /**
    * 生命周期函数--监听页面加载
@@ -347,14 +301,77 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if(!this.data.listData[0]){return}
+    console.log('onReachBottom')
+    let that = this,
+        token = this.data.token,
+        hasmore = this.data.hasmore
+    wx.showLoading({
+      title: 'searching...',
+      mask: true,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+    if(hasmore){
+      that.setData({hasmore: false, hasmoredata:true, hasnomore: false})
+      console.log(that.data.hasmoredata, that.data.hasnomore)  
+
+      ++this.data.offset
+
+      wx.request({
+        url: 'https://www.shouzan365.com/back/tradeBlotter/page',
+        data: {
+          limit: 10,
+          offset: that.data.offset,
+          type: that.data.state,
+          startDate: that.data.startDate,
+          endDate: that.data.endDate,
+          token
+        },
+        header: {
+          'access-token': token
+        },
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 1000)
+          console.log(res)
+          let listData = that.data.listData
+          // listData.concat(res.data.rows)
+          res.data.rows.map(item => {
+            listData.push(item)
+          })
+          console.log(that.data.listData)
+          that.setData({
+            listData
+          })
+          // **设置定时器，防止一次上拉多次加载 
+          setTimeout(function () {
+            that.setData({ hasmore: true, hasmoredata: false})
+          }, 1000)
+          that.setData({hasnomore: false })
+          console.log('total--' + res.data.total, '--listData.length--' + that.data.listData.length)
+          if (res.data.total <= that.data.listData.length) {
+            that.setData({hasmore: false, hasmoredata: false, hasnomore: true })
+            console.log(that.data.hasmoredata, that.data.hasnomore)
+          }else{
+            that.setData({hasmore: true})
+          }
+        },
+        fail: function (res) { },
+        complete: function (res) {  },
+      })
+    }
   },
 
   /**

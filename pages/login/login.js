@@ -12,7 +12,7 @@ Page({
    * userPassword -   密码
    * inputName    -   输入de用户名 
    * inputPassword-   输入de密码
-   * 
+   * name         -   返回的用户名
    */
   data: {
     islogin: false,
@@ -21,6 +21,7 @@ Page({
     userPassword: "",
     inputName: "",
     inputPassword: "",
+    name: "",
   },
 
   
@@ -94,32 +95,41 @@ Page({
         if(res.statusCode === 200 && res.data.token){
           setTimeout(function () {
             wx.hideLoading()
-          }, 2000)
+          }, 0)
+         
           that.setData({
             userName: nameInput,
             userPassword: passwordInput,
-            token: res.data.token            
+            token: res.data.token,  
           })
-          wx.redirectTo({
-            url: '../home/home?userName=' + that.data.userName + '&userPassword=' + that.data.userPassword + '&token=' + that.data.token,
-            success: function (res) {
-              console.log(that.data)
+
+          let toke = res.data.token
+          wx.request({
+            url: 'https://www.shouzan365.com/back/user',
+            header: {
+              'access-token': toke
             },
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+              console.log(res)
+              that.setData({name: res.data.name})
+              wx.redirectTo({
+                url: '../home/home?userName=' + that.data.userName + '&userPassword=' + that.data.userPassword + '&token=' + that.data.token + '&name=' + that.data.name,
+                success: function (res) {
+                  console.log(that.data)
+                },
+              })
+            }
           })
+          
         } else if (!res.data.token) {
-          setTimeout(function(){
-            wx.hideLoading()
-          }, 0)
+          wx.hideLoading()
+
           wx.showModal({
             title: '提示',
             content: '用户名或密码错误',
-            showCancel: false,
-            success: function (e) {
-              // console.log(e)
-            },
-            complete: function (e) {
-              // console.log(e)
-            }
+            showCancel: false
           })
         }
       },
@@ -132,17 +142,9 @@ Page({
           showCancel: false,
         })
       },
-      complete: function () { }
+      complete: function(){}
     })
-    
   },
-
-
-  /** */
-  usertap: function() {
-    console.log('user had clicked')
-  },
-
   /**
    * 退出登录
    */
@@ -175,7 +177,8 @@ Page({
     this.setData({
       userName: options.userName,
       userPassword: options.userPassword,
-      token: options.token
+      token: options.token,
+      name: options.name
     })
     console.log(options)
     if(this.data.token != "undefined"){

@@ -13,7 +13,10 @@
   justify-content: space-around;
 }
 .backbtn{
+  margin-top: 50rpx;
   font-size: 36rpx;
   width: 260rpx;
   height: 100rpx;
+  color: #fff;
+  background-color: #f55d54;
 }
