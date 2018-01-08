@@ -28,7 +28,7 @@ Page({
     this.setData({
       inputName: value
     })
-    console.log('用户名'+this.data.inputName)
+    // console.log('用户名'+this.data.inputName)
     return value
   },
 
@@ -40,7 +40,7 @@ Page({
     this.setData({
       inputPassword: value
     })
-    console.log('密码'+this.data.inputPassword)
+    // console.log('密码'+this.data.inputPassword)
     return value
   },
 
@@ -49,7 +49,7 @@ Page({
    */
   loginbtn: function (e) {
     let that = this
-    console.log(e)
+    // console.log(e)
     let token = this.data.token,
         nameInput = this.data.inputName,
         passwordInput = this.data.inputPassword,
@@ -92,7 +92,7 @@ Page({
         'access-token':  token
       },
       success: function (res) {
-        console.log(res, res.data)
+        // console.log(res, res.data)
 
         if(res.statusCode === 200 && res.data.token){
           setTimeout(function () {
@@ -114,12 +114,12 @@ Page({
             method: "GET",
             dataType: "json",
             success: function (res) {
-              console.log(res)
+              // console.log(res)
               that.setData({name: res.data.name})
               wx.redirectTo({
                 url: '../home/home?userName=' + that.data.userName + '&userPassword=' + that.data.userPassword + '&token=' + that.data.token + '&name=' + that.data.name,
                 success: function (res) {
-                  console.log(that.data)
+                  // console.log(that.data)
                 },
               })
             }
@@ -182,7 +182,7 @@ Page({
       token: options.token,
       name: options.name
     })
-    console.log(options)
+    // console.log(options)
     if(this.data.token != "undefined"){
       this.setData({islogin: true})
     } else {

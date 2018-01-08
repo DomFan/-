@@ -1,6 +1,5 @@
 // pages/home/home.js
 Page({
-
   /**
    * 页面的初始数据
    */ 
@@ -12,9 +11,8 @@ Page({
     username: '请登录', // administrator
     name: '',
   },
-
   login: function(){
-    console.log(this.data)
+    // console.log(this.data)
     let token = this.data.token,
         userName = this.data.userName,
         userPassword = this.data.userPassword,
@@ -49,7 +47,7 @@ Page({
     let token = this.data.token,
         userName = this.data.userName,
         userPassword = this.data.userPassword
-    console.log(0, this.data)
+    // console.log(0, this.data)
     wx.navigateTo({
       url: '../index/index?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
       success: function(res) {
@@ -160,7 +158,7 @@ Page({
     if(!options.token){
       this.setData({name: this.data.username})
     }
-    console.log(options)
+    // console.log(options)
   },
 
   /**

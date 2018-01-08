@@ -1,6 +1,5 @@
 // pages/query/query.js
 Page({
-  
   /**
    * 页面的初始数据
    * @params
@@ -25,7 +24,7 @@ Page({
     limit: 10, 
     offset: 1, 
     state: '', 
-    date: '{{new Date()}}', 
+    date: new Date(), 
     startDate: '', 
     endDate: '', 
     listData: [], 
@@ -41,10 +40,7 @@ Page({
       { text: "部分退款", type: 6}
     ], 
     dateReg: /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/, 
-    
   },
-
-
   // openlist 点击交易状态
   openlist: function(){
     (!this.data.open) ? this.setData({open: true}): this.setData({open: false})
@@ -63,12 +59,10 @@ Page({
     ;(state == 3 || state == 6) ? this.setData({ isrefund: true }) : this.setData({ isrefund: false })
   },
 
-
   // 交易状态选择
     // radioChange: function(e){
     //   console.log(e.detail.value)
     // },
-
 
   // 开始时间
   starttime: function(e){
@@ -76,15 +70,14 @@ Page({
       startDate: e.detail.value
     })
     console.log(this.data.startDate)
-    
   },
+
   // 结束时间
   endtime: function (e) {
     this.setData({
       endDate: e.detail.value
     })
-    // console.log(this.data.endDate) 
-    
+    console.log(this.data.endDate) 
   },
 
   // 确定搜索条件
@@ -93,7 +86,7 @@ Page({
 
     let that = this,
         token = this.data.token
-    console.log(token)
+    // console.log(token)
     if(!token || token == 'undefined') {
       wx.showModal({
         title: '请先登录',
