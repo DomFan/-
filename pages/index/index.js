@@ -482,7 +482,7 @@ Page({
       password: options.userPassword,
       token: options.token
     })
-    console.log(options)
+    // console.log(options)
   },
 
   /**
