@@ -16,39 +16,6 @@ page, form, view{
   box-sizing: border-box;
 }
 
-/* .container {
-  display: flex;
-  justify-content: flex-start; 
-
-  padding-top: 0;
-  font-size: 35rpx;
-  padding: 20px;
-  }
-  .row-container {
-    width: 100%;  
-    margin-bottom: 10px;
-
-    display: flex;
-    justify-content: space-around;
-  }
-  .row-container text {
-    width: 200rpx;
-    font-size: 28rpx;
-    line-height: 50rpx;
-  }
-  .row-container input {
-    border: 1rpx solid #cfcfcf;
-  }
-  .row-container button {
-  width: 140rpx;
-  height: 70rpx;
-  
-  font-size: 30rpx;
-  line-height: 60rpx;
-  text-align: center;
-} */
-
-
 /*提交按钮  */
 .confirmAdd{
   background-color: #f55d54;

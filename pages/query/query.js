@@ -82,8 +82,6 @@ Page({
 
   // 确定搜索条件
   confirm: function(){
-    this.setData({listData: []})
-
     let that = this,
         token = this.data.token
     // console.log(token)
@@ -95,35 +93,32 @@ Page({
       })
       return 
     }
-    
-      if (!that.data.startDate){
-        wx.showModal({
-          title: '提示',
-          content: '请选择开始日期',
-          showCancel: false,
-        })
-        return
-      }
-      if (!that.data.endDate) {
-        wx.showModal({
-          title: '提示',
-          content: '请选择结束日期',
-          showCancel: false,
-        })
-        return
-      }
-    
-
-    console.log(that.data)
-
+    if (!that.data.startDate){
+      wx.showModal({
+        title: '提示',
+        content: '请选择开始日期',
+        showCancel: false,
+      })
+      return
+    }
+    if (!that.data.endDate) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择结束日期',
+        showCancel: false,
+      })
+      return
+    }
+    // 重置数据数据及页码
+    this.setData({ listData: [], offset: 1})
+    // console.log(that.data)
     wx.showLoading({
       title: 'searching...',
       mask: true,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
     })
-    
+    setTimeout(function(){
+      wx.hideLoading()
+    }, 2000)
     /** 
      * @params 返回参数
      * tradedt - 交易确认时间
@@ -134,7 +129,6 @@ Page({
      * stateName - 交易状态
      * refundsum - 退款金额
      * refundorders - 退款订单号
-
      * fee - 手续费
      * rate - 费率
      * tradeNo - 钱包方订单号
@@ -161,24 +155,21 @@ Page({
           wx.hideLoading()
         }, 1000)
 
-        console.log(res)
+        // console.log(res)
         console.log(res.data.rows)
         that.setData({
           listData: res.data.rows
         })
 
-        console.log('total--'+res.data.total, '--listData.length--'+that.data.listData.length)
-
-        if (res.data.total <= that.data.listData.length) {
+        if (res.data.total < that.data.listData.length) {
           that.setData({ hasmore: false, hasmoredata: false, hasnomore: true })
-          console.log(that.data.hasmoredata, that.data.hasnomore)
         } else {
           that.setData({ hasmore: true })
         }
       },
       fail: function(res) {},
       complete: function(res) {
-        
+    
       },
     })
   },
@@ -310,14 +301,11 @@ Page({
     wx.showLoading({
       title: 'searching...',
       mask: true,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
     })
     if(hasmore){
       that.setData({hasmore: false, hasmoredata:true, hasnomore: false})
-      console.log(that.data.hasmoredata, that.data.hasnomore)  
 
+      // 对页码进行累加
       ++this.data.offset
 
       wx.request({
@@ -354,12 +342,15 @@ Page({
             that.setData({ hasmore: true, hasmoredata: false})
           }, 1000)
           that.setData({hasnomore: false })
-          console.log('total--' + res.data.total, '--listData.length--' + that.data.listData.length)
-          if (res.data.total <= that.data.listData.length) {
-            that.setData({hasmore: false, hasmoredata: false, hasnomore: true })
-            console.log(that.data.hasmoredata, that.data.hasnomore)
-          }else{
-            that.setData({hasmore: true})
+
+          console.log('res.data.total='+res.data.total,'--this.data.listData.length='+that.data.listData.length)
+          
+          if (res.data.total > that.data.listData.length) {
+            that.setData({ hasmore: true })
+            // console.log('total > listData.length' + that.data.hasmoredata, that.data.hasnomore)
+          } else {
+            that.setData({ hasmore: false, hasmoredata: false, hasnomore: true })
+            // console.log('total <= listData.length'+ that.data.hasmore, that.data.hasmoredata, that.data.hasnomare)
           }
         },
         fail: function (res) { },
