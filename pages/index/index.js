@@ -15,7 +15,6 @@ Page({
     fileList: new Array(10), // 文件列表
     userName: '', // 为商户设置名称
     passWord: '', // 为商户设置密码
-    // urls: new Array(10),
     urls: ['1','1','1','1','1','1','1','1','1','1'],
     nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"],
 
@@ -446,10 +445,19 @@ Page({
         merchantStname: that.data.merchantName, // 商户名简称
         userName: that.data.userName, // 为商户设置用户名
         passWord: that.data.passWord, // 为商户设置密码
-        urls: that.data.urls // 
+        buslicence: that.data.buslicence, // 营业执照图片
+        orgcode: that.data.orgcode, // 组织代码图片
+        lawholder: that.data.lawholder, // 法人持证件照图片
+        frontid: that.data.frontid, // 身份证正面照片
+        backid: that.data.backid, // 身份证反面照片
+        spequalifione: that.data.spequalifione, // 特殊资质一图片
+        spequalifitwo: that.data.spequalifitwo, // 特殊资质二图片
+        spequalifithree: that.data.spequalifithree, // 特殊资质三图片
+        spequalififour: that.data.spequalififour, // 特殊资质四图片
+        spequalififive: that.data.spequalififive, // 特殊资质五图片
       },
       success: function (res) {
-        // console.log(that.data.merchantName)
+        console.log('it is uploading...'+that.data)
         console.log(res.data)
         console.log(res)
         // data:{ rel: true }, errMsg: "request:ok", header: { Expires: "0", Cache - Control: "no-cache, no-store, max-age=0, must-revalidate", Set - Cookie: SESSION=13ca18d1-4fe1-4743-848a-3fcc9a28dae8; path=/; HttpOnly", X - XSS - Protection: "1; mode=block", Pragma: "no-cache", … }, statusCode: 200
