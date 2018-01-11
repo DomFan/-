@@ -7,7 +7,7 @@ Page({
     token: '',
     userName: '',
     userPassword: '',
-    list: ["上传", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
+    list: ["进件", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
     username: '请登录', // administrator
     name: '',
   },
