@@ -10,6 +10,9 @@ Page({
     list: ["进件", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
     username: '请登录', // administrator
     name: '',
+    isDB: true,
+    isServer: false,
+    isMerchant: false,
   },
   login: function(){
     // console.log(this.data)
@@ -43,7 +46,7 @@ Page({
 
   // 点击跳转
   // 上传页
-  click0: function(){
+  clickUpload: function(){
     let token = this.data.token,
         userName = this.data.userName,
         userPassword = this.data.userPassword
@@ -58,7 +61,7 @@ Page({
     })
   },
   // 查账页
-  click1: function(){
+  clickQuery: function(){
     let token = this.data.token,
         userName = this.data.userName,
         userPassword = this.data.userPassword
@@ -72,7 +75,9 @@ Page({
       complete: function(res) {},
     })
   },
-  click2: function () {
+  
+  // 跳转到当前页
+  noUse: function () {
     wx.redirectTo({
       url: './home',
       success: function (res) {
@@ -82,68 +87,6 @@ Page({
       complete: function (res) { },
     })
   },
-
-  click3: function () {
-    wx.redirectTo({
-      url: './home',
-      success: function (res) {
-        console.log(3)
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
-  click4: function () {
-    wx.redirectTo({
-      url: './home',
-      success: function (res) {
-        console.log(4)
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
-  click5: function () {
-    wx.redirectTo({
-      url: './home',
-      success: function (res) {
-        console.log(5)
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
-  click6: function () {
-    wx.redirectTo({
-      url: './home',
-      success: function (res) {
-        console.log(6)
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
-  click7: function () {
-    wx.redirectTo({
-      url: './home',
-      success: function (res) {
-        console.log(7)
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
-  click8: function () {
-    wx.navigateTo({
-      url: '../home/home',
-      success: function (res) {
-        console.log(8)
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
-
 
   /**
    * 生命周期函数--监听页面加载

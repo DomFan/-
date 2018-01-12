@@ -9,6 +9,10 @@
         <input name='sellerInput' type='text' bindinput='nameinput' placeholder='请输入商户名称' placeholder-class='phcolor' maxlength='30'></input>
       </view>
       <view class='row-container'>
+        <text class='msgleft'>商户简称</text>
+        <input name='stnameInput' type='text' bindinput='stnameinput' placeholder='请输入商户简称' placeholder-class='phcolor' maxlength='30'></input>
+      </view>
+      <view class='row-container'>
         <text class='msgleft'>商户地址</text>
         <input name='addressInput' type='text' bindinput='addressinput' placeholder='请输入商户地址' placeholder-class='phcolor' maxlength='80'></input>
       </view>
@@ -16,10 +20,13 @@
         <text class='msgleft'>联系人名称</text>
          <input name='personInput' type='text' bindinput='personinput' placeholder='请输入联系人名称' placeholder-class='phcolor' maxlength='10'></input> 
       </view>
-      <view class='row-container nounderline'>
-      <!-- 登录之后能不能跳转到后台接口 测试 避开 -->
+      <view class='row-container'>
         <text class='msgleft'>联系人电话</text>
         <input name='phoneInput' type='number' maxlength='20' bindinput='phoneinput' bindblur='validatemobile' placeholder='请输入联系人电话' placeholder-class='phcolor'></input>
+      </view>
+      <view class='row-container'>
+        <text class='msgleft'>联系人邮箱</text>
+        <input name='mailInput' type='mail' maxlength='20' bindinput='mailinput' bindblur='validatemobile' placeholder='请输入联系人邮箱' placeholder-class='phcolor'></input>
       </view>
 
       <!-- 设置商户名和密码  -->

@@ -8,10 +8,12 @@ Page({
     password: '',
     token: '',
     userId: '',
-    merchantName: '', //商户名称
-    address: '', //商户地址
-    linkman: '', //联系人
-    lkmphone: '', //电话
+    merchantName: '',   //商户名称
+    merchantStname: '', //商户简称
+    address: '',        //商户地址
+    linkman: '',        //联系人
+    lkmphone: '',       //电话
+    lkmemail: '',       //联系人邮箱
     fileList: new Array(10), // 文件列表
     userName: '', // 为商户设置名称
     passWord: '', // 为商户设置密码
@@ -40,7 +42,18 @@ Page({
     this.setData({
       merchantName: value
     })
-    console.log(e.detail.value, '---', this.data.merchantName)
+    console.log(e.detail.value, '--merchantName--', this.data.merchantName)
+    return value
+  },
+  /**商户简称 */
+  stnameinput: function(e){
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
+    this.setData({
+      merchantStname: value
+    })
+    console.log(e.detail.value, '--merchantStname--', this.data.merchantStname)
     return value
   },
   /* 地址 */
@@ -104,6 +117,17 @@ Page({
       return false;
     }
     return true;
+  },
+  /**联系人邮箱 */
+  mailinput: function (e) {
+    let val = e.detail.value,
+      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+      value = val.replace(reg, '')
+    this.setData({
+      lkmphone: value
+    })
+    console.log('mailinput', this.data.lkmemail)
+    return value
   },
   /* 商户登录名 */
   userNameinput: function (e) {
@@ -442,7 +466,8 @@ Page({
         linkman: that.data.linkman, // 商户联系人
         lkmphone: that.data.lkmphone, // 商户联系方式
         address: that.data.address, // 商户地址
-        merchantStname: that.data.merchantName, // 商户名简称
+        merchantStname: that.data.merchantStname, // 商户名简称
+        lkmemail: that.data.lkmemail, // 商户邮箱
         userName: that.data.userName, // 为商户设置用户名
         passWord: that.data.passWord, // 为商户设置密码
         buslicence: that.data.buslicence, // 营业执照图片

@@ -10,46 +10,88 @@
     </view>
   </view>
 
-  <view class='wrap'>
-    <!-- <view class='box' wx:if='{{list}}' wx:for='{{list}}' wx:key='index' bindtap='click{{index}}'>{{index}}___{{item}}</view> -->
-    <view class='box' bindtap='click0'>
+  <!--isDB  -->
+  <view class="wrap" wx:if='{{isDB}}'>
+    <view class='box' bindtap='clickUpload'>
       <image src='../../images/upload.png'></image>
-      <view>上传</view>
+      <view>进件</view>
     </view>
-    <view class='box' bindtap='click1'>
-      <image src='../../images/search.png'></image>
-      <view>查账</view>
-    </view>
-    <view class='box norightborder' bindtap='click2'>
+    <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
     </view>
-    <view class='box' bindtap='click3'>
+    <view class='box norightborder' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
     </view>
-    <view class='box' bindtap='click4'>
+    <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
     </view>
-    <view class='box norightborder' bindtap='click5'>
+    <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
     </view>
-    <view class='box' bindtap='click6'>
+    <view class='box norightborder' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
     </view>
-    <view class='box' bindtap='click7'>
+    <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
     </view>
-    <view class='box norightborder' bindtap='click8'>
+    <view class='box' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box norightborder' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
     </view>
   </view>
 
+  <view class="wrap" wx:if='{{isServer}}'>
+     
+    <view class='box' bindtap='clickQuery'>
+      <image src='../../images/search.png'></image>
+      <view>查账</view>
+    </view>
+     
+    <view class='box' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box norightborder' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box norightborder' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+    <view class='box norightborder' bindtap='noUse'>
+      <image src='../../images/white.png'></image>
+      <view> </view>
+    </view>
+  </view>
+
+  <!--底部  -->
   <view class='footer'>
     <view class='home' bindtap='home'>
       <image class='icon' src='../../images/home_act.png'></image>
