@@ -92,7 +92,7 @@ Page({
         'access-token':  token
       },
       success: function (res) {
-        // console.log(res, res.data)
+        console.log('login--res--data', res, res.data)
 
         if(res.statusCode === 200 && res.data.token){
           setTimeout(function () {
@@ -114,7 +114,9 @@ Page({
             method: "GET",
             dataType: "json",
             success: function (res) {
-              // console.log(res)
+
+              console.log('load--user--res', res)
+
               that.setData({name: res.data.name})
               wx.redirectTo({
                 url: '../home/home?userName=' + that.data.userName + '&userPassword=' + that.data.userPassword + '&token=' + that.data.token + '&name=' + that.data.name,

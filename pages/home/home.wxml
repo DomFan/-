@@ -16,14 +16,14 @@
       <image src='../../images/upload.png'></image>
       <view>进件</view>
     </view>
-    <view class='box' bindtap='clickQuery'>
+    <!-- <view class='box' bindtap='clickQuery'>
       <image src='../../images/search.png'></image>
       <view>查账</view>
-    </view>
-    <!-- <view class='box' bindtap='noUse'>
+    </view> -->
+     <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
-    </view> -->
+    </view> 
     <view class='box norightborder' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
@@ -53,7 +53,8 @@
       <view> </view>
     </view>
   </view>
-
+  
+  <!--查询  -->
   <view class="wrap" wx:if='{{isServer}}'>
      
     <view class='box' bindtap='clickQuery'>
