@@ -26,22 +26,22 @@
       </view>
       <view class='row-container'>
         <text class='msgleft'>联系人邮箱</text>
-        <input name='mailInput' type='mail' maxlength='20' bindinput='mailinput' bindblur='validatemobile' placeholder='请输入联系人邮箱' placeholder-class='phcolor'></input>
+        <input name='mailInput' type='mail' maxlength='20' bindinput='mailinput' bindblur='emailblur' placeholder='请输入联系人邮箱' placeholder-class='phcolor'></input>
       </view>
       <view class='row-container'>
         <text class='msgleft'>商户客服电话</text>
-        <input name='serviceInput' type='number' maxlength='11' bindinput='serviceinput' bindblur='validatemobile' placeholder='请输入商户客服电话' placeholder-class='phcolor'></input>
+        <input name='serviceInput' type='number' maxlength='20' bindinput='serviceinput' placeholder='请输入商户客服电话' placeholder-class='phcolor'></input>
       </view>
 
       <!-- 设置商户名和密码  -->
-      <view class='row-container'>
+      <!-- <view class='row-container'>
         <text class='msgleft'>商户登录名</text>
          <input name='userName' type='text' maxlength='100' bindinput='userNameinput' placeholder='请设置商户登录名' placeholder-class='phcolor'></input> 
       </view>
       <view class='row-container nounderline'>
         <text class='msgleft'>商户登录密码</text>
         <input name='passWord' type='text' password maxlength='100' bindinput='passWordinput' placeholder='请设置商户密码' placeholder-class='phcolor'></input>
-      </view>
+      </view> -->
     </view>
     
     <!--证件信息  proof-->

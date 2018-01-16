@@ -94,7 +94,7 @@ Page({
     if (val.length == 0) {
       wx.showToast({
         title: '请输入手机号！',
-        icon: 'success',
+        icon: 'loading',
         duration: 1500
       })
       return false;
@@ -102,7 +102,7 @@ Page({
     if (val.length != 11) {
       wx.showToast({
         title: '手机号长度有误！',
-        icon: 'success',
+        icon: 'loading',
         duration: 1500
       })
       return false;
@@ -111,7 +111,7 @@ Page({
     if (!myreg.test(val)) {
       wx.showToast({
         title: '手机号格式有误！',
-        icon: 'success',
+        icon: 'loading',
         duration: 1500
       })
       return false;
@@ -119,15 +119,37 @@ Page({
     return true;
   },
   /**联系人邮箱 */
+  validateEmail : function (email) {
+    let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'/
+    return reg.test(email)
+  },
+
   mailinput: function (e) {
-    let val = e.detail.value,
-      reg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
-      value = val.replace(reg, '')
     this.setData({
-      lkmphone: value
+      lkmemail: e.detail.value
     })
     console.log('mailinput', this.data.lkmemail)
-    return value
+  },
+
+  emailblur: function(e){
+    let val = e.detail.value,
+        reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/, 
+        //  /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/
+        isEmail = reg.test(val)
+        
+    console.log(reg.test(val))
+    if(!isEmail){
+      // console.log('not email')
+      wx.showToast({
+        title: '请填写正确邮箱',
+        icon: 'loading',
+        mask: true,
+      })
+      this.setData({ lkmemail: ''})
+    } else {
+      // console.log('email')
+      // do nothing
+    }
   },
   /* 商户登录名 */
   userNameinput: function (e) {
@@ -431,6 +453,13 @@ Page({
       })
       return
     }
+    if (!this.data.merchantStname) {
+      wx.showToast({
+        title: '请填写商户名称',
+        icon: 'loading',
+      })
+      return
+    }
     if (!this.data.address) {
       wx.showToast({
         title: '请填写商户地址',
@@ -448,6 +477,13 @@ Page({
     if (!this.data.lkmphone) {
       wx.showToast({
         title: '请填写联系人电话',
+        icon: 'loading',
+      })
+      return
+    }
+    if (!this.data.lkmemail) {
+      wx.showToast({
+        title: '请填写联系人邮箱',
         icon: 'loading',
       })
       return
