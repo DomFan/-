@@ -77,3 +77,8 @@ page, form, view{
 .bottom{
   height: 200rpx;
 }
+
+.checkWX{
+  padding-left: 80rpx;
+  padding-right: 50rpx;
+}

@@ -34,16 +34,38 @@
       </view>
 
       <!-- 设置商户名和密码  -->
-      <!-- <view class='row-container'>
+       <view class='row-container'>
         <text class='msgleft'>商户登录名</text>
-         <input name='userName' type='text' maxlength='100' bindinput='userNameinput' placeholder='请设置商户登录名' placeholder-class='phcolor'></input> 
+         <input name='userName' value='{{lkmphone}}' type='text' maxlength='100' bindinput='userNameinput' placeholder='默认为联系人电话' placeholder-class='phcolor'></input> 
       </view>
       <view class='row-container nounderline'>
         <text class='msgleft'>商户登录密码</text>
-        <input name='passWord' type='text' password maxlength='100' bindinput='passWordinput' placeholder='请设置商户密码' placeholder-class='phcolor'></input>
-      </view> -->
+        <input name='passWord' type='text' password maxlength='100' bindinput='passWordinput' placeholder='默认密码为"000000"' placeholder-class='phcolor'></input>
+      </view> 
     </view>
     
+    <!--通道类型  -->
+    <view class='tradetype'>
+      <view class='title'>通道类型</view>
+      <view class='row-container' bindchange="checkboxChange">
+        <text class='msgleft'>选择通道类型</text>
+        <checkbox class='checkWX' bindtap='tapWX' value="WX" checked="{{ischeckWX}}">微信 </checkbox>
+        <checkbox value="ZFB" bindtap='tapZFB' checked="{{ischeckZFB}}">支付宝</checkbox>
+      </view>
+    </view>
+    <!--WX  -->
+    <view class='' wx:if='{{ischeckWX}}'>
+      <view class='title'>微信</view> 
+        <view class='row-container'>
+          <text class='msgleft'>所属行业</text>
+          <input></input>
+        </view>
+      </view>
+      <!--ZFB  -->
+      <view class='row-container' wx:if='{{ischeckZFB}}'>
+      支付宝
+      </view>
+
     <!--证件信息  proof-->
     <view class='proop'>
       <view class='title prooftitle'>证件信息</view>

@@ -17,6 +17,10 @@ Page({
     fileList: new Array(10), // 文件列表
     userName: '', // 为商户设置名称
     passWord: '', // 为商户设置密码
+
+    ischeckWX: false,
+    ischeckZFB: false,
+
     urls: ['1','1','1','1','1','1','1','1','1','1'],
     nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"],
 
@@ -30,6 +34,7 @@ Page({
     spequalifithree: '', // 特殊资质三图片
     spequalififour: '', // 特殊资质四图片
     spequalififive: '', // 特殊资质五图片
+    
   },
 
   /* 获取input输入值 */
@@ -159,15 +164,35 @@ Page({
     this.setData({
       userName: value
     })
-    console.log('userNameinput', e.detail.value, 'userName', this.data.userName)
+    // console.log('userNameinput', e.detail.value, 'userName', this.data.userName, 'phone', this.data.lkmphone)
     return value
   },
   /* 商户登录密码 */
   passWordinput: function (e) {
+    if(!e.detail.value){
+      this.setData({passWord : '000000'})
+      return
+    }
     this.setData({
       passWord: e.detail.value
     })
     console.log('passWordinput', e.detail.value,'passWord', this.data.passWord)
+  },
+
+  /** 通道类型 */
+  // 微信
+  tapWX: function (e) {
+    let check = this.data.ischeckWX
+    check = !check
+    this.setData({ischeckWX: check})
+    console.log('ischeckWX', this.data.ischeckWX)
+  },
+  // 支付宝
+  tapZFB: function () {
+    let check = this.data.ischeckZFB
+    check = !check
+    this.setData({ ischeckZFB: check })
+    console.log('ischeckZFB', this.data.ischeckZFB)
   },
   
   /**上传图片  */
