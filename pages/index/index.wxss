@@ -55,6 +55,13 @@ page, form, view{
   width: 63%;
   height: 100rpx;
 }
+.percent{
+  position: relative;
+  right: -520rpx;
+}
+.rate{
+  padding-left: 20rpx;
+}
 .row-container button{
   font-size: 28rpx;
   color: #9a9a9a;

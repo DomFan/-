@@ -182,3 +182,11 @@
 		
 		微信小程序上传的资料从哪里下载，怎么下载地推人员上传的资料。
 		*** 
+
+洪刚:
+https://www.shouzan365.com/back/industry/industrys
+洪刚:
+passwayId
+洪刚:
+0c811cd8f6a3453da7eca6e446a54528	支付宝
+74e1479029544232a218a3e60cb791fc	微信

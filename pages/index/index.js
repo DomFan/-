@@ -182,17 +182,45 @@ Page({
   /** 通道类型 */
   // 微信
   tapWX: function (e) {
-    let check = this.data.ischeckWX
+    let check = this.data.ischeckWX,
+        token = this.data.token
     check = !check
     this.setData({ischeckWX: check})
     console.log('ischeckWX', this.data.ischeckWX)
+    if(check){
+      wx.request({
+        url: 'https://www.shouzan365.com//back/industry/industrys',
+        data: {
+          passwayId: '74e1479029544232a218a3e60cb791fc'
+        },
+        header: {'access-token': token},
+        method: 'GET',
+        success: function(res) {
+          console.log('WX--res', res )
+        },
+      })
+    }
   },
   // 支付宝
   tapZFB: function () {
-    let check = this.data.ischeckZFB
+    let check = this.data.ischeckZFB,
+        token = this.data.token
     check = !check
     this.setData({ ischeckZFB: check })
     console.log('ischeckZFB', this.data.ischeckZFB)
+    if (check) {
+      wx.request({
+        url: 'https://www.shouzan365.com//back/industry/industrys',
+        data: {
+          passwayId: '0c811cd8f6a3453da7eca6e446a54528'
+        },
+        header: { 'access-token': token },
+        method: 'GET',
+        success: function (res) {
+          console.log('ZFB--res', res)
+        },
+      })
+    }
   },
   
   /**上传图片  */
@@ -513,6 +541,15 @@ Page({
       })
       return
     }
+    if (!this.data.userName || !this.data.passWord) {
+      if(!this.data.userName){this.setData({userName: this.data.lkmphone})}
+      if(!this.data.passWord)(this.setData({passWord: '000000'}))
+      wx.showModal({
+        title: '提示',
+        content: '登录名默认为联系人电话，密码默认为000000',
+        showCancel: false,
+      })
+    }
 
     wx.request({
       // url: 'http://192.168.98.179/back/merchantinfoController/save',
@@ -525,7 +562,7 @@ Page({
       data: {
         merchantName: that.data.merchantName, // 商户名
         linkman: that.data.linkman, // 商户联系人
-        lkmphone: that.data.lkmphone, // 商户联系方式
+        lkmphone: that.data.lkmphone, // 联系人电话
         address: that.data.address, // 商户地址
         merchantStname: that.data.merchantStname, // 商户名简称
         lkmemail: that.data.lkmemail, // 商户邮箱

@@ -40,7 +40,7 @@
       </view>
       <view class='row-container nounderline'>
         <text class='msgleft'>商户登录密码</text>
-        <input name='passWord' type='text' password maxlength='100' bindinput='passWordinput' placeholder='默认密码为"000000"' placeholder-class='phcolor'></input>
+        <input name='passWord' type='text' password maxlength='100' bindinput='passWordinput' value='' placeholder='默认密码为"000000"' placeholder-class='phcolor'></input>
       </view> 
     </view>
     
@@ -49,22 +49,37 @@
       <view class='title'>通道类型</view>
       <view class='row-container' bindchange="checkboxChange">
         <text class='msgleft'>选择通道类型</text>
-        <checkbox class='checkWX' bindtap='tapWX' value="WX" checked="{{ischeckWX}}">微信 </checkbox>
-        <checkbox value="ZFB" bindtap='tapZFB' checked="{{ischeckZFB}}">支付宝</checkbox>
+        <checkbox class='checkWX' bindtap='tapWX' color='#f55d54' value="WX" checked="{{ischeckWX}}">微信 </checkbox>
+        <checkbox value="ZFB" bindtap='tapZFB' color='#f55d54' checked="{{ischeckZFB}}">支付宝</checkbox>
       </view>
     </view>
     <!--WX  -->
-    <view class='' wx:if='{{ischeckWX}}'>
+    <view class='trade' wx:if='{{ischeckWX}}'>
       <view class='title'>微信</view> 
-        <view class='row-container'>
-          <text class='msgleft'>所属行业</text>
-          <input></input>
-        </view>
+      <view class='row-container'>
+        <text class='msgleft'>所属行业</text>
+        <input class='business' placeholder='行业'></input>
       </view>
-      <!--ZFB  -->
-      <view class='row-container' wx:if='{{ischeckZFB}}'>
-      支付宝
+      <view class='row-container perwrap'>
+        <text class='msgleft'>费率</text>
+        <input class='rate' type='digit' placeholder='费率'></input>
+        <view class='percent'>%</view>
       </view>
+    </view>
+    <!--ZFB  -->
+    <view class='trade' wx:if='{{ischeckZFB}}'>
+      <view class='title'>支付宝</view>
+      <view class='row-container'>
+        <text class='msgleft'>所属行业</text>
+        <input class='business' placeholder='行业'></input>
+      </view>
+      <view class='row-container perwrap'>
+        <text class='msgleft'>费率</text>
+        <input class='rate' type='digit' placeholder='费率'></input>
+        <text class='percent'>%</text>
+      </view>
+      
+    </view>
 
     <!--证件信息  proof-->
     <view class='proop'>
