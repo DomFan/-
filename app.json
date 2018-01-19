@@ -1,12 +1,13 @@
 {
-  "pages":[
+  "pages": [
     
-    "pages/home/home",    
-    "pages/login/login",  
-    "pages/index/index",  
+    "pages/home/home",
+    "pages/login/login",
+    "pages/index/index",
     "pages/query/query",
-    "pages/submitSuccess/submitSuccess", 
-    "pages/logs/logs"    
+    "pages/hello/hello",
+    "pages/submitSuccess/submitSuccess",
+    "pages/logs/logs"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -16,7 +17,6 @@
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": false
   },
-
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000

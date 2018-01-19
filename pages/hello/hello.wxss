@@ -1,0 +1,9 @@
+/* pages/hello/hello.wxss */
+page{
+  background-color: white;
+}
+.picker{
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: lightgrey;
+}

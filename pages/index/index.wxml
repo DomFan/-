@@ -58,7 +58,12 @@
       <view class='title'>微信</view> 
       <view class='row-container'>
         <text class='msgleft'>所属行业</text>
-        <input class='business' placeholder='行业'></input>
+        <!-- <input class='business' placeholder='行业'></input> -->
+        <picker mode='multiSelector' bindchange="WXlistChange" bindcolumnchange="WXlistColumnChange" value="{{WXindex}}" range="{{WXlist}}">
+          <view class='picker'>
+            {{WXlist[0][0]}}      {{WXlist[0][1]}}
+          </view>
+        </picker>
       </view>
       <view class='row-container perwrap'>
         <text class='msgleft'>费率</text>

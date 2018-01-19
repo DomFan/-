@@ -50,10 +50,13 @@ page, form, view{
 .msgleft {
   float: left;
 }
-.row-container input{
+.row-container input, .row-container picker{
   float: right;
   width: 63%;
   height: 100rpx;
+}
+.picker{
+  width: 100%;
 }
 .percent{
   position: relative;

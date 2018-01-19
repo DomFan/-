@@ -14,12 +14,19 @@ Page({
     linkman: '',        //联系人
     lkmphone: '',       //电话
     lkmemail: '',       //联系人邮箱
+    customerTel: '',    //商户客户电话
     fileList: new Array(10), // 文件列表
     userName: '', // 为商户设置名称
     passWord: '', // 为商户设置密码
 
     ischeckWX: false,
     ischeckZFB: false,
+    WXlist: [],
+    wlist: [],
+    xlist: [],
+    WXindex: [0, 0],
+    ZFBlist: [],
+    ZFBindex: [0, 0],
 
     urls: ['1','1','1','1','1','1','1','1','1','1'],
     nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"],
@@ -128,14 +135,12 @@ Page({
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'/
     return reg.test(email)
   },
-
   mailinput: function (e) {
     this.setData({
       lkmemail: e.detail.value
     })
     console.log('mailinput', this.data.lkmemail)
   },
-
   emailblur: function(e){
     let val = e.detail.value,
         reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/, 
@@ -155,6 +160,12 @@ Page({
       // console.log('email')
       // do nothing
     }
+  },
+  /**商户客户电话 customerTel */
+  serviceinput: function (e) {
+    this.setData({
+      customerTel: e.detail.value
+    })
   },
   /* 商户登录名 */
   userNameinput: function (e) {
@@ -182,7 +193,8 @@ Page({
   /** 通道类型 */
   // 微信
   tapWX: function (e) {
-    let check = this.data.ischeckWX,
+    let that = this,
+        check = this.data.ischeckWX,
         token = this.data.token
     check = !check
     this.setData({ischeckWX: check})
@@ -196,11 +208,34 @@ Page({
         header: {'access-token': token},
         method: 'GET',
         success: function(res) {
-          console.log('WX--res', res )
+          console.log('WX--res', res.data)
+          let data = res.data, WXlist = that.data.WXlist, xlist = that.data.xlist, wlist = that.data.wlist
+          data.map((item, index) => {
+            let children = item.children, industryName = item.industryName
+            children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '')
+            industryName ? (wlist[index] = industryName) : (wlist[index] = '')
+            WXlist[0] = wlist
+            WXlist[1] = xlist
+
+          })
+          console.log(data, WXlist, xlist)
+          that.setData({WXlist})
+          // that.setData({WXlist: res.data})
         },
       })
     }
   },
+  // 微信行业列表
+  WXlistChange: function (e) {
+    this.setData({
+      multiIndex: e.detail.value
+    })
+  },
+  WXlistColumnChange: function (e) {
+
+  },
+
+
   // 支付宝
   tapZFB: function () {
     let check = this.data.ischeckZFB,
@@ -560,12 +595,13 @@ Page({
         'access-token': token
       },
       data: {
-        merchantName: that.data.merchantName, // 商户名
+        merchantName: that.data.merchantName, // 商户名称
+        merchantStname: that.data.merchantStname, // 商户名简称
+        address: that.data.address, // 商户地址
         linkman: that.data.linkman, // 商户联系人
         lkmphone: that.data.lkmphone, // 联系人电话
-        address: that.data.address, // 商户地址
-        merchantStname: that.data.merchantStname, // 商户名简称
-        lkmemail: that.data.lkmemail, // 商户邮箱
+        lkmemail: that.data.lkmemail, // 联系人邮箱
+        customerTel: that.data.customerTel, //商户客服电话
         userName: that.data.userName, // 为商户设置用户名
         passWord: that.data.passWord, // 为商户设置密码
         buslicence: that.data.buslicence, // 营业执照图片

@@ -10,9 +10,9 @@ Page({
     list: ["进件", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
     username: '请登录', // administrator
     name: '',
-    isDB: true,
-    isServer: false,
-    isMerchant: false,
+    isDB: false, //是地推人员
+    isServer: true, //是服务商
+    isMerchant: false, //是商户
   },
   login: function(){
     // console.log(this.data)
@@ -75,6 +75,21 @@ Page({
       complete: function(res) {},
     })
   },
+  // 汇总页
+  clickCollect:function () {
+    let token = this.data.token,
+      userName = this.data.userName,
+      userPassword = this.data.userPassword
+    wx.navigateTo({
+      url: '../query/query?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
+      success: function (res) {
+        // console.log(that.data)
+        // console.log('go to search---', userName, userPassword, token)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
   
   // 跳转到当前页
   noUse: function () {
@@ -92,16 +107,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userName: options.userName,
-      userPassword: options.userPassword,
-      token: options.token,
-      name: options.name
-    })
     if(!options.token){
-      this.setData({name: this.data.username})
+      this.setData({name: this.data.username, isServer:true, isDB: false, isMerchant: false})
     }
-    // console.log(options)
+    if(options.token){
+      this.setData({
+        userName: options.userName,
+        userPassword: options.userPassword,
+        token: options.token,
+        name: options.name,
+        isServer: options.isServer,
+        isMerchant: options.isMerchant,
+        isDB: options.isDB,
+      })
+    } else {
+      this.setData({ name: this.data.username, isServer: true, isDB: false, isMerchant: false })
+    }
+    console.log(options)
+    console.log(this.data)
   },
 
   /**
