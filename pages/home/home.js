@@ -10,9 +10,9 @@ Page({
     list: ["进件", "查账", "其他", "其他", "其他", "其他", "其他", "其他","其他"],
     username: '请登录', // administrator
     name: '',
-    isDB: false, //是地推人员
-    isServer: true, //是服务商
-    isMerchant: false, //是商户
+    isDB: '', //是地推人员
+    isServer: '', //是服务商
+    isMerchant: '', //是商户
   },
   login: function(){
     // console.log(this.data)
@@ -23,7 +23,7 @@ Page({
     wx.navigateTo({
       url: '../login/login?userName='+ userName+ '&userPassword='+ userPassword+ '&token=' +token + '&name='+ name,
       success: function(res) {
-        console.log('去登录')
+        console.log('去登录', token, '---')
       },
       fail: function(res) {},
       complete: function(res) {},

@@ -218,12 +218,12 @@ Page({
       token: options.token,
       name: options.name
     })
-    // console.log(options)
-    if(this.data.token != "undefined"){
-      this.setData({islogin: true})
-    } else {
+    if(this.data.token == "undefined" || !this.data.token){
       this.setData({islogin: false})
+    } else {
+      this.setData({islogin: true})
     }
+    console.log(options, this.data)
   },
 
   /**
