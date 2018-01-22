@@ -5,6 +5,7 @@
     "pages/login/login",
     "pages/index/index",
     "pages/query/query",
+    "pages/gather/gather",
     "pages/hello/hello",
     "pages/submitSuccess/submitSuccess",
     "pages/logs/logs"

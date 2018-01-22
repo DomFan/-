@@ -183,10 +183,52 @@
 		微信小程序上传的资料从哪里下载，怎么下载地推人员上传的资料。
 		*** 
 
-洪刚:
-https://www.shouzan365.com/back/industry/industrys
-洪刚:
-passwayId
-洪刚:
-0c811cd8f6a3453da7eca6e446a54528	支付宝
-74e1479029544232a218a3e60cb791fc	微信
+###登录权限
+	洪刚:
+	https://www.shouzan365.com/back/industry/industrys
+	洪刚:
+	passwayId
+	洪刚:
+	0c811cd8f6a3453da7eca6e446a54528	支付宝
+	74e1479029544232a218a3e60cb791fc	微信
+###订单汇总页面
+	- 报表汇总-查询
+		HTTP请求方式：get
+		HTTP请求url：http://域名或IP:8765/back/tradeBalcons/page?limit=10&amp;offset=0&amp;name="abc"
+		- 参数
+			- 参数		类型		是否必填		说明
+			- limit		string 		否 		页面数据个数
+			- offset 		string 		否 		页数
+			- startdate 	string 		否 		开始时间
+			- enddate 	string 		否 		结束时间
+			- merchantId 	string 		否 		商户ID
+			- passwayId 	string 		否 		通道ID
+			
+		- 返回json说明
+			- 参数			类型		说明
+			- tradedt		date	交易日期
+			- merchant_id	string	商户名称
+			- passway_id	string	支付方式
+			- tradetimes	num		交易总笔数
+			- sum			num		交易总金额
+			- refundtimes	num		退款总笔数
+			- refund		num		退款总金额  
+			- fee			num		手续费
+			- refundtimes	num		退款总笔数 ??
+
+
+	- 订单汇总 按钮
+		HTTP请求方式：post
+		HTTP请求url：http://域名或IP:8765/back/tradeBalcons/calTradebalcons
+		
+		- 参数		类型		是否必填 	说明
+		- startDate	string				开始时间
+		- endDate	string				结束时间
+
+
+		返回json说明
+		- 参数		类型		说明
+		- ok		String	成功
+
+
+

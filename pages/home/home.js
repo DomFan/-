@@ -76,12 +76,12 @@ Page({
     })
   },
   // 汇总页
-  clickCollect:function () {
+  clickGather:function () {
     let token = this.data.token,
       userName = this.data.userName,
       userPassword = this.data.userPassword
     wx.navigateTo({
-      url: '../query/query?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
+      url: '../gather/gather?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token,
       success: function (res) {
         // console.log(that.data)
         // console.log('go to search---', userName, userPassword, token)
@@ -107,9 +107,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(!options.token){
-      this.setData({name: this.data.username, isServer:true, isDB: false, isMerchant: false})
-    }
+    // if(!options.token){
+    //   this.setData({name: this.data.username, isServer:false, isDB: true, isMerchant: false})
+    // }
     if(options.token){
       this.setData({
         userName: options.userName,
@@ -121,24 +121,25 @@ Page({
         isDB: options.isDB,
       })
     } else {
-      this.setData({ name: this.data.username, isServer: true, isDB: false, isMerchant: false })
+      this.setData({ name: this.data.username, isServer: true, isDB: '', isMerchant: ''})
     }
-    console.log(options)
-    console.log(this.data)
+    // console.log(options)
+    // console.log(this.data)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    // console.log(this.data)
+    // console.log(this.data.isMerchant == 'true')
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    // console.log(this.data)
   },
 
   /**

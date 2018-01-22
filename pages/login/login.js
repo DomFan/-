@@ -95,19 +95,16 @@ Page({
         'access-token':  token
       },
       success: function (res) {
-        console.log('login--res--data', res, res.data)
-
+        // console.log('login--res--data', res, res.data)
         if(res.statusCode === 200 && res.data.token){
           setTimeout(function () {
             wx.hideLoading()
           }, 0)
-         
           that.setData({
             userName: nameInput,
             userPassword: passwordInput,
             token: res.data.token,  
           })
-
           let toke = res.data.token
           wx.request({
             url: 'https://www.shouzan365.com/back/user',
@@ -117,17 +114,13 @@ Page({
             method: "GET",
             dataType: "json",
             success: function (res) {
-
               console.log('load--user--res', res)
-
               that.setData({name: res.data.name})
-
-              console.log(toke)
-
+              // console.log(toke)
               /**权限确认 */
               wx.request({
                 // url: 'http://192.168.98.179/back/smallprogrammenu/system/authority',
-                url: 'http://www.shouzan365.com/back/smallprogrammenu/system/authority',
+                url: 'https://www.shouzan365.com/back/smallprogrammenu/system/authority',
                 data: {},
                 header: { 'access-token': toke},
                 method: 'GET',
@@ -135,17 +128,17 @@ Page({
                   console.log(res)
                   //res.data 账单: "tradeblotter", 商户: "merchantinfo", 汇总: "tradebalcons"
                   let data = res.data, istradeblotter, ismerchantinfo, istradebalcons
-                  data.indexOf("tradeblotter") == -1 ? istradeblotter = false : istradeblotter = true
-                  data.indexOf("merchantinfo") == -1 ? ismerchantinfo = false : ismerchantinfo = true
-                  data.indexOf("tradebalcons") == -1 ? istradebalcons = false : istradebalcons = true
+                  data.indexOf("tradeblotter") == -1 ? istradeblotter = '' : istradeblotter = true
+                  data.indexOf("merchantinfo") == -1 ? ismerchantinfo = '' : ismerchantinfo = true
+                  data.indexOf("tradebalcons") == -1 ? istradebalcons = '' : istradebalcons = true
                   if (istradeblotter && ismerchantinfo && istradebalcons) {
-                    that.setData({ isServer: true, isMerchant: false, isDB: false})
+                    that.setData({isServer: true,isMerchant: '', isDB: ''})
                   }
                   if (istradeblotter && !ismerchantinfo && istradebalcons) {
-                    that.setData({idServer: false, isMerchant: true, isDB: false})
+                    that.setData({isServer: '', isMerchant: true, isDB: ''})
                   }
                   if (!istradeblotter && ismerchantinfo && !istradebalcons) {
-                    that.setData({ idServer: false, isMerchant: false, isDB: true})  
+                    that.setData({isServer: '', isMerchant: '', isDB: true})  
                   }
 
                   wx.redirectTo({
@@ -223,7 +216,7 @@ Page({
     } else {
       this.setData({islogin: true})
     }
-    console.log(options, this.data)
+    // console.log(options, this.data)
   },
 
   /**

@@ -11,101 +11,132 @@
   </view>
 
   <!--isDB  -->
-  <view class="wrap" wx:if='{{isDB}}'>
-    <view class='box' bindtap='clickUpload'>
-      <image src='../../images/upload.png'></image>
-      <view>进件</view>
-    </view>
-     <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
+     <view class="wrap" wx:if='{{isDB}}'>
+      <view class='box' bindtap='clickUpload'>
+        <image src='../../images/upload.png'></image>
+        <view>进件</view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view> 
+      <view class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
     </view> 
-    <view class='box norightborder' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box norightborder' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box norightborder' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-  </view>
   
   <!-- isMerchant  -->
-  <view class="wrap" wx:if='{{isMerchant}}'>
-     
-    <view class='box' bindtap='clickQuery'>
-      <image src='../../images/search.png'></image>
-      <view>查账</view>
-    </view>
-     
-    <view class='box' bindtap='clickCollect'>
-      <image src='../../images/search.png'></image>
-      <view>汇总</view>
-    </view>
-    <view class='box norightborder' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box norightborder' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-    <view class='box norightborder' bindtap='noUse'>
-      <image src='../../images/white.png'></image>
-      <view> </view>
-    </view>
-  </view>
+     <view class="wrap" wx:if='{{isMerchant}}'>
+      
+      <view class='box' bindtap='clickQuery'>
+        <image src='../../images/search.png'></image>
+        <view>查账</view>
+      </view>
+      
+      <view class='box' bindtap='clickGather'>
+        <image src='../../images/search.png'></image>
+        <view>汇总</view>
+      </view>
+      <view class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+      <view class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+    </view> 
 
   <!-- isServer  -->
-  <view class="wrap" wx:if='{{isServer}}'>
-    <view class='box' bindtap='clickUpload'>
-      <image src='../../images/upload.png'></image>
-      <view>进件</view>
-    </view>
-    <view class='box' bindtap='clickQuery'>
-      <image src='../../images/search.png'></image>
-      <view>查账</view>
-    </view>
-    <view class='box norightborder' bindtap='clickCollect'>
-      <image src='../../images/search.png'></image>
-      <view>汇总</view>
-    </view>
+  <view wx:if='{{isServer}}' class="wrap">
+    
+      <!-- <view wx:if='{{isDB == true}}' class='box' bindtap='clickUpload'>
+        <image src='../../images/upload.png'></image>
+        <view>进件</view>
+      </view>
+      <view wx:if='{{isDB == true}}' class='box' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view> 
+      <view wx:if='{{isDB == true}}' class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view>
+    
+    
+      <view wx:if='{{isMerchant == true}}' class='box' bindtap='clickQuery'>
+        <image src='../../images/search.png'></image>
+        <view>查账</view>
+      </view>
+      
+      <view wx:if='{{isMerchant == true}}' class='box' bindtap='clickCollect'>
+        <image src='../../images/search.png'></image>
+        <view>汇总</view>
+      </view>
+      <view wx:if='{{isMerchant == true}}' class='box norightborder' bindtap='noUse'>
+        <image src='../../images/white.png'></image>
+        <view> </view>
+      </view> -->
+   
+    
+      <view class='box' bindtap='clickUpload'>
+        <image src='../../images/upload.png'></image>
+        <view>进件</view>
+      </view>
+      <view class='box' bindtap='clickQuery'>
+        <image src='../../images/search.png'></image>
+        <view>查账</view>
+      </view>
+      <view class='box norightborder' bindtap='clickGather'>
+        <image src='../../images/search.png'></image>
+        <view>汇总</view>
+      </view>
+    
      
     <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>

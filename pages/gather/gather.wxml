@@ -1,0 +1,76 @@
+<!--pages/gather/gather.wxml-->
+<view class='wrap'>
+  <form class='form'>
+    <view class='startwrap'>
+      <picker mode="date" value="{{date}}" end='{{endDate}}' bindchange="starttime">
+        <view class='picker' wx:if='{{!startDate}}'>
+          开始日期：选择开始时间
+        </view>
+        <view class="picker" wx:else>
+          开始日期：{{startDate}}
+        </view>
+      </picker>
+    </view>
+    <view class='endwrap'>
+      <picker mode="date" value="{{date}}" start='{{startDate}}' bindchange="endtime">
+        <view class="picker" wx:if='{{!endDate}}'>
+          结束日期：选择结束时间
+        </view>
+        <view class="picker" wx:else>
+          结束日期：{{endDate}}
+        </view>
+      </picker>
+    </view>
+    <view class='btnwrap'>
+      <button class='btn confirm' bindtap='confirm'>查询</button>
+      <button class='btn confirm' bindtap='gatherall'>汇总</button> 
+    </view>
+  </form>
+  <view class='table'>
+    <!--表头  -->
+    <view class="thead bg-w">
+      <view class="thitem">交易日期</view>
+      <view class="thitem">商户</view>
+      <view class="thitem">支付方式</view>
+      <view class="thitem">交易总笔数</view>
+      <view class="thitem">交易总金额</view>
+      <view class="thitem">退款金额</view>
+      <view class="thitem">退款总笔数</view>
+      <view class="thitem">手续费</view>
+    </view>
+      <view wx:if='{{!listData[0]}}' class='nocontent'>
+        <view>尚无数据</view>
+      </view>
+      <view wx:if='{{listData[0]}}'>
+        <view wx:for="{{listData}}" wx:key="{{index}}">
+          <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+            <view class="td">{{item.tradedt}}</view>
+            <view class="td">{{item.merchantId}}</view>
+            <view class="td">{{item.passwayId}}</view>
+            <view class="td">{{item.tradetimes}}</view>
+            <view class="td">{{item.sum}}</view>
+            <view class="td">{{item.refundtimes}}</view>
+            <view class="td">{{item.refund}}</view>
+            <view class="td">{{item.fee}}</view>
+          </view>
+          <view class="tr" wx:else>
+            <view class="td">{{item.tradedt}}</view>
+            <view class="td">{{item.merchantId}}</view>
+            <view class="td">{{item.passwayId}}</view>
+            <view class="td">{{item.tradetimes}}</view>
+            <view class="td">{{item.sum}}</view>
+            <view class="td">{{item.refundtimes}}</view>
+            <view class="td">{{item.refund}}</view>
+            <view class="td">{{item.fee}}</view>
+          </view>
+        </view>
+        <view wx:if='{{hasmoredata}}' class='more'>
+          正在加载。。。
+        </view>
+        <view wx:if='{{hasnomore}}' class='more'>
+          全部加载完毕
+        </view>
+      </view>
+  </view>
+</view>
+
