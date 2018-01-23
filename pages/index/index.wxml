@@ -61,7 +61,7 @@
         <!-- <input class='business' placeholder='行业'></input> -->
         <picker mode='multiSelector' bindchange="WXlistChange" bindcolumnchange="WXlistColumnChange" value="{{WXindex}}" range="{{WXlist}}">
           <view class='picker'>
-            {{WXlist[0][0]}}      {{WXlist[0][1]}}
+            {{WXlist[1].industryName}} -- {{WXlist[1].children[0].industryName}}
           </view>
         </picker>
       </view>

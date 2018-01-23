@@ -51,7 +51,21 @@ Page({
       wx.showModal({
         title: '请先登录',
         content: '登录后可查询',
-        showCancel: false,
+        showCancel: true,
+        cancelText: '去登录',
+        cancelColor: '#3CC51F',
+        confirmText: '知道了',
+        confirmColor: '#999',
+        success: function (res) {
+          if (res.cancel){
+            wx.redirectTo({
+              url: '../login/login',
+              success: function(res) {},
+              fail: function(res) {},
+              complete: function(res) {},
+            })
+          } 
+        },
       })
       return
     }

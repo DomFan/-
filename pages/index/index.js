@@ -209,10 +209,11 @@ Page({
         method: 'GET',
         success: function(res) {
           console.log('WX--res', res.data)
+          // console.log(typeof res.data)
           let data = res.data, WXlist = that.data.WXlist, xlist = that.data.xlist, wlist = that.data.wlist
           data.map((item, index) => {
             let children = item.children, industryName = item.industryName
-            children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '')
+            children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '') // ?
             industryName ? (wlist[index] = industryName) : (wlist[index] = '')
             WXlist[0] = wlist
             WXlist[1] = xlist

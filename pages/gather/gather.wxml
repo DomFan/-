@@ -32,10 +32,10 @@
       <view class="thitem">交易日期</view>
       <view class="thitem">商户</view>
       <view class="thitem">支付方式</view>
-      <view class="thitem">交易总笔数</view>
-      <view class="thitem">交易总金额</view>
+      <view class="thitem">交易笔数</view>
+      <view class="thitem">交易金额</view>
       <view class="thitem">退款金额</view>
-      <view class="thitem">退款总笔数</view>
+      <view class="thitem">退款笔数</view>
       <view class="thitem">手续费</view>
     </view>
       <view wx:if='{{!listData[0]}}' class='nocontent'>
