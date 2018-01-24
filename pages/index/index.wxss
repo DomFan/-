@@ -55,6 +55,11 @@ page, form, view{
   width: 63%;
   height: 100rpx;
 }
+.row-container view{
+  float: right;
+  width: 80%;
+  height: 100rpx;
+}
 .picker{
   width: 100%;
 }

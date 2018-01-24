@@ -211,20 +211,39 @@ Page({
           console.log('WX--res', res.data)
           // console.log(typeof res.data)
           let data = res.data, WXlist = that.data.WXlist, xlist = that.data.xlist, wlist = that.data.wlist
-          data.map((item, index) => {
-            let children = item.children, industryName = item.industryName
-            children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '') // ?
-            industryName ? (wlist[index] = industryName) : (wlist[index] = '')
-            WXlist[0] = wlist
-            WXlist[1] = xlist
-
-          })
+          // data.map((item, index) => {
+          //   let children = item.children, industryName = item.industryName
+          //   children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '') // ?
+          //   industryName ? (wlist[index] = industryName) : (wlist[index] = '')
+          //   WXlist[0] = wlist
+          //   WXlist[1] = xlist
+          // })
+          if(token){
+            data.map((index, item) => {
+              if(item.children){
+                wlist.push(item.children)
+              } else {
+                wlist.push([])
+              }
+            })
+          }
+          that.setData({wlist})
           console.log(data, WXlist, xlist)
-          that.setData({WXlist})
-          // that.setData({WXlist: res.data})
+          // that.setData({WXlist})
+          that.setData({WXlist: res.data})
         },
       })
     }
+  },
+  bindChange: function (e) {
+    const val = e.detail.value
+    this.setData({
+      // year: this.data.years[val[0]],
+      // month: this.data.months[val[1]],
+      // day: this.data.days[val[2]]
+      WXlist: this.data.WXlist[val[0]],
+      wlist: this.data.wlist[val[1]]
+    })
   },
   // 微信行业列表
   WXlistChange: function (e) {
