@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/date/date",
     "pages/cities/cities",
 
-    "pages/home/home",
     "pages/login/login",
     "pages/index/index",
     "pages/query/query",

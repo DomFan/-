@@ -18,8 +18,9 @@ Page({
     fileList: new Array(10), // 文件列表
     userName: '', // 为商户设置名称
     passWord: '', // 为商户设置密码
+    passwayIds: '', //通道类型
 
-    ischeckWX: false,
+    ischeckWX: true,
     ischeckZFB: false,
     WXlist: [],
     wlist: [],
@@ -191,15 +192,19 @@ Page({
   },
 
   /** 通道类型 */
+  //wxindustryId   String 否 微信所属行业
+  //wxsettlerate BigDecimal 否 微信结算费率
   // 微信
   tapWX: function (e) {
     let that = this,
         check = this.data.ischeckWX,
-        token = this.data.token
+        token = this.data.token,
+        ischeckWX = this.data.ischeckWX,
+        ischeckZFB = this.data.ischeckZFB
     check = !check
     this.setData({ischeckWX: check})
     console.log('ischeckWX', this.data.ischeckWX)
-    if(check){
+    if(check == true){
       wx.request({
         url: 'https://www.shouzan365.com//back/industry/industrys',
         data: {
@@ -208,32 +213,38 @@ Page({
         header: {'access-token': token},
         method: 'GET',
         success: function(res) {
-          console.log('WX--res', res.data)
+          console.log('WX--res', res)
           // console.log(typeof res.data)
           let data = res.data, WXlist = that.data.WXlist, xlist = that.data.xlist, wlist = that.data.wlist
-          // data.map((item, index) => {
-          //   let children = item.children, industryName = item.industryName
-          //   children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '') // ?
-          //   industryName ? (wlist[index] = industryName) : (wlist[index] = '')
-          //   WXlist[0] = wlist
-          //   WXlist[1] = xlist
-          // })
           if(token){
-            data.map((index, item) => {
-              if(item.children){
-                wlist.push(item.children)
-              } else {
-                wlist.push([])
-              }
+            data.map((item, index) => {
+              let children = item.children, industryName = item.industryName
+              children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '') // ?
+              industryName ? (wlist[index] = industryName) : (wlist[index] = '')
+              WXlist[0] = wlist
+              WXlist[1] = xlist
             })
           }
+          // if(token){
+          //   data.map((index, item) => {
+          //     if(item.children){
+          //       wlist.push(item.children)
+          //     } else {
+          //       wlist.push([])
+          //     }
+          //   })
+          // }
           that.setData({wlist})
-          console.log(data, WXlist, xlist)
+          // console.log( WXlist, xlist)
           // that.setData({WXlist})
           that.setData({WXlist: res.data})
         },
       })
     }
+    ischeckWX = that.data.ischeckWX
+    ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
+    console.log("isWX? ", that.data.ischeckWX,'--isZFB? ', ischeckZFB)
+    console.log(this.data.passwayIds)
   },
   bindChange: function (e) {
     const val = e.detail.value
@@ -257,6 +268,8 @@ Page({
 
 
   // 支付宝
+  // zfbindustryId   String 否 支付宝所属行业ID
+  // zfbsettlerate   BigDecimal 否 支付宝结算费率
   tapZFB: function () {
     let check = this.data.ischeckZFB,
         token = this.data.token
@@ -605,6 +618,17 @@ Page({
         showCancel: false,
       })
     }
+    if(ischeckWX && ischeckZFB){
+      this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528"})
+    } else if(ischeckWX && !ischeckZFB){
+      this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc"})
+    } else if(!ischeckWX && ischeckZFB){
+      this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528"})
+    } else {
+      this.setData({ passwayIds: ""})
+    }
+
+    ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
 
     wx.request({
       // url: 'http://192.168.98.179/back/merchantinfoController/save',
@@ -624,6 +648,7 @@ Page({
         customerTel: that.data.customerTel, //商户客服电话
         userName: that.data.userName, // 为商户设置用户名
         passWord: that.data.passWord, // 为商户设置密码
+        passwayIds: that.data.passwayIds, // 商户通道类型
         buslicence: that.data.buslicence, // 营业执照图片
         orgcode: that.data.orgcode, // 组织代码图片
         lawholder: that.data.lawholder, // 法人持证件照图片

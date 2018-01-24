@@ -59,14 +59,14 @@
       <view class='row-container'>
         <text class='msgleft'>所属行业</text>
         <!-- <input class='business' placeholder='行业'></input> -->
-        <!-- <picker mode='multiSelector' bindchange="WXlistChange" bindcolumnchange="WXlistColumnChange" value="{{WXindex}}" range="{{WXlist}}" range-key='{{"industryName"}}'>
+         <picker mode='multiSelector' bindchange="WXlistChange" bindcolumnchange="WXlistColumnChange" value="{{WXindex}}" range="{{WXlist}}" range-key='{{"industryName"}}'>
           <view class='picker'>
             {{WXlist[0].industryName}} -- {{WXlist[0].children[0].industryName}}
 
           </view>
-        </picker> -->
+        </picker> 
 
-        <view >
+        <!-- <view >
           <view>aaaaaaaa</view>
           <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value='{{WXindex}}' bindchange="bindChange">
             <picker-view-column>
@@ -75,7 +75,7 @@
               <view style="line-height: 50px" wx:for="{{wlist}}" wx:key='{{index}}'  style="line-height: 50px">{{item.industryName}}</view>
             </picker-view-column>
           </picker-view>
-        </view>
+        </view> -->
       </view>
       <view class='row-container perwrap'>
         <text class='msgleft'>费率</text>
