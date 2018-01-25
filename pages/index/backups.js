@@ -1,4 +1,5 @@
 Page({
+
   /**
    * 页面的初始数据
    */
@@ -22,24 +23,11 @@ Page({
     wxsettlerate: '', // 微信结算费率
     zfbindustryId: '', // 支付宝所属行业ID
     zfbsettlerate: '', // 支付宝结算费率
-    openWXlist: false,
     ischeckWX: false,
     ischeckZFB: false,
-    value: [0, 0, 0],
-    // WXlist: [],
     WXlist: [],
     wlist: [],
     xlist: [],
-
-    firWXlist: [],
-    secWXlist: [],
-    thiWXlist: [],
-    firWXindex: 0,
-    secWXindex: 0,
-    thiWXindex: 0,
-    final: {},
-    animationData: {},
-
     WXindex: [0, 0],
     ZFBlist: [],
     ZFBindex: [0, 0],
@@ -227,156 +215,56 @@ Page({
         method: 'GET',
         success: function(res) {
           console.log('WX--res', res)
-          let data = res.data, 
-              WXlist = that.data.WXlist, 
-              wlist = that.data.wlist, 
-              xlist = that.data.xlist
-          
-          console.log(wlist, xlist)
+          // console.log(typeof res.data)
+          let data = res.data, WXlist = that.data.WXlist, xlist = that.data.xlist, wlist = that.data.wlist
+          if(token){
+            data.map((item, index) => {
+              let children = item.children, industryName = item.industryName
+              children[0] ? (xlist[index] = children[0].industryName) : (xlist[index] = '') // ?
+              industryName ? (wlist[index] = industryName) : (wlist[index] = '')
+              WXlist[0] = wlist
+              WXlist[1] = xlist
+            })
+          }
+          // if(token){
+          //   data.map((index, item) => {
+          //     if(item.children){
+          //       wlist.push(item.children)
+          //     } else {
+          //       wlist.push([])
+          //     }
+          //   })
+          // }
+          that.setData({wlist})
+          // console.log( WXlist, xlist)
+          // that.setData({WXlist})
           that.setData({WXlist: res.data})
-          that.cascade()
         },
       })
     }
-    
     ischeckWX = that.data.ischeckWX
     ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
     console.log("isWX? ", that.data.ischeckWX,'--isZFB? ', ischeckZFB)
     console.log(this.data.passwayIds)
   },
-  bindChange: function(e){
-    const val = e.detail.value
-
-    this.setData({
-      year: this.data.WXlist[val[0]],
-      month: this.data.wlist[val[1]],
-      day: this.data.xlist[val[2]]
-    })
-  },
-
-  //点击事件，点击弹出选择页
-  dianji: function () {
-    //这里写了一个动画，让其高度变为满屏
-    var animation = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'ease',
-    })
-    this.animation = animation
-    animation.height(100 + 'vh').step()
-    this.setData({
-      animationData: animation.export()
-    })
-
-  },
-  //取消按钮
-  quxiao: function () {
-    //这里也是动画，然其高度变为0
-    var animation = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'ease',
-    })
-
-    this.animation = animation
-    animation.height(0 + 'rpx').step()
-    this.setData({
-      animationData: animation.export()
-    });
-    //取消不传值，这里就把final 的值赋值为{}
-    this.setData({
-      final: {}
-    });
-    console.log(this.data.final);
-  },
-  //确认按钮
-  queren: function () {
-    //一样是动画，级联选择页消失，效果和取消一样
-    var animation = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'ease',
-    })
-    this.animation = animation
-    animation.height(0 + 'rpx').step()
-    this.setData({
-      animationData: animation.export()
-    });
-    //打印最后选取的结果
-    console.log(this.data.final);
-  },
-  //滚动选择的时候触发事件
   bindChange: function (e) {
-    //这里是获取picker-view内的picker-view-column 当前选择的是第几项
-
     const val = e.detail.value
     this.setData({
-      firWXindex: val[0],
-      secWXindex: val[1],
-      thiWXindex: val[2]
+      // year: this.data.years[val[0]],
+      // month: this.data.months[val[1]],
+      // day: this.data.days[val[2]]
+      WXlist: this.data.WXlist[val[0]],
+      wlist: this.data.wlist[val[1]]
     })
-    this.cascade();
-    console.log(val);
-
-    console.log(this.data.final);
   },
-  cascade: function () {
-    let that = this,
-      WXlist = that.data.WXlist,
-      firWXlist = [],
-      secWXlist = [],
-      thiWXlist = [],
-      firWXindex = that.data.firWXindex,
-      secWXindex = that.data.secWXindex,
-      thiWXindex = that.data.thiWXindex
-
-    for(let i= 0; i<WXlist.length; i++){
-      firWXlist.push(WXlist[i].industryName)
-    }
-    if (WXlist[firWXindex].children){
-      if (WXlist[firWXindex].children[secWXindex]){
-        for (let i = 0; i < WXlist[firWXindex].children.length; i++){
-          // debugger
-          secWXlist.push(WXlist[firWXindex].children[i].industryName)
-        }
-        if (WXlist[firWXindex].children[secWXindex].children){
-          if (WXlist[firWXindex].children[secWXindex].children[thiWXindex]){
-            for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
-              thiWXlist.push(WXlist[firWXindex].children[secWXindex].children[i].industryName)
-            }
-          } else {
-            that.setData({ thiWXindex: 0})
-            for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
-              thiWXlist.push(WXlist[firWXindex].children[secWXindex].children[i].industryName)
-            }
-          }
-        } else {
-          thiWXlist.push(WXlist[firWXindex].children[secWXindex].industryName)
-        }
-      } else {
-        that.setData({ secWXindex: 0})
-        for (let i= 0; i< WXlist[firWXindex].children.length; i++){
-          secWXlist.push(WXlist[firWXindex].children[i].industryName)
-        }
-      }
-    } else {
-      secWXlist.push(WXlist[firWXindex].industryName)
-      thiWXlist.push(WXlist[firWXindex].industryName)
-    }
-
-    that.setData({
-      firWXlist,
-      secWXlist,
-      thiWXlist
+  // 微信行业列表
+  WXlistChange: function (e) {
+    this.setData({
+      multiIndex: e.detail.value
     })
-    // 内存溢出
-    if (firWXlist.length == 0 || secWXlist.length == 0 || thiWXlist.length == 0) {
-      that.cascade()
-      // 执行一次回调
-    }
-    let final = {
-      firWXlist: firWXlist[that.data.firWXindex],
-      secWXlist: secWXlist[that.data.secWXindex],
-      thiWXlist: thiWXlist[that.data.thiWXindex]
-    }
-    that.setData({ final})
+  },
+  WXlistColumnChange: function (e) {
+
   },
 
 

@@ -230,5 +230,31 @@
 		- 参数		类型		说明
 		- ok		String	成功
 
-
+### 表单数据
+	formdata = {
+        merchantName: that.data.merchantName, // 商户名称
+        merchantStname: that.data.merchantStname, // 商户名简称
+        address: that.data.address, // 商户地址
+        linkman: that.data.linkman, // 商户联系人
+        lkmphone: that.data.lkmphone, // 联系人电话
+        lkmemail: that.data.lkmemail, // 联系人邮箱
+        customerTel: that.data.customerTel, //商户客服电话
+        userName: that.data.userName, // 为商户设置用户名
+        passWord: that.data.passWord, // 为商户设置密码
+        passwayIds: that.data.passwayIds, // 商户通道类型
+        wxindustryId: that.data.wxindustryId, // 微信所属行业ID
+        wxsettlerate: that.data.wxsettlerate, // 微信结算费率
+        zfbindustryId: that.data.zfbindustryId, // 支付宝所属行业ID
+        zfbsettlerate: that.data.zfbsettlerate, // 支付宝结算费率
+        buslicence: that.data.buslicence, // 营业执照图片
+        orgcode: that.data.orgcode, // 组织代码图片
+        lawholder: that.data.lawholder, // 法人持证件照图片
+        frontid: that.data.frontid, // 身份证正面照片
+        backid: that.data.backid, // 身份证反面照片
+        spequalifione: that.data.spequalifione, // 特殊资质一图片
+        spequalifitwo: that.data.spequalifitwo, // 特殊资质二图片
+        spequalifithree: that.data.spequalifithree, // 特殊资质三图片
+        spequalififour: that.data.spequalififour, // 特殊资质四图片
+        spequalififive: that.data.spequalififive, // 特殊资质五图片
+      }
 

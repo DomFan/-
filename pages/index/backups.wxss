@@ -1,4 +1,4 @@
-@import '../teml/teml.wxss';
+
 page {
   /* overflow: hidden; */
   width: 100%;
@@ -38,30 +38,28 @@ page, form, view{
   color: #cecece;
 }
 .row-container{
-  /* overflow: hidden;  */
-  height: 100rpx; 
+  overflow: hidden; 
+  height: 100rpx;
   line-height: 100rpx;
   border-bottom: 1rpx #f1f1f1 solid;
   margin-left: 45rpx;
 }
-
 .nounderline{
    border-bottom: 0; 
 }
 .msgleft {
   float: left;
-  height: 100rpx;
 }
 .row-container input, .row-container picker{
   float: right;
   width: 63%;
-  height: 100rpx; 
+  height: 100rpx;
 }
-/* .row-container view{
+.row-container view{
   float: right;
   width: 80%;
   height: 100rpx;
-} */
+}
 .picker{
   width: 100%;
 }
@@ -95,17 +93,6 @@ page, form, view{
   height: 200rpx;
 }
 
-.trade-container{
-  height: 100rpx;
-  line-height: 100rpx;
-  border-bottom: 1rpx #f1f1f1 solid;
-  margin-left: 45rpx;
-}
-.trade-container input{
-  width: 63%;
-  height: 100rpx;
-  float: right;
-}
 .checkWX{
   padding-left: 80rpx;
   padding-right: 50rpx;

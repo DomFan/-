@@ -1,5 +1,5 @@
 <!-- info.wxml -->
-  <import src="../teml/teml.wxml"></import>
+
   <form bindsubmit='formSubmit'>
     <!--基本信息  basic-->
     <view class='basic'>
@@ -56,32 +56,28 @@
     <!--WX  -->
     <view class='trade' wx:if='{{ischeckWX}}'>
       <view class='title'>微信</view> 
-      <view class='trade-container'>
+      <view class='row-container'>
         <text class='msgleft'>所属行业</text>
-        <!-- <input class='business' disabled bindtap='dianji' placeholder='行业'></input>  -->
-        <view bindtap='dianji'>
-      　　<text>{{final.firWXlist}}</text>
-      　　<text>{{final.secWXlist}}</text>
-      　　<text>{{final.thiWXlist}}</text>
-        </view>
+        <input class='business' placeholder='行业'></input> 
+        <!-- <picker mode='multiSelector' bindchange="WXlistChange" bindcolumnchange="WXlistColumnChange" value="{{WXindex}}" range="{{WXlist}}" range-key='{{"industryName"}}'>
+          <view class='picker'>
+            {{WXlist[0].industryName}} -- {{WXlist[0].children[0].industryName}}
+
+          </view>
+        </picker>  -->
+
+        <!-- <view >
+          <view>aaaaaaaa</view>
+          <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value='{{WXindex}}' bindchange="bindChange">
+            <picker-view-column>
+              <view style="line-height: 50px" wx:for="{{WXlist}}" wx:key='{{index}}' style="line-height: 50px">{{item.industryName}}</view>
+            </picker-view-column><picker-view-column>
+              <view style="line-height: 50px" wx:for="{{wlist}}" wx:key='{{index}}'  style="line-height: 50px">{{item.industryName}}</view>
+            </picker-view-column>
+          </picker-view>
+        </view> -->
       </view>
-      <view>
-        <template is="cascade" data="{{animationData:animationData,firWXlist:firWXlist,secWXlist:secWXlist,thiWXlist:thiWXlist}}"/>
-      </view>
-      <!-- <view>{{year}}年{{month}}月{{day}}日</view>
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 150px;" value="{{value}}" bindchange="bindChange">
-          <picker-view-column>
-            <view wx:for="{{WXlist}}" style="line-height: 40px">{{item.industryName}}</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{wlist}}" style="line-height: 40px">{{item.industryName}}</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{xlist}}" style="line-height: 40px">{{item.industryName}}</view>
-          </picker-view-column>
-        </picker-view>
-      </view> -->
-      <view class='trade-container perwrap'>
+      <view class='row-container perwrap'>
         <text class='msgleft'>费率</text>
         <input class='rate' type='digit' placeholder='费率'></input>
         <text class='percent'>%</text>
@@ -90,11 +86,11 @@
     <!--ZFB  -->
     <view class='trade' wx:if='{{ischeckZFB}}'>
       <view class='title'>支付宝</view>
-      <view class='trade-container'>
+      <view class='row-container'>
         <text class='msgleft'>所属行业</text>
         <input class='business' placeholder='行业'></input>
       </view>
-      <view class='trade-container perwrap'>
+      <view class='row-container perwrap'>
         <text class='msgleft'>费率</text>
         <input class='rate' type='digit' placeholder='费率'></input>
         <text class='percent'>%</text>
