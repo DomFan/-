@@ -48,7 +48,7 @@ Page({
   },
   // 交易状态选择
   chooseone: function(e){
-    console.log(e)
+    // console.log(e)
     this.setData(e.target.dataset)
     this.setData({
       open: false
@@ -156,7 +156,7 @@ Page({
         }, 1000)
 
         // console.log(res)
-        console.log(res.data.rows)
+        // console.log(res.data.rows)
         that.setData({
           listData: res.data.rows
         })
@@ -259,13 +259,13 @@ Page({
           setTimeout(function () {
             wx.hideLoading()
           }, 1000)
-          console.log(res)
+          // console.log(res)
           let listData = that.data.listData
           // listData.concat(res.data.rows)
           res.data.rows.map(item => {
             listData.push(item)
           })
-          console.log(that.data.listData)
+          // console.log(that.data.listData)
           that.setData({
             listData
           })

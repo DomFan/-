@@ -1,7 +1,5 @@
 Page({
-  /**
-   * 页面的初始数据
-   */
+  /** 页面的初始数据 */
   data: {
     username: '',
     password: '',
@@ -22,15 +20,9 @@ Page({
     wxsettlerate: '', // 微信结算费率
     zfbindustryId: '', // 支付宝所属行业ID
     zfbsettlerate: '', // 支付宝结算费率
-    openWXlist: false,
     ischeckWX: false,
     ischeckZFB: false,
-    value: [0, 0, 0],
-    // WXlist: [],
     WXlist: [],
-    wlist: [],
-    xlist: [],
-
     firWXlist: [],
     secWXlist: [],
     thiWXlist: [],
@@ -39,10 +31,15 @@ Page({
     thiWXindex: 0,
     final: {},
     animationData: {},
-
-    WXindex: [0, 0],
     ZFBlist: [],
-    ZFBindex: [0, 0],
+    firZFBlist: [],
+    secZFBlist: [],
+    thiZFBlist: [],
+    firZFBindex: 0,
+    secZFBindex: 0,
+    thiZFBindex: 0,
+    finalZ: {},
+    animationDataZ: {},
     urls: ['1','1','1','1','1','1','1','1','1','1'],
     nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"],
     buslicence: '', // 营业执照图片
@@ -68,7 +65,7 @@ Page({
     this.setData({
       merchantName: value
     })
-    console.log(e.detail.value, '--merchantName--', this.data.merchantName)
+    // console.log(e.detail.value, '--merchantName--', this.data.merchantName)
     return value
   },
   /**商户简称 */
@@ -79,7 +76,7 @@ Page({
     this.setData({
       merchantStname: value
     })
-    console.log(e.detail.value, '--merchantStname--', this.data.merchantStname)
+    // console.log(e.detail.value, '--merchantStname--', this.data.merchantStname)
     return value
   },
   /* 地址 */
@@ -90,7 +87,7 @@ Page({
     this.setData({
       address: value
     })
-    console.log('11',value, 2, e.detail.value, 3, this.data.address)
+    // console.log('11',value, 2, e.detail.value, 3, this.data.address)
     return value
   },
   /* 联系人 */
@@ -111,34 +108,31 @@ Page({
     this.setData({
       lkmphone: value
     })
-    console.log('phoneinput', this.data.lkmphone)
+    // console.log('phoneinput', this.data.lkmphone)
     return value
   },
   /** 电话格式验证 */
   validatemobile: function (e) {
     let val = e.detail.value
     if (val.length == 0) {
-      wx.showToast({
-        title: '请输入手机号！',
-        icon: 'loading',
-        duration: 1500
+      wx.showModal({
+        content: '请输入联系人电话！',
+        showCancel: false,
       })
       return false;
     }
     if (val.length != 11) {
-      wx.showToast({
-        title: '手机号长度有误！',
-        icon: 'loading',
-        duration: 1500
+      wx.showModal({
+        content: '电话长度有误！',
+        showCancel: false,
       })
       return false;
     }
-    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    let myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (!myreg.test(val)) {
-      wx.showToast({
-        title: '手机号格式有误！',
-        icon: 'loading',
-        duration: 1500
+      wx.showModal({
+        content: '电话格式有误！',
+        showCancel: false,
       })
       return false;
     }
@@ -153,7 +147,7 @@ Page({
     this.setData({
       lkmemail: e.detail.value
     })
-    console.log('mailinput', this.data.lkmemail)
+    // console.log('mailinput', this.data.lkmemail)
   },
   emailblur: function(e){
     let val = e.detail.value,
@@ -161,13 +155,12 @@ Page({
         //  /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/
         isEmail = reg.test(val)
         
-    console.log(reg.test(val))
+    // console.log(reg.test(val))
     if(!isEmail){
       // console.log('not email')
-      wx.showToast({
-        title: '请填写正确邮箱',
-        icon: 'loading',
-        mask: true,
+      wx.showModal({
+        content: '请填写正确邮箱',
+        showCancel: false,
       })
       this.setData({ lkmemail: ''})
     } else {
@@ -201,7 +194,7 @@ Page({
     this.setData({
       passWord: e.detail.value
     })
-    console.log('passWordinput', e.detail.value,'passWord', this.data.passWord)
+    // console.log('passWordinput', e.detail.value,'passWord', this.data.passWord)
   },
 
   /** 通道类型 */
@@ -216,7 +209,7 @@ Page({
         ischeckZFB = this.data.ischeckZFB
     check = !check
     this.setData({ischeckWX: check})
-    console.log('ischeckWX', this.data.ischeckWX)
+    // console.log('ischeckWX', this.data.ischeckWX)
     if(check == true){
       wx.request({
         url: 'https://www.shouzan365.com//back/industry/industrys',
@@ -226,13 +219,7 @@ Page({
         header: {'access-token': token},
         method: 'GET',
         success: function(res) {
-          console.log('WX--res', res)
-          let data = res.data, 
-              WXlist = that.data.WXlist, 
-              wlist = that.data.wlist, 
-              xlist = that.data.xlist
-          
-          console.log(wlist, xlist)
+          // console.log('WX--res', res)
           that.setData({WXlist: res.data})
           that.cascade()
         },
@@ -241,26 +228,20 @@ Page({
     
     ischeckWX = that.data.ischeckWX
     ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
-    console.log("isWX? ", that.data.ischeckWX,'--isZFB? ', ischeckZFB)
-    console.log(this.data.passwayIds)
-  },
-  bindChange: function(e){
-    const val = e.detail.value
-
-    this.setData({
-      year: this.data.WXlist[val[0]],
-      month: this.data.wlist[val[1]],
-      day: this.data.xlist[val[2]]
-    })
+    // console.log("isWX? ", that.data.ischeckWX,'--isZFB? ', ischeckZFB)
+    // console.log(this.data.passwayIds)
   },
 
   //点击事件，点击弹出选择页
   dianji: function () {
     //这里写了一个动画，让其高度变为满屏
-    var animation = wx.createAnimation({
+    let animation = wx.createAnimation({
       duration: 500,
       timingFunction: 'ease',
     })
+    if (!this.data.token) {
+      return
+    }
     this.animation = animation
     animation.height(100 + 'vh').step()
     this.setData({
@@ -271,7 +252,7 @@ Page({
   //取消按钮
   quxiao: function () {
     //这里也是动画，然其高度变为0
-    var animation = wx.createAnimation({
+    let animation = wx.createAnimation({
       duration: 500,
       timingFunction: 'ease',
     })
@@ -285,12 +266,12 @@ Page({
     this.setData({
       final: {}
     });
-    console.log(this.data.final);
+    // console.log(this.data.final);
   },
   //确认按钮
   queren: function () {
     //一样是动画，级联选择页消失，效果和取消一样
-    var animation = wx.createAnimation({
+    let animation = wx.createAnimation({
       duration: 500,
       timingFunction: 'ease',
     })
@@ -300,12 +281,23 @@ Page({
       animationData: animation.export()
     });
     //打印最后选取的结果
-    console.log(this.data.final);
+    // console.log(this.data.final);
+    let final = this.data.final,
+      fir = final.firWXlist,
+      sec = final.secWXlist,
+      thi = final.thiWXlist
+    if (thi) {
+      this.setData({ wxindustryId: thi.id})
+    } else if (!thi && sec) {
+      this.setData({ wxindustryId: sec.id})
+    } else if (!thi && !sec && fir) {
+      this.setData({ wxindustryId: fir.id})
+    }
+    // console.log('wxindustryId', this.data.wxindustryId)
   },
   //滚动选择的时候触发事件
   bindChange: function (e) {
     //这里是获取picker-view内的picker-view-column 当前选择的是第几项
-
     const val = e.detail.value
     this.setData({
       firWXindex: val[0],
@@ -313,9 +305,8 @@ Page({
       thiWXindex: val[2]
     })
     this.cascade();
-    console.log(val);
-
-    console.log(this.data.final);
+    // console.log(val);
+    // console.log(this.data.final);
   },
   cascade: function () {
     let that = this,
@@ -328,37 +319,37 @@ Page({
       thiWXindex = that.data.thiWXindex
 
     for(let i= 0; i<WXlist.length; i++){
-      firWXlist.push(WXlist[i].industryName)
+      firWXlist.push({ id: WXlist[i].id, industryName: WXlist[i].industryName})
     }
     if (WXlist[firWXindex].children){
       if (WXlist[firWXindex].children[secWXindex]){
         for (let i = 0; i < WXlist[firWXindex].children.length; i++){
           // debugger
-          secWXlist.push(WXlist[firWXindex].children[i].industryName)
+          secWXlist.push({ id: WXlist[firWXindex].children[i].id, industryName: WXlist[firWXindex].children[i].industryName})
         }
         if (WXlist[firWXindex].children[secWXindex].children){
           if (WXlist[firWXindex].children[secWXindex].children[thiWXindex]){
             for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
-              thiWXlist.push(WXlist[firWXindex].children[secWXindex].children[i].industryName)
+              thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].id, industryName: WXlist[firWXindex].children[secWXindex].children[i].industryName})
             }
           } else {
             that.setData({ thiWXindex: 0})
             for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
-              thiWXlist.push(WXlist[firWXindex].children[secWXindex].children[i].industryName)
+              thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].children[i].id, industryName: WXlist[firWXindex].children[secWXindex].children[i].industryName})
             }
           }
         } else {
-          thiWXlist.push(WXlist[firWXindex].children[secWXindex].industryName)
+          thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].id, industryName: WXlist[firWXindex].children[secWXindex].industryName})
         }
       } else {
         that.setData({ secWXindex: 0})
         for (let i= 0; i< WXlist[firWXindex].children.length; i++){
-          secWXlist.push(WXlist[firWXindex].children[i].industryName)
+          secWXlist.push({ id: WXlist[firWXindex].children[i].id, industryName: WXlist[firWXindex].children[i].industryName})
         }
       }
     } else {
-      secWXlist.push(WXlist[firWXindex].industryName)
-      thiWXlist.push(WXlist[firWXindex].industryName)
+      secWXlist.push({ id: WXlist[firWXindex].id, industryName: WXlist[firWXindex].industryName})
+      thiWXlist.push({ id: WXlist[firWXindex].id, industryName: WXlist[firWXindex].industryName})
     }
 
     that.setData({
@@ -367,16 +358,20 @@ Page({
       thiWXlist
     })
     // 内存溢出
-    if (firWXlist.length == 0 || secWXlist.length == 0 || thiWXlist.length == 0) {
-      that.cascade()
-      // 执行一次回调
-    }
+    // if (firWXlist.length == 0 || secWXlist.length == 0 || thiWXlist.length == 0) {
+    //   that.cascade()
+    //   // 执行一次回调
+    // }
     let final = {
       firWXlist: firWXlist[that.data.firWXindex],
       secWXlist: secWXlist[that.data.secWXindex],
       thiWXlist: thiWXlist[that.data.thiWXindex]
     }
     that.setData({ final})
+  },
+  // 微信结算费率
+  rateWXinput: function (e) {
+    this.setData({ wxsettlerate: e.detail.value})
   },
 
 
@@ -385,10 +380,13 @@ Page({
   // zfbsettlerate   BigDecimal 否 支付宝结算费率
   tapZFB: function () {
     let check = this.data.ischeckZFB,
-        token = this.data.token
+        token = this.data.token,
+        that = this,
+        ischeckWX = this.data.ischeckWX,
+        ischeckZFB = this.data.ischeckZFB
     check = !check
     this.setData({ ischeckZFB: check })
-    console.log('ischeckZFB', this.data.ischeckZFB)
+    // console.log('ischeckZFB', this.data.ischeckZFB)
     if (check) {
       wx.request({
         url: 'https://www.shouzan365.com//back/industry/industrys',
@@ -398,10 +396,159 @@ Page({
         header: { 'access-token': token },
         method: 'GET',
         success: function (res) {
-          console.log('ZFB--res', res)
+          // console.log('ZFB--res', res)
+          that.setData({ ZFBlist: res.data })
+          that.cascadeZFB()
         },
       })
     }
+    ischeckZFB = that.data.ischeckZFB
+    ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
+    // console.log("isWX? ", that.data.ischeckWX, '--isZFB? ', ischeckZFB)
+    // console.log(this.data.passwayIds)
+  },
+  //点击事件，点击弹出选择页
+  dianjiZ: function () {
+    //这里写了一个动画，让其高度变为满屏
+    let animationZ = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+    })
+
+    if (!this.data.token) {
+      return
+    }
+    this.animationZ = animationZ
+    animationZ.height(100 + 'vh').step()
+    // debugger
+    this.setData({
+      animationDataZ: animationZ.export()
+    })
+    console.log('dianjiZ')
+  },
+  //取消按钮
+  quxiaoZ: function () {
+    //这里也是动画，然其高度变为0
+    let animationZ = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+    })
+
+    this.animationZ = animationZ
+    animationZ.height(0 + 'rpx').step()
+    this.setData({
+      animationDataZ: animationZ.export()
+    });
+    //取消不传值，这里就把final 的值赋值为{}
+    this.setData({
+      finalZ: {}
+    });
+    // console.log(this.data.finalZ);
+  },
+  //确认按钮
+  querenZ: function () {
+    //一样是动画，级联选择页消失，效果和取消一样
+    let animationZ = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+    })
+    this.animationZ = animationZ
+    animationZ.height(0 + 'rpx').step()
+    this.setData({
+      animationDataZ: animationZ.export()
+    });
+    //打印最后选取的结果
+    // console.log(this.data.finalZ);
+    let finalZ = this.data.finalZ,
+      fir = finalZ.firZFBlist,
+      sec = finalZ.secZFBlist,
+      thi = finalZ.thiZFBlist
+    if (thi) {
+      this.setData({ zfbindustryId: thi.id })
+    } else if (!thi && sec) {
+      this.setData({ zfbindustryId: sec.id })
+    } else if (!thi && !sec && fir) {
+      this.setData({ zfbindustryId: fir.id })
+    }
+    // console.log('zfbindustryId', this.data.zfbindustryId)
+  },
+  //滚动选择的时候触发事件
+  bindChangeZ: function (e) {
+    //这里是获取picker-view内的picker-view-column 当前选择的是第几项
+    const val = e.detail.value
+    this.setData({
+      firZFBindex: val[0],
+      secZFBindex: val[1],
+      thiZFBindex: val[2]
+    })
+    this.cascadeZFB();
+    // console.log(val);
+    // console.log(this.data.final);
+  },
+  cascadeZFB: function () {
+    let that = this,
+      ZFBlist = that.data.ZFBlist,
+      firZFBlist = [],
+      secZFBlist = [],
+      thiZFBlist = [],
+      firZFBindex = that.data.firZFBindex,
+      secZFBindex = that.data.secZFBindex,
+      thiZFBindex = that.data.thiZFBindex
+
+    for (let i = 0; i < ZFBlist.length; i++) {
+      firZFBlist.push({ id: ZFBlist[i].id, industryName: ZFBlist[i].industryName })
+    }
+    if (ZFBlist[firZFBindex].children) {
+      if (ZFBlist[firZFBindex].children[secZFBindex]) {
+        for (let i = 0; i < ZFBlist[firZFBindex].children.length; i++) {
+          // debugger
+          secZFBlist.push({ id: ZFBlist[firZFBindex].children[i].id, industryName: ZFBlist[firZFBindex].children[i].industryName })
+        }
+        if (ZFBlist[firZFBindex].children[secZFBindex].children) {
+          if (ZFBlist[firZFBindex].children[secZFBindex].children[thiZFBindex]) {
+            for (let i = 0; i < ZFBlist[firZFBindex].children[secZFBindex].children.length; i++) {
+              thiZFBlist.push({ id: ZFBlist[firZFBindex].children[secZFBindex].children[i].id, industryName: ZFBlist[firZFBindex].children[secZFBindex].children[i].industryName })
+            }
+          } else {
+            that.setData({ thiZFBindex: 0 })
+            for (let i = 0; i < ZFBlist[firZFBindex].children[secZFBindex].children.length; i++) {
+              thiZFBlist.push({ id: ZFBlist[firZFBindex].children[secZFBindex].children[i].id, industryName: ZFBlist[firZFBindex].children[secZFBindex].children[i].industryName })
+            }
+          }
+        } else {
+          thiZFBlist.push({ id: ZFBlist[firZFBindex].children[secZFBindex].id, industryName: ZFBlist[firZFBindex].children[secZFBindex].industryName })
+        }
+      } else {
+        that.setData({ secZFBindex: 0 })
+        for (let i = 0; i < ZFBlist[firZFBindex].children.length; i++) {
+          secZFBlist.push({ id: ZFBlist[firZFBindex].children[i].id, industryName: ZFBlist[firZFBindex].children[i].industryName })
+        }
+      }
+    } else {
+      secZFBlist.push({ id: ZFBlist[firZFBindex].id, industryName: ZFBlist[firZFBindex].industryName })
+      thiZFBlist.push({ id: ZFBlist[firZFBindex].id, industryName: ZFBlist[firZFBindex].industryName })
+    }
+
+    that.setData({
+      firZFBlist,
+      secZFBlist,
+      thiZFBlist
+    })
+    // 内存溢出
+    // if (firZFBlist.length == 0 || secZFBlist.length == 0 || thiZFBlist.length == 0) {
+    //   that.cascade()
+    //   // 执行一次回调
+    // }
+    let finalZ = {
+      firZFBlist: firZFBlist[that.data.firZFBindex],
+      secZFBlist: secZFBlist[that.data.secZFBindex],
+      thiZFBlist: thiZFBlist[that.data.thiZFBindex]
+    }
+    that.setData({ finalZ })
+  },
+  // 支付宝结算费率
+  rateZFBinput: function (e) {
+    this.setData({ zfbsettlerate: e.detail.value})
   },
   
   /**上传图片  */
@@ -420,7 +567,7 @@ Page({
         urls.splice(index, 1, src)
         // console.log(that.data.urls)
         // console.log(res.tempFilePaths)
-        console.log(src)
+        // console.log(src)
         // 上传文件
         wx.uploadFile({
           // url: 'http://192.168.98.179/back/accepagent/fileUpload',
@@ -433,10 +580,10 @@ Page({
           },
           formData: {},
           success: function (res) {
-            console.log('upload success', res)
+            // console.log('upload success', res)
             // console.log(res.data)
             let data = JSON.parse(res.data) // 将JSON字符串 转换成对象格式
-            console.log(data)
+            // console.log(data)
             switch (index) {
               case 0: 
                 that.setData({
@@ -496,7 +643,7 @@ Page({
             let fileList = that.data.fileList,
                 file = data.msg
             fileList.splice(index, 1, file)
-            console.log(fileList, file, that.data.buslicence)
+            // console.log(fileList, file, that.data.buslicence)
           },
           fail: function (res) {
             console.log('upload fail', res)
@@ -670,7 +817,10 @@ Page({
   submitcfm: function (e) {
     let data = this.data,
         that = this,
-        token = this.data.token
+        token = this.data.token,
+        telreg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
+        emailreg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
+
     if (!token || token == 'undefined') {
       wx.showModal({
         title: '请先登录',
@@ -679,7 +829,6 @@ Page({
       })
       return
     }
-
     if(!data.merchantName){
       wx.showToast({
         title: '请填写商户名称',
@@ -715,9 +864,23 @@ Page({
       })
       return
     }
+    if (!telreg.test(data.lkmphone)) {
+      wx.showToast({
+        title: '电话格式有误',
+        icon: 'loading',
+      })
+      return
+    }
     if (!data.lkmemail) {
       wx.showToast({
         title: '请填写联系人邮箱',
+        icon: 'loading',
+      })
+      return
+    }
+    if (!emailreg.test(data.lkmemail)) {
+      wx.showToast({
+        title: '邮箱格式有误',
         icon: 'loading',
       })
       return
@@ -743,10 +906,40 @@ Page({
     // } else {
     //   this.setData({ passwayIds: ""})
     // }
-
     ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
 
     let formdata = {}, passwayIds = this.data.passwayIds
+    if (passwayIds = '74e1479029544232a218a3e60cb791fc'){
+      if (!this.data.wxindustryId) {
+        wx.showModal({
+          content: '请选择微信所属行业',
+          showCancel: false,
+        })
+        return
+      }
+      if (!this.data.wxsettlerate) {
+        wx.showModal({
+          content: '请填写微信结算费率',
+          showCancel: false,
+        })
+        return
+      }
+    } else if (passwayIds = '0c811cd8f6a3453da7eca6e446a54528'){
+      if (!this.data.zfbindustryId) {
+        wx.showModal({
+          content: '请选择支付宝所属行业',
+          showCancel: false,
+        })
+        return
+      }
+      if (!this.data.zfbsettlerate) {
+        wx.showModal({
+          content: '请填写支付宝结算费率',
+          showCancel: false,
+        })
+        return
+      }
+    }
     if(!passwayIds || passwayIds == 'undefined'){ // 未选则通道类型
       formdata = {
         merchantName: that.data.merchantName, // 商户名称
@@ -858,9 +1051,9 @@ Page({
       },
       data: formdata,
       success: function (res) {
-        console.log('it is uploading...'+that.data)
-        console.log(res.data)
-        console.log(res)
+        // console.log('it is uploading...'+that.data)
+        // console.log(res.data)
+        // console.log(res)
         // data:{ rel: true }, errMsg: "request:ok", header: { Expires: "0", Cache - Control: "no-cache, no-store, max-age=0, must-revalidate", Set - Cookie: SESSION=13ca18d1-4fe1-4743-848a-3fcc9a28dae8; path=/; HttpOnly", X - XSS - Protection: "1; mode=block", Pragma: "no-cache", … }, statusCode: 200
 
 

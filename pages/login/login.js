@@ -114,7 +114,7 @@ Page({
             method: "GET",
             dataType: "json",
             success: function (res) {
-              console.log('load--user--res', res)
+              // console.log('load--user--res', res)
               that.setData({name: res.data.name})
               // console.log(toke)
               /**权限确认 */
@@ -125,7 +125,7 @@ Page({
                 header: { 'access-token': toke},
                 method: 'GET',
                 success: function(res) {
-                  console.log(res)
+                  // console.log(res)
                   //res.data 账单: "tradeblotter", 商户: "merchantinfo", 汇总: "tradebalcons"
                   let data = res.data, istradeblotter, ismerchantinfo, istradebalcons
                   data.indexOf("tradeblotter") == -1 ? istradeblotter = '' : istradeblotter = true

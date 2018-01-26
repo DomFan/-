@@ -106,7 +106,18 @@ page, form, view{
   height: 100rpx;
   float: right;
 }
+.trade-container view{
+  width: 63%;
+  height: 100rpx;
+  float: right;
+  position: relative;
+}
 .checkWX{
   padding-left: 80rpx;
   padding-right: 50rpx;
+}
+.text{
+  width: 100%;
+  position: absolute;
+  left: 0;
 }
