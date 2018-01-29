@@ -122,6 +122,7 @@ Page({
       return false;
     }
     if (val.length != 11) {
+      debugger
       wx.showModal({
         content: '电话长度有误！',
         showCancel: false,
@@ -135,6 +136,7 @@ Page({
         showCancel: false,
       })
       return false;
+
     }
     return true;
   },
@@ -209,7 +211,7 @@ Page({
         ischeckZFB = this.data.ischeckZFB
     check = !check
     this.setData({ischeckWX: check})
-    // console.log('ischeckWX', this.data.ischeckWX)
+    console.log('ischeckWX', this.data.ischeckWX)
     if(check == true){
       wx.request({
         url: 'https://www.shouzan365.com//back/industry/industrys',
@@ -221,7 +223,14 @@ Page({
         success: function(res) {
           // console.log('WX--res', res)
           that.setData({WXlist: res.data})
-          that.cascade()
+          if(that.data.WXlist[0]){
+            that.cascade()  
+          } else {
+            wx.showModal({
+              content: '没有可选行业，请添加',
+              showCancel: false,
+            })
+          }
         },
       })
     }
@@ -242,6 +251,17 @@ Page({
     if (!this.data.token) {
       return
     }
+    if (!this.data.WXlist[0]){
+      wx.showLoading({
+        title: '无可选行业',
+      })
+      setTimeout(function(){
+        wx.hideLoading()
+      }, 1000)
+      console.log('---',this.data.wxindustryId, '---')
+      return
+    }
+    // return this.data.WXlist[0]
     this.animation = animation
     animation.height(100 + 'vh').step()
     this.setData({
@@ -281,7 +301,7 @@ Page({
       animationData: animation.export()
     });
     //打印最后选取的结果
-    console.log(this.data.final);
+    // console.log(this.data.final);
     let final = this.data.final,
       fir = final.firWXlist,
       sec = final.secWXlist,
@@ -293,7 +313,7 @@ Page({
     } else if (!thi && !sec && fir) {
       this.setData({ wxindustryId: fir.id})
     }
-    console.log('wxindustryId', this.data.wxindustryId)
+    // console.log('wxindustryId', this.data.wxindustryId)
   },
   //滚动选择的时候触发事件
   bindChange: function (e) {
@@ -321,37 +341,39 @@ Page({
     for(let i= 0; i<WXlist.length; i++){
       firWXlist.push({ id: WXlist[i].id, industryName: WXlist[i].industryName})
     }
-    if (WXlist[firWXindex].children){
-      if (WXlist[firWXindex].children[secWXindex]){
-        for (let i = 0; i < WXlist[firWXindex].children.length; i++){
-          // debugger
-          secWXlist.push({ id: WXlist[firWXindex].children[i].id, industryName: WXlist[firWXindex].children[i].industryName})
-        }
-        if (WXlist[firWXindex].children[secWXindex].children){
-          if (WXlist[firWXindex].children[secWXindex].children[thiWXindex]){
-            for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
-              thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].id, industryName: WXlist[firWXindex].children[secWXindex].children[i].industryName})
+      // console.log('WXlist[firWXindex].children', WXlist)
+    if (WXlist[0]){
+      if (WXlist[firWXindex].children){
+        if (WXlist[firWXindex].children[secWXindex]){
+          for (let i = 0; i < WXlist[firWXindex].children.length; i++){
+            // debugger
+            secWXlist.push({ id: WXlist[firWXindex].children[i].id, industryName: WXlist[firWXindex].children[i].industryName})
+          }
+          if (WXlist[firWXindex].children[secWXindex].children){
+            if (WXlist[firWXindex].children[secWXindex].children[thiWXindex]){
+              for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
+                thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].id, industryName: WXlist[firWXindex].children[secWXindex].children[i].industryName})
+              }
+            } else {
+              that.setData({ thiWXindex: 0})
+              for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
+                thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].children[i].id, industryName: WXlist[firWXindex].children[secWXindex].children[i].industryName})
+              }
             }
           } else {
-            that.setData({ thiWXindex: 0})
-            for (let i = 0; i < WXlist[firWXindex].children[secWXindex].children.length; i++){
-              thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].children[i].id, industryName: WXlist[firWXindex].children[secWXindex].children[i].industryName})
-            }
+            thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].id, industryName: WXlist[firWXindex].children[secWXindex].industryName})
           }
         } else {
-          thiWXlist.push({ id: WXlist[firWXindex].children[secWXindex].id, industryName: WXlist[firWXindex].children[secWXindex].industryName})
+          that.setData({ secWXindex: 0})
+          for (let i= 0; i< WXlist[firWXindex].children.length; i++){
+            secWXlist.push({ id: WXlist[firWXindex].children[i].id, industryName: WXlist[firWXindex].children[i].industryName})
+          }
         }
       } else {
-        that.setData({ secWXindex: 0})
-        for (let i= 0; i< WXlist[firWXindex].children.length; i++){
-          secWXlist.push({ id: WXlist[firWXindex].children[i].id, industryName: WXlist[firWXindex].children[i].industryName})
-        }
+        secWXlist.push({ id: WXlist[firWXindex].id, industryName: WXlist[firWXindex].industryName})
+        thiWXlist.push({ id: WXlist[firWXindex].id, industryName: WXlist[firWXindex].industryName})
       }
-    } else {
-      secWXlist.push({ id: WXlist[firWXindex].id, industryName: WXlist[firWXindex].industryName})
-      thiWXlist.push({ id: WXlist[firWXindex].id, industryName: WXlist[firWXindex].industryName})
     }
-
     that.setData({
       firWXlist,
       secWXlist,
@@ -398,7 +420,14 @@ Page({
         success: function (res) {
           // console.log('ZFB--res', res)
           that.setData({ ZFBlist: res.data })
-          that.cascadeZFB()
+          if (that.data.ZFBlist[0]) {
+            that.cascadeZFB()
+          } else {
+            wx.showModal({
+              content: '没有可选行业，请添加',
+              showCancel: false,
+            })
+          }
         },
       })
     }
@@ -416,6 +445,16 @@ Page({
     })
 
     if (!this.data.token) {
+      return
+    }
+    if (!this.data.ZFBlist[0]) {
+      wx.showLoading({
+        title: '无可选行业',
+      })
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 1000)
+      console.log('---', this.data.zfbindustryId, '---')
       return
     }
     this.animationZ = animationZ
@@ -818,8 +857,10 @@ Page({
     let data = this.data,
         that = this,
         token = this.data.token,
-        telreg = /[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,
-        emailreg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
+        telreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/,
+        emailreg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/,
+        ischeckWX = that.data.ischeckWX,
+        ischeckZFB = that.data.ischeckZFB
 
     if (!token || token == 'undefined') {
       wx.showModal({
@@ -865,6 +906,7 @@ Page({
       return
     }
     if (!telreg.test(data.lkmphone)) {
+      debugger
       wx.showToast({
         title: '电话格式有误',
         icon: 'loading',

@@ -65,7 +65,15 @@ Page({
   },
   goback: function () {
     wx.navigateBack({
-      delta: 1,
+      delta: 2,
+    })
+  },
+  gohome: function () {
+    wx.redirectTo({
+      url: '../home/home',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   }
 })

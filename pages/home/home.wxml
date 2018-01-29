@@ -11,7 +11,7 @@
   </view>
 
   <!--isDB  -->
-     <view class="wrap" wx:if='{{isDB}}'>
+     <view class="wrap" wx:if='{{isDB == "true"}}'>
       <view class='box' bindtap='clickUpload'>
         <image src='../../images/upload.png'></image>
         <view>进件</view>
@@ -51,7 +51,7 @@
     </view> 
   
   <!-- isMerchant  -->
-     <view class="wrap" wx:if='{{isMerchant}}'>
+     <view class="wrap" wx:if='{{isMerchant == "true"}}'>
       
       <view class='box' bindtap='clickQuery'>
         <image src='../../images/search.png'></image>
@@ -93,7 +93,7 @@
     </view> 
 
   <!-- isServer  -->
-  <view wx:if='{{isServer}}' class="wrap">
+  <view wx:if='{{isServer == "true"}}' class="wrap">
     
       <!-- <view wx:if='{{isDB == true}}' class='box' bindtap='clickUpload'>
         <image src='../../images/upload.png'></image>

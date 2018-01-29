@@ -13,6 +13,7 @@ Page({
     isDB: '', //是地推人员
     isServer: '', //是服务商
     isMerchant: '', //是商户
+    useris: ''
   },
   login: function(){
     // console.log(this.data)
@@ -33,9 +34,12 @@ Page({
     let token = this.data.token,
       userName = this.data.userName,
       userPassword = this.data.userPassword,
-      name = this.data.name
+      name = this.data.name,
+      isDB = this.data.isDB,
+      isServer = this.data.isServer,
+      isMerchant = this.data.isMerchant
     wx.redirectTo({
-      url: '../home/home?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token + '&name=' +name,
+      url: '../home/home?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token + '&name=' + name + '&isDB=' + isDB + '&isServer=' + isServer + '&isMerchant' + isMerchant,
       success: function(res) {
         console.log('去首页')
       },
@@ -93,14 +97,13 @@ Page({
   
   // 跳转到当前页
   noUse: function () {
-    wx.redirectTo({
-      url: './home',
-      success: function (res) {
-        console.log(2)
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
+    console.log('no use btn')
+    // wx.redirectTo({
+    //   url: './home?userName=' + userName + '&userPassword=' + userPassword + '&token='+ token+ '&name=' + name + '&isDB=' + isDB + '&isServer=' + isServer + '&isMerchant' + isMerchant,
+    //   success: function (res) {
+    //     console.log(2)
+    //   },
+    // })
   },
 
   /**
@@ -121,7 +124,7 @@ Page({
         isDB: options.isDB,
       })
     } else {
-      this.setData({ name: this.data.username, isServer: true, isDB: '', isMerchant: ''})
+      this.setData({ name: this.data.username, isServer: "true", isDB: '', isMerchant: ''})
     }
     // console.log(options)
     // console.log(this.data)
