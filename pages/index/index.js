@@ -281,7 +281,7 @@ Page({
       animationData: animation.export()
     });
     //打印最后选取的结果
-    // console.log(this.data.final);
+    console.log(this.data.final);
     let final = this.data.final,
       fir = final.firWXlist,
       sec = final.secWXlist,
@@ -293,7 +293,7 @@ Page({
     } else if (!thi && !sec && fir) {
       this.setData({ wxindustryId: fir.id})
     }
-    // console.log('wxindustryId', this.data.wxindustryId)
+    console.log('wxindustryId', this.data.wxindustryId)
   },
   //滚动选择的时候触发事件
   bindChange: function (e) {
