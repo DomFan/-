@@ -40,7 +40,8 @@ Page({
     thiZFBindex: 0,
     finalZ: {},
     animationDataZ: {},
-    urls: ['1','1','1','1','1','1','1','1','1','1'],
+    urls: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
+    // urls: new Array(10),
     nameArr: ["营业执照", "组织代码证", "法人持证件照", "身份证正面", "身份证反面", "特殊资质一", "特殊资质二", "特殊资质三", "特殊资质四", "特殊资质五"],
     buslicence: '', // 营业执照图片
     orgcode: '', // 组织代码图片
@@ -238,7 +239,7 @@ Page({
     ischeckWX = that.data.ischeckWX
     ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
     // console.log("isWX? ", that.data.ischeckWX,'--isZFB? ', ischeckZFB)
-    // console.log(this.data.passwayIds)
+    console.log(this.data.passwayIds)
   },
 
   //点击事件，点击弹出选择页
@@ -434,7 +435,7 @@ Page({
     ischeckZFB = that.data.ischeckZFB
     ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
     // console.log("isWX? ", that.data.ischeckWX, '--isZFB? ', ischeckZFB)
-    // console.log(this.data.passwayIds)
+    console.log(this.data.passwayIds)
   },
   //点击事件，点击弹出选择页
   dianjiZ: function () {
@@ -444,16 +445,10 @@ Page({
       timingFunction: 'ease',
     })
 
-    if (!this.data.token) {
-      return
-    }
+    if (!this.data.token) { return }
     if (!this.data.ZFBlist[0]) {
-      wx.showLoading({
-        title: '无可选行业',
-      })
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 1000)
+      wx.showLoading({ title: '无可选行业', })
+      setTimeout(function () { wx.hideLoading() }, 1000)
       console.log('---', this.data.zfbindustryId, '---')
       return
     }
@@ -479,9 +474,7 @@ Page({
       animationDataZ: animationZ.export()
     });
     //取消不传值，这里就把final 的值赋值为{}
-    this.setData({
-      finalZ: {}
-    });
+    this.setData({ finalZ: {} });
     // console.log(this.data.finalZ);
   },
   //确认按钮
@@ -591,7 +584,12 @@ Page({
   },
   
   /**上传图片  */
-  uploadpic: function (index, urls, indexName, userId) { // 索引，本地图片地址， 当前栏， 用户ID
+  uploadpic: function (index, urls, indexName) { // 索引, 本地图片地址, 当前栏
+    if(!this.data.token){
+      wx.showLoading({ title: '请先登录', mask: true,})
+      setTimeout(function(){wx.hideLoading()}, 1000)
+      return
+    }
     console.log(indexName)
     let that = this,
         token = that.data.token
@@ -605,8 +603,6 @@ Page({
         // urls 清除元素 添加元素
         urls.splice(index, 1, src)
         // console.log(that.data.urls)
-        // console.log(res.tempFilePaths)
-        // console.log(src)
         // 上传文件
         wx.uploadFile({
           // url: 'http://192.168.98.179/back/accepagent/fileUpload',
@@ -619,7 +615,7 @@ Page({
           },
           formData: {},
           success: function (res) {
-            // console.log('upload success', res)
+            console.log('upload success', res)
             // console.log(res.data)
             let data = JSON.parse(res.data) // 将JSON字符串 转换成对象格式
             // console.log(data)
@@ -675,184 +671,120 @@ Page({
                 })
                 break
             }
-
-            
             // console.log(data, res.data, res.data.msg, that.data.buslicence)
-
             let fileList = that.data.fileList,
                 file = data.msg
             fileList.splice(index, 1, file)
             // console.log(fileList, file, that.data.buslicence)
+            if (res.errMsg = "uploadFile:ok"){
+              wx.showToast({
+                title: '上传成功',
+                icon: 'success',
+                duration: 0,
+                mask: true,
+              })
+            }
           },
           fail: function (res) {
             console.log('upload fail', res)
-            // console.log(res, 'fail', name, indexName, this.formData, this.filePath, that)
-          },
-          complete: function (res) {
-            console.log('upload complete', res)
-            // console.log('uploadfiles---', index, urls, res)
           },
         })
-
       }
     })
   },
-
   /**预览图片 */
   lookpic: function (index, urls) {
     // console.log(urls[index])
-    if (urls[index] != '1') {
-      wx.previewImage({
-        current: urls[index],
-        urls: urls,
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
-      })
-    } else {
+    if (urls[index] == '1') {
       wx.showToast({
         title: '请先上传文件',
         icon: 'loading',
-        image: '',
         duration: 1000,
         mask: false,
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
+      })
+    } else {
+      wx.previewImage({
+        current: urls[index],
+        urls: urls,
       })
     }
   },
-
-  /**上传图片 0 */
+  /** 上传图片 0 */
   uploadpic0: function(){
-   this.uploadpic(0, this.data.urls, this.data.nameArr[0], this.data.userId)
+   this.uploadpic(0, this.data.urls, this.data.nameArr[0])
   },
-
-  /*
-  * 点击预览 0
-  */
+  /** 点击预览 0 */
   lookpic0: function() {
     this.lookpic(0, this.data.urls)
   },
-  /**
-   * 上传图片 1
-   */
+  /** 上传图片 1 */
   uploadpic1: function () {
     let urls = this.data.urls,
-        nameArr = this.data.nameArr,
-        userId = this.data.userId
-    if(urls[0] == '1'){
-      wx.showModal({
-        title: '提示',
-        content: `请先上传` + nameArr[0],
-      })
-      
-    }else {
-      this.uploadpic(1, urls, nameArr[1], userId)
-    }
+        nameArr = this.data.nameArr
+      this.uploadpic(1, urls, nameArr[1])
   },
-
-  /**点击预览 1 */
+  /** 点击预览 1 */
   lookpic1: function(){
     this.lookpic(1, this.data.urls)
     // console.log('预览 1111')
   },
   uploadpic2: function () {
     let urls = this.data.urls,
-      nameArr = this.data.nameArr,
-      userId = this.data.userId
-    if (!urls[1]) {
-      wx.showModal({
-        title: '提示',
-        content: '请先上传' + nameArr[1],
-      })
-
-    } else {
-      this.uploadpic(2, urls, nameArr[2], userId)
-    }
+      nameArr = this.data.nameArr
+    this.uploadpic(2, urls, nameArr[2])
   },
   lookpic2: function () {
     this.lookpic(2, this.data.urls)
   },
   uploadpic3: function () {
     let urls = this.data.urls,
-      nameArr = this.data.nameArr,
-      userId = this.data.userId
-    if (!urls[2]) {
-      wx.showModal({
-        title: '提示',
-        content: '请先上传' + nameArr[2],
-      })
-
-    } else {
-      this.uploadpic(3, urls, nameArr[3], userId)
-    }
+      nameArr = this.data.nameArr
+    this.uploadpic(3, urls, nameArr[3])
   },
   lookpic3: function () {
     this.lookpic(3, this.data.urls)
   },
   uploadpic4: function () {
     let urls = this.data.urls,
-      nameArr = this.data.nameArr,
-      userId = this.data.userId
-    if (!urls[3]) {
-      wx.showModal({
-        title: '提示',
-        content: '请先上传' + nameArr[3],
-      })
-
-    } else {
-      this.uploadpic(4, urls, nameArr[4], userId)
-    }
+      nameArr = this.data.nameArr
+    this.uploadpic(4, urls, nameArr[4])
   },
   lookpic4: function () {
     this.lookpic(4, this.data.urls)
   },
   uploadpic5: function () {
     let urls = this.data.urls,
-      nameArr = this.data.nameArr,
-      userId = this.data.userId
-    if (!urls[4]) {
-      wx.showModal({
-        title: '提示',
-        content: '请先上传' + nameArr[4],
-      })
-
-    } else {
-      this.uploadpic(5, urls, nameArr[5], userId)
-    }
+      nameArr = this.data.nameArr
+    this.uploadpic(5, urls, nameArr[5])
   },
   lookpic5: function () {
     this.lookpic(5, this.data.urls)
   },
   uploadpic6: function () {
-    this.uploadpic(6, this.data.urls, this.data.nameArr[6], this.data.userId)
+    this.uploadpic(6, this.data.urls, this.data.nameArr[6])
   },
   lookpic6: function () {
     this.lookpic(6, this.data.urls)
   },
   uploadpic7: function () {
-    this.uploadpic(7, this.data.urls, this.data.nameArr[7], this.data.userId)
+    this.uploadpic(7, this.data.urls, this.data.nameArr[7])
   },
   lookpic7: function () {
     this.lookpic(7, this.data.urls)
   },
   uploadpic8: function () {
-    this.uploadpic(8, this.data.urls, this.data.nameArr[8], this.data.userId)
+    this.uploadpic(8, this.data.urls, this.data.nameArr[8])
   },
   lookpic8: function () {
     this.lookpic(8, this.data.urls)
   },
   uploadpic9: function () {
-    this.uploadpic(9, this.data.urls, this.data.nameArr[9], this.data.userId)
+    this.uploadpic(9, this.data.urls, this.data.nameArr[9])
   },
   lookpic9: function () {
     this.lookpic(9, this.data.urls)
   },
-
-  /*
-  * 确认提交
-  */
+  /** 确认提交 */
   submitcfm: function (e) {
     let data = this.data,
         that = this,
@@ -863,68 +795,40 @@ Page({
         ischeckZFB = that.data.ischeckZFB
 
     if (!token || token == 'undefined') {
-      wx.showModal({
-        title: '请先登录',
-        content: '登录后可添加',
-        showCancel: false,
-      })
+      wx.showModal({ title: '请先登录', content: '登录后可添加', showCancel: false, })
       return
     }
     if(!data.merchantName){
-      wx.showToast({
-        title: '请填写商户名称',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '请填写商户名称', icon: 'loading', })
       return
     }
     if (!data.merchantStname) {
-      wx.showToast({
-        title: '请填写商户名称',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '请填写商户名称', icon: 'loading', })
       return
     }
     if (!data.address) {
-      wx.showToast({
-        title: '请填写商户地址',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '请填写商户地址', icon: 'loading', })
       return
     }
     if (!data.linkman) {
-      wx.showToast({
-        title: '请填写联系人名称',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '请填写联系人名称', icon: 'loading', })
       return
     }
     if (!data.lkmphone) {
-      wx.showToast({
-        title: '请填写联系人电话',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '请填写联系人电话', icon: 'loading', })
       return
     }
     if (!telreg.test(data.lkmphone)) {
       debugger
-      wx.showToast({
-        title: '电话格式有误',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '电话格式有误', icon: 'loading', })
       return
     }
     if (!data.lkmemail) {
-      wx.showToast({
-        title: '请填写联系人邮箱',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '请填写联系人邮箱', icon: 'loading', })
       return
     }
     if (!emailreg.test(data.lkmemail)) {
-      wx.showToast({
-        title: '邮箱格式有误',
-        icon: 'loading',
-      })
+      wx.showToast({ title: '邮箱格式有误', icon: 'loading', })
       return
     }
     if (!data.customerTel){
@@ -939,46 +843,42 @@ Page({
         showCancel: false,
       })
     }
-    // if(ischeckWX && ischeckZFB){
-    //   this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528"})
-    // } else if(ischeckWX && !ischeckZFB){
-    //   this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc"})
-    // } else if(!ischeckWX && ischeckZFB){
-    //   this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528"})
-    // } else {
-    //   this.setData({ passwayIds: ""})
-    // }
     ischeckWX && ischeckZFB ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528" }) : (ischeckWX && !ischeckZFB) ? this.setData({ passwayIds: "74e1479029544232a218a3e60cb791fc" }) : (!ischeckWX && ischeckZFB) ? this.setData({ passwayIds: "0c811cd8f6a3453da7eca6e446a54528" }) : this.setData({ passwayIds: "" })
 
     let formdata = {}, passwayIds = this.data.passwayIds
-    if (passwayIds = '74e1479029544232a218a3e60cb791fc'){
+    if (passwayIds == '74e1479029544232a218a3e60cb791fc'){
       if (!this.data.wxindustryId) {
-        wx.showModal({
-          content: '请选择微信所属行业',
-          showCancel: false,
-        })
+        wx.showModal({ content: '请选择微信所属行业', showCancel: false, })
         return
       }
       if (!this.data.wxsettlerate) {
-        wx.showModal({
-          content: '请填写微信结算费率',
-          showCancel: false,
-        })
+        wx.showModal({ content: '请填写微信结算费率', showCancel: false, })
         return
       }
-    } else if (passwayIds = '0c811cd8f6a3453da7eca6e446a54528'){
+    } else if (passwayIds == '0c811cd8f6a3453da7eca6e446a54528'){
       if (!this.data.zfbindustryId) {
-        wx.showModal({
-          content: '请选择支付宝所属行业',
-          showCancel: false,
-        })
+        wx.showModal({ content: '请选择支付宝所属行业', showCancel: false, })
         return
       }
       if (!this.data.zfbsettlerate) {
-        wx.showModal({
-          content: '请填写支付宝结算费率',
-          showCancel: false,
-        })
+        wx.showModal({ content: '请填写支付宝结算费率', showCancel: false, })
+        return
+      }
+    } else if (passwayIds == "74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528"){
+      if (!this.data.wxindustryId) {
+        wx.showModal({ content: '请选择微信所属行业', showCancel: false, })
+        return
+      }
+      if (!this.data.wxsettlerate) {
+        wx.showModal({ content: '请填写微信结算费率', showCancel: false, })
+        return
+      }
+      if (!this.data.zfbindustryId) {
+        wx.showModal({ content: '请选择支付宝所属行业', showCancel: false, })
+        return
+      }
+      if (!this.data.zfbsettlerate) {
+        wx.showModal({ content: '请填写支付宝结算费率', showCancel: false, })
         return
       }
     }
@@ -1095,28 +995,16 @@ Page({
       success: function (res) {
         // console.log('it is uploading...'+that.data)
         // console.log(res.data)
-        // console.log(res)
-        // data:{ rel: true }, errMsg: "request:ok", header: { Expires: "0", Cache - Control: "no-cache, no-store, max-age=0, must-revalidate", Set - Cookie: SESSION=13ca18d1-4fe1-4743-848a-3fcc9a28dae8; path=/; HttpOnly", X - XSS - Protection: "1; mode=block", Pragma: "no-cache", … }, statusCode: 200
-
-
         wx.navigateTo({
           url: '../submitSuccess/submitSuccess',
           success: function (res) { },
           fail: function (res) { },
-          complete: function (res) {  },
+          complete: function (res) { },
         })
       }
-
     })
-    
   },
-
-  /**表单提交 */
-  formSubmit: function(e) {
-    console.log(this.data, e.detail.value)
-  },
-
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
