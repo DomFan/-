@@ -125,8 +125,8 @@ Page({
                 header: { 'access-token': toke},
                 method: 'GET',
                 success: function(res) {
-                  // console.log(res)
-                  //res.data 账单: "tradeblotter", 商户: "merchantinfo", 汇总: "tradebalcons"
+                  console.log(res)
+                  // res.data 账单: "tradeblotter", 商户: "merchantinfo", 汇总: "tradebalcons"
                   let data = res.data, istradeblotter, ismerchantinfo, istradebalcons
                   data.indexOf("tradeblotter") == -1 ? istradeblotter = '' : istradeblotter = true
                   data.indexOf("merchantinfo") == -1 ? ismerchantinfo = '' : ismerchantinfo = true

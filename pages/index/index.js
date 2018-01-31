@@ -676,11 +676,10 @@ Page({
                 file = data.msg
             fileList.splice(index, 1, file)
             // console.log(fileList, file, that.data.buslicence)
-            if (res.errMsg = "uploadFile:ok"){
+            if (res.errMsg == "uploadFile:ok"){
               wx.showToast({
                 title: '上传成功',
                 icon: 'success',
-                duration: 0,
                 mask: true,
               })
             }
