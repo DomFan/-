@@ -33,18 +33,22 @@
         <text class='msgleft'>商户客服电话</text>
         <input name='serviceInput' type='number' maxlength='20' bindinput='serviceinput' placeholder='请输入商户客服电话' placeholder-class='phcolor'></input>
       </view>
+    </view>
 
+    <!--用户信息  -->
+    <view class='usermsg'>
+      <view class='title'>用户信息</view>
       <!-- 设置商户名和密码  -->
-       <view class='row-container'>
-        <text class='msgleft'>商户登录名</text>
+      <view class='row-container'>
+        <text class='msgleft'>用户名</text>
          <input name='userName' value='{{lkmphone}}' type='text' maxlength='100' bindinput='userNameinput' placeholder='默认为联系人电话' placeholder-class='phcolor'></input> 
       </view>
       <view class='row-container nounderline'>
-        <text class='msgleft'>商户登录密码</text>
+        <text class='msgleft'>密码</text>
         <input name='passWord' type='text' password maxlength='100' bindinput='passWordinput' value='' placeholder='默认密码为"000000"' placeholder-class='phcolor'></input>
       </view> 
     </view>
-    
+
     <!--通道类型  -->
     <view class='tradetype'>
       <view class='title'>通道类型</view>
@@ -166,7 +170,13 @@
         <button bindtap='uploadpic9' class='btnright'>上传</button>
       </view>
     </view>
-    <view class='space'></view>
+
+    <!--结算账户信息  -->
+    <view class=''></view>
+    
+    <view class='space'>
+      <view class='title'> </view>
+    </view>
 
     <button class='confirmAdd' bindtap='submitcfm'>确认新增</button>
     <view class='bottom'></view>

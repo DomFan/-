@@ -226,6 +226,17 @@ Page({
           that.setData({WXlist: res.data})
           if(that.data.WXlist[0]){
             that.cascade()  
+            let final = that.data.final,
+              fir = final.firWXlist,
+              sec = final.secWXlist,
+              thi = final.thiWXlist
+            if (thi) {
+              that.setData({ wxindustryId: thi.id })
+            } else if (!thi && sec) {
+              that.setData({ wxindustryId: sec.id })
+            } else if (!thi && !sec && fir) {
+              that.setData({ wxindustryId: fir.id })
+            }
           } else {
             wx.showModal({
               content: '没有可选行业，请添加',
@@ -423,6 +434,17 @@ Page({
           that.setData({ ZFBlist: res.data })
           if (that.data.ZFBlist[0]) {
             that.cascadeZFB()
+            let finalZ = that.data.finalZ,
+              fir = finalZ.firZFBlist,
+              sec = finalZ.secZFBlist,
+              thi = finalZ.thiZFBlist
+            if (thi) {
+              that.setData({ zfbindustryId: thi.id })
+            } else if (!thi && sec) {
+              that.setData({ zfbindustryId: sec.id })
+            } else if (!thi && !sec && fir) {
+              that.setData({ zfbindustryId: fir.id })
+            }
           } else {
             wx.showModal({
               content: '没有可选行业，请添加',
@@ -580,7 +602,7 @@ Page({
   },
   // 支付宝结算费率
   rateZFBinput: function (e) {
-    this.setData({ zfbsettlerate: e.detail.value})
+    this.setData({ zfbsettlerate: e.detail.value })  
   },
   
   /**上传图片  */
@@ -680,7 +702,7 @@ Page({
               wx.showToast({
                 title: '上传成功',
                 icon: 'success',
-                mask: true,
+                mask: false,
               })
             }
           },
@@ -709,80 +731,80 @@ Page({
     }
   },
   /** 上传图片 0 */
-  uploadpic0: function(){
-   this.uploadpic(0, this.data.urls, this.data.nameArr[0])
-  },
-  /** 点击预览 0 */
-  lookpic0: function() {
-    this.lookpic(0, this.data.urls)
-  },
-  /** 上传图片 1 */
-  uploadpic1: function () {
-    let urls = this.data.urls,
+    uploadpic0: function(){
+    this.uploadpic(0, this.data.urls, this.data.nameArr[0])
+    },
+    /** 点击预览 0 */
+    lookpic0: function() {
+      this.lookpic(0, this.data.urls)
+    },
+    /** 上传图片 1 */
+    uploadpic1: function () {
+      let urls = this.data.urls,
+          nameArr = this.data.nameArr
+        this.uploadpic(1, urls, nameArr[1])
+    },
+    /** 点击预览 1 */
+    lookpic1: function(){
+      this.lookpic(1, this.data.urls)
+      // console.log('预览 1111')
+    },
+    uploadpic2: function () {
+      let urls = this.data.urls,
         nameArr = this.data.nameArr
-      this.uploadpic(1, urls, nameArr[1])
-  },
-  /** 点击预览 1 */
-  lookpic1: function(){
-    this.lookpic(1, this.data.urls)
-    // console.log('预览 1111')
-  },
-  uploadpic2: function () {
-    let urls = this.data.urls,
-      nameArr = this.data.nameArr
-    this.uploadpic(2, urls, nameArr[2])
-  },
-  lookpic2: function () {
-    this.lookpic(2, this.data.urls)
-  },
-  uploadpic3: function () {
-    let urls = this.data.urls,
-      nameArr = this.data.nameArr
-    this.uploadpic(3, urls, nameArr[3])
-  },
-  lookpic3: function () {
-    this.lookpic(3, this.data.urls)
-  },
-  uploadpic4: function () {
-    let urls = this.data.urls,
-      nameArr = this.data.nameArr
-    this.uploadpic(4, urls, nameArr[4])
-  },
-  lookpic4: function () {
-    this.lookpic(4, this.data.urls)
-  },
-  uploadpic5: function () {
-    let urls = this.data.urls,
-      nameArr = this.data.nameArr
-    this.uploadpic(5, urls, nameArr[5])
-  },
-  lookpic5: function () {
-    this.lookpic(5, this.data.urls)
-  },
-  uploadpic6: function () {
-    this.uploadpic(6, this.data.urls, this.data.nameArr[6])
-  },
-  lookpic6: function () {
-    this.lookpic(6, this.data.urls)
-  },
-  uploadpic7: function () {
-    this.uploadpic(7, this.data.urls, this.data.nameArr[7])
-  },
-  lookpic7: function () {
-    this.lookpic(7, this.data.urls)
-  },
-  uploadpic8: function () {
-    this.uploadpic(8, this.data.urls, this.data.nameArr[8])
-  },
-  lookpic8: function () {
-    this.lookpic(8, this.data.urls)
-  },
-  uploadpic9: function () {
-    this.uploadpic(9, this.data.urls, this.data.nameArr[9])
-  },
-  lookpic9: function () {
-    this.lookpic(9, this.data.urls)
-  },
+      this.uploadpic(2, urls, nameArr[2])
+    },
+    lookpic2: function () {
+      this.lookpic(2, this.data.urls)
+    },
+    uploadpic3: function () {
+      let urls = this.data.urls,
+        nameArr = this.data.nameArr
+      this.uploadpic(3, urls, nameArr[3])
+    },
+    lookpic3: function () {
+      this.lookpic(3, this.data.urls)
+    },
+    uploadpic4: function () {
+      let urls = this.data.urls,
+        nameArr = this.data.nameArr
+      this.uploadpic(4, urls, nameArr[4])
+    },
+    lookpic4: function () {
+      this.lookpic(4, this.data.urls)
+    },
+    uploadpic5: function () {
+      let urls = this.data.urls,
+        nameArr = this.data.nameArr
+      this.uploadpic(5, urls, nameArr[5])
+    },
+    lookpic5: function () {
+      this.lookpic(5, this.data.urls)
+    },
+    uploadpic6: function () {
+      this.uploadpic(6, this.data.urls, this.data.nameArr[6])
+    },
+    lookpic6: function () {
+      this.lookpic(6, this.data.urls)
+    },
+    uploadpic7: function () {
+      this.uploadpic(7, this.data.urls, this.data.nameArr[7])
+    },
+    lookpic7: function () {
+      this.lookpic(7, this.data.urls)
+    },
+    uploadpic8: function () {
+      this.uploadpic(8, this.data.urls, this.data.nameArr[8])
+    },
+    lookpic8: function () {
+      this.lookpic(8, this.data.urls)
+    },
+    uploadpic9: function () {
+      this.uploadpic(9, this.data.urls, this.data.nameArr[9])
+    },
+    lookpic9: function () {
+      this.lookpic(9, this.data.urls)
+    },
   /** 确认提交 */
   submitcfm: function (e) {
     let data = this.data,
@@ -818,7 +840,7 @@ Page({
       return
     }
     if (!telreg.test(data.lkmphone)) {
-      debugger
+      // debugger
       wx.showToast({ title: '电话格式有误', icon: 'loading', })
       return
     }
@@ -883,108 +905,111 @@ Page({
     }
     if(!passwayIds || passwayIds == 'undefined'){ // 未选则通道类型
       formdata = {
-        merchantName: that.data.merchantName, // 商户名称
-        merchantStname: that.data.merchantStname, // 商户名简称
-        address: that.data.address, // 商户地址
-        linkman: that.data.linkman, // 商户联系人
-        lkmphone: that.data.lkmphone, // 联系人电话
-        lkmemail: that.data.lkmemail, // 联系人邮箱
-        customerTel: that.data.customerTel, //商户客服电话
-        userName: that.data.userName, // 为商户设置用户名
-        passWord: that.data.passWord, // 为商户设置密码
-        buslicence: that.data.buslicence, // 营业执照图片
-        orgcode: that.data.orgcode, // 组织代码图片
-        lawholder: that.data.lawholder, // 法人持证件照图片
-        frontid: that.data.frontid, // 身份证正面照片
-        backid: that.data.backid, // 身份证反面照片
-        spequalifione: that.data.spequalifione, // 特殊资质一图片
-        spequalifitwo: that.data.spequalifitwo, // 特殊资质二图片
-        spequalifithree: that.data.spequalifithree, // 特殊资质三图片
-        spequalififour: that.data.spequalififour, // 特殊资质四图片
-        spequalififive: that.data.spequalififive, // 特殊资质五图片
+        merchantName: data.merchantName, // 商户名称
+        merchantStname: data.merchantStname, // 商户名简称
+        address: data.address, // 商户地址
+        linkman: data.linkman, // 商户联系人
+        lkmphone: data.lkmphone, // 联系人电话
+        lkmemail: data.lkmemail, // 联系人邮箱
+        customerTel: data.customerTel, //商户客服电话
+        userName: data.userName, // 为商户设置用户名
+        passWord: data.passWord, // 为商户设置密码
+        buslicence: data.buslicence, // 营业执照图片
+        orgcode: data.orgcode, // 组织代码图片
+        lawholder: data.lawholder, // 法人持证件照图片
+        frontid: data.frontid, // 身份证正面照片
+        backid: data.backid, // 身份证反面照片
+        spequalifione: data.spequalifione, // 特殊资质一图片
+        spequalifitwo: data.spequalifitwo, // 特殊资质二图片
+        spequalifithree: data.spequalifithree, // 特殊资质三图片
+        spequalififour: data.spequalififour, // 特殊资质四图片
+        spequalififive: data.spequalififive, // 特殊资质五图片
       }
-    } else if (passwayIds = '74e1479029544232a218a3e60cb791fc') { // 通道 微信
+    } else if (passwayIds == '74e1479029544232a218a3e60cb791fc') { // 通道 微信
       formdata = {
-        merchantName: that.data.merchantName, // 商户名称
-        merchantStname: that.data.merchantStname, // 商户名简称
-        address: that.data.address, // 商户地址
-        linkman: that.data.linkman, // 商户联系人
-        lkmphone: that.data.lkmphone, // 联系人电话
-        lkmemail: that.data.lkmemail, // 联系人邮箱
-        customerTel: that.data.customerTel, //商户客服电话
-        userName: that.data.userName, // 为商户设置用户名
-        passWord: that.data.passWord, // 为商户设置密码
-        passwayIds: that.data.passwayIds, // 商户通道类型
-        wxindustryId: that.data.wxindustryId, // 微信所属行业ID
-        wxsettlerate: that.data.wxsettlerate, // 微信结算费率
-        buslicence: that.data.buslicence, // 营业执照图片
-        orgcode: that.data.orgcode, // 组织代码图片
-        lawholder: that.data.lawholder, // 法人持证件照图片
-        frontid: that.data.frontid, // 身份证正面照片
-        backid: that.data.backid, // 身份证反面照片
-        spequalifione: that.data.spequalifione, // 特殊资质一图片
-        spequalifitwo: that.data.spequalifitwo, // 特殊资质二图片
-        spequalifithree: that.data.spequalifithree, // 特殊资质三图片
-        spequalififour: that.data.spequalififour, // 特殊资质四图片
-        spequalififive: that.data.spequalififive, // 特殊资质五图片
+        merchantName: data.merchantName, // 商户名称
+        merchantStname: data.merchantStname, // 商户名简称
+        address: data.address, // 商户地址
+        linkman: data.linkman, // 商户联系人
+        lkmphone: data.lkmphone, // 联系人电话
+        lkmemail: data.lkmemail, // 联系人邮箱
+        customerTel: data.customerTel, //商户客服电话
+        userName: data.userName, // 为商户设置用户名
+        passWord: data.passWord, // 为商户设置密码
+        passwayIds: data.passwayIds, // 商户通道类型
+        wxindustryId: data.wxindustryId, // 微信所属行业ID
+        wxsettlerate: data.wxsettlerate, // 微信结算费率
+        buslicence: data.buslicence, // 营业执照图片
+        orgcode: data.orgcode, // 组织代码图片
+        lawholder: data.lawholder, // 法人持证件照图片
+        frontid: data.frontid, // 身份证正面照片
+        backid: data.backid, // 身份证反面照片
+        spequalifione: data.spequalifione, // 特殊资质一图片
+        spequalifitwo: data.spequalifitwo, // 特殊资质二图片
+        spequalifithree: data.spequalifithree, // 特殊资质三图片
+        spequalififour: data.spequalififour, // 特殊资质四图片
+        spequalififive: data.spequalififive, // 特殊资质五图片
       }
-    } else if (passwayIds = '0c811cd8f6a3453da7eca6e446a54528') { // 通道 支付宝
+    } else if (passwayIds == '0c811cd8f6a3453da7eca6e446a54528') { // 通道 支付宝
       formdata = {
-        merchantName: that.data.merchantName, // 商户名称
-        merchantStname: that.data.merchantStname, // 商户名简称
-        address: that.data.address, // 商户地址
-        linkman: that.data.linkman, // 商户联系人
-        lkmphone: that.data.lkmphone, // 联系人电话
-        lkmemail: that.data.lkmemail, // 联系人邮箱
-        customerTel: that.data.customerTel, //商户客服电话
-        userName: that.data.userName, // 为商户设置用户名
-        passWord: that.data.passWord, // 为商户设置密码
-        passwayIds: that.data.passwayIds, // 商户通道类型
-        zfbindustryId: that.data.zfbindustryId, // 支付宝所属行业ID
-        zfbsettlerate: that.data.zfbsettlerate, // 支付宝结算费率
-        buslicence: that.data.buslicence, // 营业执照图片
-        orgcode: that.data.orgcode, // 组织代码图片
-        lawholder: that.data.lawholder, // 法人持证件照图片
-        frontid: that.data.frontid, // 身份证正面照片
-        backid: that.data.backid, // 身份证反面照片
-        spequalifione: that.data.spequalifione, // 特殊资质一图片
-        spequalifitwo: that.data.spequalifitwo, // 特殊资质二图片
-        spequalifithree: that.data.spequalifithree, // 特殊资质三图片
-        spequalififour: that.data.spequalififour, // 特殊资质四图片
-        spequalififive: that.data.spequalififive, // 特殊资质五图片
+        merchantName: data.merchantName, // 商户名称
+        merchantStname: data.merchantStname, // 商户名简称
+        address: data.address, // 商户地址
+        linkman: data.linkman, // 商户联系人
+        lkmphone: data.lkmphone, // 联系人电话
+        lkmemail: data.lkmemail, // 联系人邮箱
+        customerTel: data.customerTel, //商户客服电话
+        userName: data.userName, // 为商户设置用户名
+        passWord: data.passWord, // 为商户设置密码
+        passwayIds: data.passwayIds, // 商户通道类型
+        zfbindustryId: data.zfbindustryId, // 支付宝所属行业ID
+        zfbsettlerate: data.zfbsettlerate, // 支付宝结算费率
+        buslicence: data.buslicence, // 营业执照图片
+        orgcode: data.orgcode, // 组织代码图片
+        lawholder: data.lawholder, // 法人持证件照图片
+        frontid: data.frontid, // 身份证正面照片
+        backid: data.backid, // 身份证反面照片
+        spequalifione: data.spequalifione, // 特殊资质一图片
+        spequalifitwo: data.spequalifitwo, // 特殊资质二图片
+        spequalifithree: data.spequalifithree, // 特殊资质三图片
+        spequalififour: data.spequalififour, // 特殊资质四图片
+        spequalififive: data.spequalififive, // 特殊资质五图片
       }
-    } else { // 通道 微信 支付宝
+    } else if (passwayIds == '74e1479029544232a218a3e60cb791fc,0c811cd8f6a3453da7eca6e446a54528') { // 通道 微信 支付宝
       formdata = {
-        merchantName: that.data.merchantName, // 商户名称
-        merchantStname: that.data.merchantStname, // 商户名简称
-        address: that.data.address, // 商户地址
-        linkman: that.data.linkman, // 商户联系人
-        lkmphone: that.data.lkmphone, // 联系人电话
-        lkmemail: that.data.lkmemail, // 联系人邮箱
-        customerTel: that.data.customerTel, //商户客服电话
-        userName: that.data.userName, // 为商户设置用户名
-        passWord: that.data.passWord, // 为商户设置密码
-        passwayIds: that.data.passwayIds, // 商户通道类型
-        wxindustryId: that.data.wxindustryId, // 微信所属行业ID
-        wxsettlerate: that.data.wxsettlerate, // 微信结算费率
-        zfbindustryId: that.data.zfbindustryId, // 支付宝所属行业ID
-        zfbsettlerate: that.data.zfbsettlerate, // 支付宝结算费率
-        buslicence: that.data.buslicence, // 营业执照图片
-        orgcode: that.data.orgcode, // 组织代码图片
-        lawholder: that.data.lawholder, // 法人持证件照图片
-        frontid: that.data.frontid, // 身份证正面照片
-        backid: that.data.backid, // 身份证反面照片
-        spequalifione: that.data.spequalifione, // 特殊资质一图片
-        spequalifitwo: that.data.spequalifitwo, // 特殊资质二图片
-        spequalifithree: that.data.spequalifithree, // 特殊资质三图片
-        spequalififour: that.data.spequalififour, // 特殊资质四图片
-        spequalififive: that.data.spequalififive, // 特殊资质五图片
+        merchantName: data.merchantName, // 商户名称
+        merchantStname: data.merchantStname, // 商户名简称
+        address: data.address, // 商户地址
+        linkman: data.linkman, // 商户联系人
+        lkmphone: data.lkmphone, // 联系人电话
+        lkmemail: data.lkmemail, // 联系人邮箱
+        customerTel: data.customerTel, //商户客服电话
+        userName: data.userName, // 为商户设置用户名
+        passWord: data.passWord, // 为商户设置密码
+        passwayIds: data.passwayIds, // 商户通道类型
+        wxindustryId: data.wxindustryId, // 微信所属行业ID
+        wxsettlerate: data.wxsettlerate, // 微信结算费率
+        zfbindustryId: data.zfbindustryId, // 支付宝所属行业ID
+        zfbsettlerate: data.zfbsettlerate, // 支付宝结算费率
+        buslicence: data.buslicence, // 营业执照图片
+        orgcode: data.orgcode, // 组织代码图片
+        lawholder: data.lawholder, // 法人持证件照图片
+        frontid: data.frontid, // 身份证正面照片
+        backid: data.backid, // 身份证反面照片
+        spequalifione: data.spequalifione, // 特殊资质一图片
+        spequalifitwo: data.spequalifitwo, // 特殊资质二图片
+        spequalifithree: data.spequalifithree, // 特殊资质三图片
+        spequalififour: data.spequalififour, // 特殊资质四图片
+        spequalififive: data.spequalififive, // 特殊资质五图片
       }
     }
 
+    console.log(formdata)
+    console.log('----', data.zfbindustryId, data.zfbsettlerate)
+
     wx.request({
-      // url: 'http://192.168.98.179/back/merchantinfoController/save',
-      url: 'https://www.shouzan365.com/back/merchantinfoController/save',
+      url: 'http://192.168.98.174/back/merchantinfoController/save',
+      // url: 'https://www.shouzan365.com/back/merchantinfoController/save',
       method: 'POST',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
