@@ -102,27 +102,32 @@
       <view class='title prooftitle'>证件信息</view>
         <view class='row-container'>
         <text>营业执照</text>
-        <button bindtap='lookpic0'>预览</button>
+        <!-- <button bindtap='lookpic0'>预览</button> -->
+        <button bindtap='lookpic0' class='{{buslicence ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic0' class='btnright'>上传</button>
       </view>
       <view class='row-container'>
         <text>组织代码证</text>
-        <button bindtap='lookpic1'>预览</button>
+        <!-- <button bindtap='lookpic1'>预览</button> -->
+        <button bindtap='lookpic1' class='{{orgcode ? "bg" : ""}}'>预览</button>
         <button  bindtap='uploadpic1' class='btnright'>上传</button>
       </view>
       <view class='row-container'>
         <text>法人持证件照</text>
-        <button bindtap='lookpic2'>预览</button>
+        <!-- <button bindtap='lookpic2'>预览</button> -->
+        <button bindtap='lookpic2' class='{{lawholder ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic2' class='btnright'>上传</button>
       </view>
       <view class='row-container'>
         <text>身份证正面</text>
-        <button bindtap='lookpic3'>预览</button>
+        <!-- <button bindtap='lookpic3'>预览</button> -->
+        <button bindtap='lookpic3' class='{{frontid ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic3' class='btnright'>上传</button>
       </view>
       <view class='row-container nounderline'>
         <text>身份证反面</text>
-        <button bindtap='lookpic4'>预览</button>
+        <!-- <button bindtap='lookpic4'>预览</button> -->
+        <button bindtap='lookpic4' class='{{backid ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic4' class='btnright'>上传</button>
       </view>
     </view>
@@ -132,27 +137,32 @@
       <view class='title specialtitle'>特殊资质信息</view>
         <view class='row-container'>
         <text>特殊资质一</text>
-        <button bindtap='lookpic5'>预览</button>
+        <!-- <button bindtap='lookpic5'>预览</button> -->
+        <button bindtap='lookpic5' class='{{spequalifione ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic5' class='btnright'>上传</button>
       </view>
       <view class='row-container'>
         <text>特殊资质二</text>
-        <button bindtap='lookpic6'>预览</button>
+        <!-- <button bindtap='lookpic6'>预览</button> -->
+        <button bindtap='lookpic6' class='{{spequalifitwo ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic6' class='btnright'>上传</button>
       </view>
       <view class='row-container'>
         <text>特殊资质三</text>
-        <button bindtap='lookpic7'>预览</button>
+        <!-- <button bindtap='lookpic7'>预览</button> -->
+        <button bindtap='lookpic7' class='{{spequalifithree ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic7' class='btnright'>上传</button>
       </view>
       <view class='row-container'>
         <text>特殊资质四</text>
-        <button bindtap='lookpic8'>预览</button>
+        <!-- <button bindtap='lookpic8'>预览</button> -->
+        <button bindtap='lookpic8' class='{{spequalififour ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic8' class='btnright'>上传</button>
       </view>
       <view class='row-container nounderline'>
         <text>特殊资质五</text>
-        <button bindtap='lookpic9'>预览</button>
+        <!-- <button bindtap='lookpic9'>预览</button> -->
+        <button bindtap='lookpic9' class='{{spequalififive ? "bg" : ""}}'>预览</button>
         <button bindtap='uploadpic9' class='btnright'>上传</button>
       </view>
     </view>

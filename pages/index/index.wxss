@@ -121,3 +121,7 @@ page, form, view{
   position: absolute;
   left: 0;
 }
+.row-container .bg{
+  background-color: #f55d54;
+  color: white;
+}
