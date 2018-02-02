@@ -53,7 +53,26 @@ Page({
     spequalifithree: '', // 特殊资质三图片
     spequalififour: '', // 特殊资质四图片
     spequalififive: '', // 特殊资质五图片
-    
+
+    // 账户类型 企业 个人 BigDecimal
+    acctype: '',
+    // 开户银行 银行卡号 开户支行名称 开户支行地区 企业名称
+    deposite: '',
+    bankno: '',
+    branchNmae: '',
+    branchRegion: '',
+    company: '',
+    // 个人：开户人（法人） 持卡人证件类型 持卡人证件号码 持卡人地址 持卡人手机号 张建有限期 起止 身份证正面 反面 
+    acctholder: '',
+    identitp: '',
+    identino: '',
+    holderaddress: '',
+    holderphone: '',
+    idendtstart: '',
+    idendtend: '',
+    front: '',
+    back: '',
+
   },
 
   /* 获取input输入值 */
