@@ -54,24 +54,28 @@ Page({
     spequalififour: '', // 特殊资质四图片
     spequalififive: '', // 特殊资质五图片
 
-    // 账户类型 企业 个人 BigDecimal
-    acctype: '',
-    // 开户银行 银行卡号 开户支行名称 开户支行地区 企业名称
-    deposite: '',
-    bankno: '',
-    branchNmae: '',
-    branchRegion: '',
-    company: '',
-    // 个人：开户人（法人） 持卡人证件类型 持卡人证件号码 持卡人地址 持卡人手机号 张建有限期 起止 身份证正面 反面 
-    acctholder: '',
-    identitp: '',
-    identino: '',
-    holderaddress: '',
-    holderphone: '',
-    idendtstart: '',
-    idendtend: '',
-    front: '',
-    back: '',
+    acctype: '', // 账户类型 企业 个人 BigDecimal
+    deposite: '', // 开户银行
+    bankno: '', // 银行卡号
+    branchNmae: '', // 开户支行名称
+    branchRegion: '', // 开户支行地区
+    company: '', // 企业名称
+    // 个人： 
+    acctholder: '', // 开户人（法人）
+    identitp: '', // 持卡人证件类型
+    identino: '', // 持卡人证件号码
+    holderaddress: '', // 持卡人地址
+    holderphone: '', // 持卡人手机号
+    idendtstart: '', // 证件有限期起始
+    idendtend: '', // 证件有限期结束
+    front: '', // 身份证正面
+    back: '', // 身份证反面
+    accountlist: [
+      { index: 0, name: "企业" },
+      { index: 1, name: "个人" },
+    ],
+    banklist: ["中国工商银行", "中国农业银行", "中国银行", "中国建设银行", "中国光大银行", "中国民生银行", "华夏银行", "中信银行", "恒丰银行", "上海浦东发展银行", "交通银行", "浙商银行", "兴业银行", "深圳发展银行", "招商银行", "广东发展银行" ],
+    bankindex: 0,
 
   },
 
@@ -824,6 +828,21 @@ Page({
     lookpic9: function () {
       this.lookpic(9, this.data.urls)
     },
+
+  radioChange: function (e) {
+    console.log(e.detail.value)
+    console.log(typeof e.detail.value) // string
+    this.setData({acctype: e.detail.value})
+  },
+
+  bankchoose: function (e) {
+    this.setData({ bankindex: e.detail.value })
+  },
+
+
+
+
+
   /** 确认提交 */
   submitcfm: function (e) {
     let data = this.data,
