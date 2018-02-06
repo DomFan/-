@@ -1,6 +1,0 @@
-<!--pages/cities/cities.wxml-->
-<picker mode="multiSelector" value="{{index}}" bindcolumnchange="bindPickerChange" range="{{province}}" range-key="{{'name'}}">
-  <view class="picker">
-    当前选择：{{province[0][0].name}}{{province[1][0].name}}
-  </view>
-</picker>

@@ -52,7 +52,7 @@ page, form, view{
   float: left;
   height: 100rpx;
 }
-.row-container input, .row-container picker{
+.row-container input, .row-container picker, .row-container .radio-group{
   float: right;
   width: 63%;
   height: 100rpx; 
@@ -101,15 +101,12 @@ page, form, view{
   border-bottom: 1rpx #f1f1f1 solid;
   margin-left: 45rpx;
 }
-.trade-container input{
+.trade-container input, .trade-container view{
   width: 63%;
   height: 100rpx;
   float: right;
 }
 .trade-container view{
-  width: 63%;
-  height: 100rpx;
-  float: right;
   position: relative;
 }
 .checkWX{
@@ -124,4 +121,11 @@ page, form, view{
 .row-container .bg{
   background-color: #f55d54;
   color: white;
+}
+/* .radio-group{
+  display: flex;
+  justify-content: space-around;
+} */
+.radio-group label {
+  margin-right: 50rpx;
 }
