@@ -36,7 +36,8 @@
       <view class="thitem">交易金额</view>
       <view class="thitem">退款笔数</view>
       <view class="thitem">退款金额</view>
-      <view class="thitem">手续费</view>
+      <!-- <view class="thitem">手续费</view> -->
+      <view class="thitem">总计</view>
     </view>
       <view wx:if='{{!listData[0]}}' class='nocontent'>
         <view>尚无数据</view>
@@ -51,7 +52,7 @@
             <view class="td">{{item.sum}}</view>
             <view class="td">{{item.refundtimes}}</view>
             <view class="td">{{item.refund}}</view>
-            <view class="td">{{item.fee}}</view>
+            <view class="td">{{item.amount}}</view>
           </view>
           <view class="tr" wx:else>
             <view class="td">{{item.tradedt}}</view>
@@ -61,7 +62,7 @@
             <view class="td">{{item.sum}}</view>
             <view class="td">{{item.refundtimes}}</view>
             <view class="td">{{item.refund}}</view>
-            <view class="td">{{item.fee}}</view>
+            <view class="td">{{item.amount}}</view>
           </view>
         </view>
         <view wx:if='{{hasmoredata}}' class='more'>

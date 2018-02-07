@@ -177,77 +177,100 @@
       <view class='row-container'>
         <text class='msgleft'>账户类型</text>
         <radio-group class="radio-group" bindchange="radioChange">
-          <label class="radio" wx:for="{{accountlist}}" wx:key="index">
+          <label class="radio" wx:for="{{acctypelist}}" wx:key="index">
             <radio color='#f55d54' value="{{item.index}}" checked="{{item.checked}}"/>{{item.name}}
           </label>
         </radio-group>
       </view>
     </view>
 
-    <view class='firm'>
+    <view class='firm' wx:if='{{isperson == "0"}}'>
       <view class='title'>企业</view>
       <view class='row-container'>
         <text>开户银行</text>
         <!-- <input placeholder='开户银行'></input> -->
         <picker bindchange='bankchoose' value='{{bankindex}}' range='{{banklist}}'>
-          <view>{{banklist[bankindex]}}</view>
+          <view wx:if='{{!isfirstchoosebank}}'>{{banklist[bankindex]}}</view>
+          <view wx:if='{{isfirstchoosebank}}' style='color: #aaa;'>选择开户银行</view>          
         </picker>
       </view>
       <view class='row-container'>
         <text>银行卡号</text>
-        <input type='number' placeholder='银行卡号' maxlength='19'></input>
+        <input type='number' bindinput='banknoinput' placeholder='银行卡号' maxlength='19'></input>
       </view>
       <view class='row-container'>
         <text>开户支行名称</text>
-        <input placeholder='开户支行名称' maxlength='100'></input>
+        <input bindinput='branchNmaeinput' placeholder='开户支行名称' maxlength='100'></input>
       </view>
       <view class='row-container'>
         <text>开户支行地区</text>
-        <input placeholder='开户支行地区' maxlength='100'></input>
+        <input bindinput='branchRegioninput' placeholder='开户支行地区' maxlength='100'></input>
       </view>
       <view class='row-container'>
         <text>企业名称</text>
-        <input placeholder='企业名称' maxlength='100'></input>
+        <input bindinput='companyinput' placeholder='企业名称' maxlength='100'></input>
       </view>
     </view>
 
-    <view class='person'>
+    <view class='person'  wx:if='{{isperson == "1"}}'>
       <view class='title'>个人</view>
       <view class='row-container'>
+        <text>开户银行</text>
+        <!-- <input placeholder='开户银行'></input> -->
+        <picker bindchange='bankchoose' value='{{bankindex}}' range='{{banklist}}'>
+          <view wx:if='{{!isfirstchoosebank}}'>{{banklist[bankindex]}}</view>
+          <view wx:if='{{isfirstchoosebank}}' style='color: #aaa;'>选择开户银行</view>          
+        </picker>
+      </view>
+      <view class='row-container'>
+        <text>银行卡号</text>
+        <input type='number' bindinput='banknoinput' placeholder='银行卡号' maxlength='19'></input>
+      </view>
+      <view class='row-container'>
+        <text>开户支行名称</text>
+        <input bindinput='branchNmaeinput' placeholder='开户支行名称' maxlength='100'></input>
+      </view>
+      <view class='row-container'>
+        <text>开户支行地区</text>
+        <input bindinput='branchRegioninput' placeholder='开户支行地区' maxlength='100'></input>
+      </view>
+      <view class='row-container'>
         <text>开户人（法人）</text>
-        <input placeholder='开户人（法人）' maxlength='10'></input>
+        <input bindinput='acctholderinput' placeholder='开户人（法人）' maxlength='10'></input>
       </view>
       <view class='row-container'>
         <text>持卡人证件类型</text>
-        <input placeholder='持卡人证件类型'></input>
+        <!-- <input placeholder='持卡人证件类型'></input> -->
+        <picker bindchange='identitpchoose' value='{{identitpindex}}' range='{{identitplist}}'>
+          <view wx:if='{{ischooseident}}'>{{identitplist[identitpindex]}}</view>
+          <view wx:if='{{!ischooseident}}' style='color: #aaa;'>选择证件类型</view>          
+        </picker>
       </view>
       <view class='row-container'>
         <text>持卡人证件号码</text>
-        <input placeholder='持卡人证件号码' maxlength='30'></input>
+        <input bindinput='identinoinput' placeholder='持卡人证件号码' maxlength='30'></input>
       </view>
       <view class='row-container'>
         <text>持卡人地址</text>
-        <input placeholder='持卡人地址' maxlength='255'></input>
+        <input bindinput='holderaddressinput' placeholder='持卡人地址' maxlength='255'></input>
       </view>
       <view class='row-container'>
         <text>持卡人手机号</text>
-        <input placeholder='持卡人手机号' maxlength='11'></input>
+        <input bindinput='holderphoneinput' placeholder='持卡人手机号' maxlength='11'></input>
       </view>
       <view class='row-container'>
         <text>证件有效期起</text>
-        <input placeholder='证件有效期起'></input>
+        <!-- <input bindinput='idendtstartinput' placeholder='证件有效期起'></input> -->
+        <picker mode='date' value='{{identstart}}' bindchange='idendtstartchange'>
+          {{idendtstart}}
+        </picker>
       </view>
       <view class='row-container'>
         <text>证件有效期止</text>
-        <input placeholder='证件有效期止'></input>
-      </view>
-      <view class='row-container'>
-        <text>身份证正面照片</text>
-        <input placeholder='身份证正面照片'></input>
-      </view>
-      <view class='row-container'>
-        <text>身份证反面照片</text>
-        <input placeholder='身份证反面照片'></input>
+        <!-- <input bindinput='idendtendinput' placeholder='证件有效期止'></input> -->
+        <picker mode='date' value='{{identend}}' bindchange='idendtendchange'>
+          {{idendtend}}
+        </picker>
       </view>
     </view>
     

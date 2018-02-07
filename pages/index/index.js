@@ -66,16 +66,22 @@ Page({
     identino: '', // 持卡人证件号码
     holderaddress: '', // 持卡人地址
     holderphone: '', // 持卡人手机号
-    idendtstart: '', // 证件有限期起始
-    idendtend: '', // 证件有限期结束
+    idendtstart: "2018-01-01", // 证件有限期起始
+    idendtend: "2018-12-31", // 证件有限期结束
     front: '', // 身份证正面
     back: '', // 身份证反面
-    accountlist: [
+
+    isperson: '', // '' 未选 '0'企业 '1'个人
+    isfirstchoosebank: true,
+    acctypelist: [
       { index: 0, name: "企业" },
       { index: 1, name: "个人" },
     ],
     banklist: ["中国工商银行", "中国农业银行", "中国银行", "中国建设银行", "中国光大银行", "中国民生银行", "华夏银行", "中信银行", "恒丰银行", "上海浦东发展银行", "交通银行", "浙商银行", "兴业银行", "深圳发展银行", "招商银行", "广东发展银行" ],
     bankindex: 0,
+    identitplist: [ "身份证", "护照", "港澳居民通行证", "其他" ],
+    identitpindex: 0,
+    ischooseident: false,
 
   },
 
@@ -146,7 +152,7 @@ Page({
       return false;
     }
     if (val.length != 11) {
-      debugger
+      // debugger
       wx.showModal({
         content: '电话长度有误！',
         showCancel: false,
@@ -829,14 +835,94 @@ Page({
       this.lookpic(9, this.data.urls)
     },
 
+  
+  /** 账户类型 */
   radioChange: function (e) {
-    console.log(e.detail.value)
-    console.log(typeof e.detail.value) // string
-    this.setData({acctype: e.detail.value})
+    let value = e.detail.value
+    this.setData({ acctype: parseInt(value), isperson: value})
+    console.log(this.data.acctype, 'this.data.acctype')
   },
 
+  /**选择开户银行 */
   bankchoose: function (e) {
-    this.setData({ bankindex: e.detail.value })
+    let banklist = this.data.banklist, value = e.detail.value
+    this.setData({ 
+      isfirstchoosebank: false,
+      bankindex: value,
+      deposite: banklist[value]
+    })
+  },
+  /**银行卡号 */
+  banknoinput: function (e) {
+    let value = e.detail.value
+
+    this.setData({bankno: value})
+  },
+  /**开户支行名称 */
+  branchNmaeinput: function (e) {
+    let value = e.detail.value
+    this.setData({ branchNmae: value })
+  },
+  /**开户支行地区 */
+  branchRegioninput: function (e) {
+    let value = e.detail.value
+    this.setData({ branchRegion: value})
+  },
+  /**企业名称 */
+  companyinput: function (e) {
+    let value = e.detail.value
+    this.setData({ company: value })
+  },
+  /**开户人 法人 */
+  acctholderinput: function (e) {
+    let value = e.detail.value
+    this.setData({ acctholder: value })
+  },
+  /**持卡人证件类型 */
+  identitpchoose: function (e) {
+    let value = e.detail.value, identitplist = this.data.identitplist
+    this.setData({ 
+      ischooseident: true,
+      identitpindex: value,
+      identitp: identitplist[value]
+    })
+  },
+  /**持卡人证件号码 */
+  identinoinput: function (e) {
+    let value = e.detail.value
+    this.setData({ identino: value })
+  },
+  /**持卡人证件地址 */
+  holderaddressinput: function (e) {
+    let value = e.detail.value
+    this.setData({ holderaddress: value })
+  },
+  /**持卡人手机号 */
+  holderphoneinput: function (e) {
+    let value = e.detail.value
+    this.setData({ holderphone: value })
+  },
+  /**持卡人有效期起 */
+  idendtstartchange: function (e) {
+    let value = e.detail.value
+    this.setData({ idendtstart: value })
+    console.log('start', this.data.idendtstart)
+  },
+  /**持卡人有效期止 */
+  idendtendchange: function (e) {
+    let value = e.detail.value
+    this.setData({ idendtend: value })
+    console.log('end', this.data.idendtend)
+  },
+  /**身份证正面照片 */
+  frontinput: function (e) {
+    let value = e.detail.value
+    this.setData({ front: value })
+  },
+  /**身份证反面照片 */
+  backinput: function (e) {
+    let value = e.detail.value
+    this.setData({ back: value })
   },
 
 
@@ -851,7 +937,9 @@ Page({
         telreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/,
         emailreg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/,
         ischeckWX = that.data.ischeckWX,
-        ischeckZFB = that.data.ischeckZFB
+        ischeckZFB = that.data.ischeckZFB,
+        bankreg = /^([1-9]{1})(\d{15}|\d{18})$/
+    console.log(data)
 
     if (!token || token == 'undefined') {
       wx.showModal({ title: '请先登录', content: '登录后可添加', showCancel: false, })
@@ -870,11 +958,11 @@ Page({
       return
     }
     if (!data.linkman) {
-      wx.showToast({ title: '请填写联系人名称', icon: 'loading', })
+      wx.showToast({ title: '填写联系人名称', icon: 'loading', })
       return
     }
     if (!data.lkmphone) {
-      wx.showToast({ title: '请填写联系人电话', icon: 'loading', })
+      wx.showToast({ title: '填写联系人电话', icon: 'loading', })
       return
     }
     if (!telreg.test(data.lkmphone)) {
@@ -883,7 +971,7 @@ Page({
       return
     }
     if (!data.lkmemail) {
-      wx.showToast({ title: '请填写联系人邮箱', icon: 'loading', })
+      wx.showToast({ title: '填写联系人邮箱', icon: 'loading', })
       return
     }
     if (!emailreg.test(data.lkmemail)) {
@@ -892,6 +980,59 @@ Page({
     }
     if (!data.customerTel){
       this.setData({ customerTel: this.data.lkmphone})
+    }
+    /** 账户类型验证 */
+    console.log(typeof data.acctype)
+    if(typeof data.acctype == 'number'){
+      // debugger
+      console.log('acctype 0 or 1', data.acctype)
+    } else {
+      console.log('acctype another', data.acctype)
+      wx.showToast({ title: '请选择账户类型', icon: 'loading', })
+      return
+    }
+    if(!data.deposite){
+      wx.showToast({ title: '请选择开户银行', icon: 'loading', })
+      return
+    }
+    console.log('bankreg.test(data.bankno)', bankreg.test(data.bankno))
+    if(!data.bankno || !bankreg.test(data.bankno)){
+      wx.showToast({ title: '银行卡格式有误', icon: 'loading', })
+      return
+    }
+    if(!data.branchNmae){
+      wx.showToast({ title: '请填写开户支行', icon: 'loading', })
+      return      
+    }
+    if(!data.branchRegion){
+      wx.showToast({ title: '请填写支行地区', icon: 'loading', })
+      return
+    }
+    if(data.acctype == 0 && !data.company){
+      wx.showToast({ title: '请填写企业名称', icon: 'loading', })
+      return
+    }
+    if(data.acctype == 1){
+      if(!data.acctholder){
+        wx.showToast({ title: '请填写开户人', icon: 'loading', })
+        return        
+      }
+      if(!data.identitp){
+        wx.showToast({ title: '请选择证件类型', icon: 'loading', })
+        return        
+      }
+      if(!data.identino){
+        wx.showToast({ title: '请填写证件号码', icon: 'loading', })
+        return
+      }
+      if(!data.holderaddress){
+        wx.showToast({ title: '填写持卡人地址', icon: 'loading', })
+        return
+      }
+      if(!telreg.test(data.holderphone)){
+        wx.showToast({ title: '持卡人手机有误', icon: 'loading', })
+        return
+      }
     }
     if (!data.userName || !data.passWord) {
       if(!data.userName){this.setData({userName: this.data.lkmphone})}
@@ -1041,13 +1182,32 @@ Page({
         spequalififive: data.spequalififive, // 特殊资质五图片
       }
     }
+    if (data.acctype == 0) {
+      formdata.deposite = data.deposite
+      formdata.bankno = data.bankno
+      formdata.branchNmae = data.branchNmae
+      formdata.branchRegion = data.branchRegion
+      formdata.company = data.company
+    } else if (data.acctype == 1) {
+      formdata.deposite = data.deposite
+      formdata.bankno = data.bankno
+      formdata.branchNmae = data.branchNmae
+      formdata.branchRegion = data.branchRegion
+      formdata.acctholder = data.acctholder
+      formdata.identitp = data.identitp
+      formdata.identino = data.identino
+      formdata.holderaddress = data.holderaddress
+      formdata.holderphone = data.holderphone
+      formdata.idendtstart = data.idendtstart
+      formdata.idendtend = data.idendtend
+    }
 
     console.log(formdata)
     console.log('----', data.zfbindustryId, data.zfbsettlerate)
 
     wx.request({
-      url: 'http://192.168.98.174/back/merchantinfoController/save',
-      // url: 'https://www.shouzan365.com/back/merchantinfoController/save',
+      // url: 'http://192.168.98.174/back/merchantinfoController/save',
+      url: 'https://www.shouzan365.com/back/merchantinfoController/save',
       method: 'POST',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
