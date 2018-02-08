@@ -16,9 +16,9 @@
         <image src='../../images/upload.png'></image>
         <view>进件</view>
       </view>
-      <view class='box' bindtap='noUse'>
-        <image src='../../images/white.png'></image>
-        <view> </view>
+      <view class='box' bindtap='searchMerchantlist'>
+        <image src='../../images/upload.png'></image>
+        <view>商户查询</view>
       </view> 
       <view class='box norightborder' bindtap='noUse'>
         <image src='../../images/white.png'></image>
@@ -52,12 +52,10 @@
   
   <!-- isMerchant  -->
      <view class="wrap" wx:if='{{isMerchant == "true"}}'>
-      
       <view class='box' bindtap='clickQuery'>
         <image src='../../images/search.png'></image>
         <view>查账</view>
       </view>
-      
       <view class='box' bindtap='clickGather'>
         <image src='../../images/search.png'></image>
         <view>汇总</view>
@@ -95,7 +93,7 @@
   <!-- isServer  -->
   <view wx:if='{{isServer == "true"}}' class="wrap">
     
-      <!-- <view wx:if='{{isDB == true}}' class='box' bindtap='clickUpload'>
+    <!-- <view wx:if='{{isDB == true}}' class='box' bindtap='clickUpload'>
         <image src='../../images/upload.png'></image>
         <view>进件</view>
       </view>
@@ -107,13 +105,10 @@
         <image src='../../images/white.png'></image>
         <view> </view>
       </view>
-    
-    
       <view wx:if='{{isMerchant == true}}' class='box' bindtap='clickQuery'>
         <image src='../../images/search.png'></image>
         <view>查账</view>
       </view>
-      
       <view wx:if='{{isMerchant == true}}' class='box' bindtap='clickCollect'>
         <image src='../../images/search.png'></image>
         <view>汇总</view>
@@ -124,24 +119,27 @@
       </view> -->
    
     
-      <view class='box' bindtap='clickUpload'>
-        <image src='../../images/upload.png'></image>
-        <view>进件</view>
-      </view>
-      <view class='box' bindtap='clickQuery'>
-        <image src='../../images/search.png'></image>
-        <view>查账</view>
-      </view>
-      <view class='box norightborder' bindtap='clickGather'>
-        <image src='../../images/search.png'></image>
-        <view>汇总</view>
-      </view>
-    
+    <view class='box' bindtap='clickUpload'>
+      <image src='../../images/upload.png'></image>
+      <view>进件</view>
+    </view>
+    <view class='box' bindtap='searchMerchantlist'>
+      <image src='../../images/upload.png'></image>
+      <view>商户查询</view>
+    </view>
+    <view class='box norightborder' bindtap='clickQuery'>
+      <image src='../../images/search.png'></image>
+      <view>查账</view>
+    </view>
+    <view class='box' bindtap='clickGather'>
+      <image src='../../images/search.png'></image>
+      <view>汇总</view>
+    </view>
      
-    <view class='box' bindtap='noUse'>
+    <!-- <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>
-    </view>
+    </view> -->
     <view class='box' bindtap='noUse'>
       <image src='../../images/white.png'></image>
       <view> </view>

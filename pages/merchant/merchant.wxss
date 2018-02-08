@@ -1,0 +1,76 @@
+/* pages/merchant/merchant.wxss */
+page{
+  width: 100%;
+  height: 100%;
+}
+.title{
+  overflow: hidden;
+  width: 100%;
+  height: 200rpx;
+  box-sizing: border-box;
+  padding: 50rpx;
+} 
+.title .pic{
+  width: 100rpx;
+  margin-right: 50rpx;
+}
+.title .avatar{
+  float: left;
+  line-height: 100rpx;
+  height: 100rpx;
+}
+.row-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  /* justify-content: space-around; */
+  justify-content: center;
+  align-items: center;
+}
+
+.row-container .td{
+  text-align: center;
+   /* height: 100rpx;  */
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 33rpx;
+  justify-content: center; 
+  /* 文字不换行 */
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis
+}
+.row-container .index{
+  width: 10%;
+}
+.row-container .name{
+  width: 50%;
+}
+.row-container .state, .row-container .remark{
+  width: 20%;
+}
+.row-container .item{
+  height: 110rpx;
+  font-size: 35rpx;
+  font-weight: bold;
+} 
+.bg-w{
+  background: snow;
+}
+.bg-g{
+  background: #E6F3F9;
+}
+.nodata{
+  width: 100%;
+  font-size: 30rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.isall{
+  width:100%;
+  height:100rpx;
+  text-align:center;
+  line-height:100rpx;
+  font-size:28rpx;
+}

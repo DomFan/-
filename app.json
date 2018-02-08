@@ -4,6 +4,7 @@
     "pages/las/las",
     "pages/teml/teml",
 
+    "pages/merchant/merchant",
     "pages/index/index",
     "pages/login/login",
     "pages/query/query",

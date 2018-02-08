@@ -24,7 +24,8 @@ Page({
     wx.navigateTo({
       url: '../login/login?userName='+ userName+ '&userPassword='+ userPassword+ '&token=' +token + '&name='+ name,
       success: function(res) {
-        console.log('去登录', token, '---')
+        console.log('去登录', '---')
+        // console.log( token)
       },
       fail: function(res) {},
       complete: function(res) {},
@@ -62,6 +63,20 @@ Page({
       },
       fail: function(res) {},
       complete: function(res) {},
+    })
+  },
+  searchMerchantlist: function() {
+    let token = this.data.token,
+      userName = this.data.userName,
+      userPassword = this.data.userPassword,
+      name = this.data.name      
+    wx.navigateTo({
+      url: '../merchant/merchant?userName=' + userName + '&userPassword=' + userPassword + '&token=' + token + '&name=' + name,
+      success: function (res) {
+        // console.log('go to index---', userName, userPassword, token)
+      },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
   // 查账页

@@ -123,8 +123,8 @@ picker{
 .tr {
   display: flex;
   width: 100%;
-  justify-content: center;
   height: 3rem;
+  justify-content: center;
   align-items: center;
 }
 .td {

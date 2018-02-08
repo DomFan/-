@@ -996,8 +996,12 @@ Page({
       return
     }
     console.log('bankreg.test(data.bankno)', bankreg.test(data.bankno))
-    if(!data.bankno || !bankreg.test(data.bankno)){
-      wx.showToast({ title: '银行卡格式有误', icon: 'loading', })
+    // if(!data.bankno || !bankreg.test(data.bankno)){
+    //   wx.showToast({ title: '银行卡格式有误', icon: 'loading', })
+    //   return
+    // }
+    if (!data.bankno) {
+      wx.showToast({ title: '请填写银行卡号', icon: 'loading', })
       return
     }
     if(!data.branchNmae){

@@ -1,0 +1,44 @@
+<!--pages/merchant/merchant.wxml-->
+<!-- <view class='title'>商户查询</view> -->
+<view class='wrap'>
+  <view class='title'>
+    <image class='pic avatar' src='../../images/avatar.png'></image>
+    <view class='avatar'>{{name}}</view>
+  </view>
+  <view class='row-container bg-w'>
+    <view class='td item index'>序号</view>
+    <view class='td item name'>名称</view>
+    <view class='td item state'>状态</view>
+    <view class='td item remark'>备注</view>
+  </view>
+  <view wx:if='{{!merchantlist[0]}}' class='nodata'>没有数据</view>
+  <view wx:if='{{merchantlist[0]}}' wx:for='{{merchantlist}}' wx:key='{{index}}'>
+    <view class='row-container bg-g' wx:if='{{index % 2 == 0}}'>
+      <view class='td index'>{{index}}</view>    
+      <view class='td name'>{{item.merchantName}}</view>
+      <!-- <view class='state'>{{item.auditstate}}--{{item.auditstate == parseInt('0')}}</view> -->
+      <view class='td state' wx:if='{{item.auditstate - 0 == 0}}'>未提交</view>     
+      <view class='td state' wx:if='{{item.auditstate - 1 == 0}}'>审核中</view>
+      <view class='td state' wx:if='{{item.auditstate - 2 == 0}}'>未通过</view>
+      <view class='td state' wx:if='{{item.auditstate - 3 == 0}}'>账户验证</view>
+      <view class='td state' wx:if='{{item.auditstate - 4 == 0}}'>签约完成</view>
+      <view class='td state' wx:if='{{item.auditstate - 5 == 0}}'>上线中</view>
+      <view class='td remark' wx:if='{{item.remarksAds}}'>{{item.remarksAds}}</view>
+      <view class='td remark' wx:if='{{!item.remarksAds}}'>无</view>
+    </view>
+    <view class='row-container' wx:else>
+      <view class='td index'>{{index}}</view>        
+      <view class='td name'>{{item.merchantName}}</view>
+      <view class='td state' wx:if='{{item.auditstate - 0 == 0}}'>未提交</view>     
+      <view class='td state' wx:if='{{item.auditstate - 1 == 0}}'>审核中</view>
+      <view class='td state' wx:if='{{item.auditstate - 2 == 0}}'>未通过</view>
+      <view class='td state' wx:if='{{item.auditstate - 3 == 0}}'>账户验证</view>
+      <view class='td state' wx:if='{{item.auditstate - 4 == 0}}'>签约完成</view>
+      <view class='td state' wx:if='{{item.auditstate - 5 == 0}}'>上线中</view>
+      <view class='td remark' wx:if='{{item.remarksAds}}'>{{item.remarksAds}}</view>
+      <view class='td remark' wx:if='{{!item.remarksAds}}'>无</view>
+    </view>
+  </view>
+  <view wx:if='{{isall}}' class='isall'>已全部显示</view>
+  
+</view>
