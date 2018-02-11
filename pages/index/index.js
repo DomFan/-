@@ -310,7 +310,7 @@ Page({
     })
 
   },
-  //取消按钮
+  //取消按钮 
   quxiao: function () {
     //这里也是动画，然其高度变为0
     let animation = wx.createAnimation({
@@ -745,19 +745,20 @@ Page({
   /**预览图片 */
   lookpic: function (index, urls) {
     // console.log(urls[index])
-    if (urls[index] == '1') {
+    if (urls[index] != '1') {
+      wx.previewImage({
+        current: urls[index],
+        urls: urls,
+      })
+    } else {
       wx.showToast({
         title: '请先上传文件',
         icon: 'loading',
         duration: 1000,
         mask: false,
       })
-    } else {
-      wx.previewImage({
-        current: urls[index],
-        urls: urls,
-      })
     }
+    // console.log(urls, urls[index])
   },
   /** 上传图片 0 */
     uploadpic0: function(){
@@ -766,6 +767,8 @@ Page({
     /** 点击预览 0 */
     lookpic0: function() {
       this.lookpic(0, this.data.urls)
+      console.log(this.data.urls, this.data.urls[0])
+      
     },
     /** 上传图片 1 */
     uploadpic1: function () {
